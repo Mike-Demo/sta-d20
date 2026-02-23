@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import RollHistory, { RollHistoryEntry, generateStardate } from "./RollHistory";
+import { playRollSound, playCriticalSound, playSuccessSound, playComplicationSound } from "@/lib/sounds";
 
 interface DieResult {
   value: number;
@@ -26,6 +27,7 @@ const DiceRoller = () => {
   const rollDice = useCallback(() => {
     setIsRolling(true);
     setResult(null);
+    playRollSound();
 
     setTimeout(() => {
       const dice: DieResult[] = [];
@@ -48,6 +50,18 @@ const DiceRoller = () => {
       const rollResult = { dice, totalSuccesses, complications };
       setResult(rollResult);
       setIsRolling(false);
+
+      // Play outcome sounds
+      const hasCritical = dice.some((d) => d.isCritical);
+      const hasComplication = dice.some((d) => d.isComplication);
+      if (hasCritical) {
+        playCriticalSound();
+      } else if (totalSuccesses > 0) {
+        playSuccessSound();
+      }
+      if (hasComplication) {
+        setTimeout(() => playComplicationSound(), hasCritical || totalSuccesses > 0 ? 400 : 0);
+      }
 
       setRollId((prev) => prev + 1);
       setHistory((prev) => [
