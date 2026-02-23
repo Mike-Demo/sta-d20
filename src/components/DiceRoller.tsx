@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import RollHistory, { RollHistoryEntry, generateStardate } from "./RollHistory";
 
 interface DieResult {
   value: number;
@@ -19,6 +20,8 @@ const DiceRoller = () => {
   const [focusRange, setFocusRange] = useState(1);
   const [result, setResult] = useState<RollResult | null>(null);
   const [isRolling, setIsRolling] = useState(false);
+  const [history, setHistory] = useState<RollHistoryEntry[]>([]);
+  const [rollId, setRollId] = useState(0);
 
   const rollDice = useCallback(() => {
     setIsRolling(true);
@@ -42,10 +45,27 @@ const DiceRoller = () => {
 
       const complications = dice.filter((d) => d.isComplication).length;
 
-      setResult({ dice, totalSuccesses, complications });
+      const rollResult = { dice, totalSuccesses, complications };
+      setResult(rollResult);
       setIsRolling(false);
+
+      setRollId((prev) => prev + 1);
+      setHistory((prev) => [
+        {
+          id: rollId + 1,
+          stardate: generateStardate(),
+          numDice,
+          targetNumber,
+          focusRange,
+          totalSuccesses,
+          complications,
+          dice,
+          timestamp: new Date(),
+        },
+        ...prev,
+      ].slice(0, 50));
     }, 700);
-  }, [numDice, targetNumber, focusRange]);
+  }, [numDice, targetNumber, focusRange, rollId]);
 
   return (
     <div className="flex flex-col gap-6 max-w-2xl mx-auto">
@@ -241,6 +261,25 @@ const DiceRoller = () => {
           <div className="text-[9px] text-muted-foreground font-bold tracking-widest uppercase">Complication</div>
           <div className="text-destructive text-xs mt-1">20 = complication</div>
         </div>
+      </div>
+      {/* Ship's Log */}
+      <div className="mt-2">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="bg-lcars-amber h-4 w-2 lcars-pill-left" />
+          <h2 className="text-lcars-amber font-display text-sm font-bold tracking-[0.3em] uppercase">
+            Ship's Log
+          </h2>
+          <div className="bg-lcars-amber/30 h-px flex-1" />
+          {history.length > 0 && (
+            <button
+              onClick={() => setHistory([])}
+              className="text-muted-foreground text-[9px] font-bold tracking-widest uppercase hover:text-destructive transition-colors"
+            >
+              CLEAR
+            </button>
+          )}
+        </div>
+        <RollHistory entries={history} />
       </div>
     </div>
   );
