@@ -3,7 +3,7 @@ import DiceRoller from "@/components/DiceRoller";
 
 const Index = () => {
   return (
-    <LCARSFrame title="Star Trek Adventures — D20 Roller">
+    <LCARSFrame title="STA2E-D20">
       <DiceRoller />
     </LCARSFrame>
   );
