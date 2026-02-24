@@ -55,9 +55,9 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           </div>
 
           {/* Main area */}
-          <div className="flex-1 bg-card/50 border border-border rounded-sm p-4 md:p-6 overflow-auto">
+          <main className="flex-1 bg-card/50 border border-border rounded-sm p-4 md:p-6 overflow-auto">
             {children}
-          </div>
+          </main>
 
           {/* External links */}
           <div className="flex flex-wrap gap-2">
