@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 import RollHistory, { RollHistoryEntry, generateStardate } from "./RollHistory";
-import { playRollSound, playCriticalSound, playSuccessSound, playComplicationSound } from "@/lib/sounds";
+import { playRollSound, playCriticalSound, playSuccessSound, playComplicationSound, isMuted, setMuted } from "@/lib/sounds";
 
 interface DieResult {
   value: number;
@@ -23,6 +24,13 @@ const DiceRoller = () => {
   const [isRolling, setIsRolling] = useState(false);
   const [history, setHistory] = useState<RollHistoryEntry[]>([]);
   const [rollId, setRollId] = useState(0);
+  const [muted, setMutedState] = useState(isMuted());
+
+  const toggleMute = useCallback(() => {
+    const next = !muted;
+    setMutedState(next);
+    setMuted(next);
+  }, [muted]);
 
   const rollDice = useCallback(() => {
     setIsRolling(true);
@@ -156,14 +164,27 @@ const DiceRoller = () => {
         </div>
       </div>
 
-      {/* Roll button */}
-      <button
-        onClick={rollDice}
-        disabled={isRolling}
-        className="w-full h-16 bg-lcars-gold text-primary-foreground font-display text-2xl font-bold tracking-[0.3em] uppercase lcars-pill hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-60"
-      >
-        {isRolling ? "SCANNING..." : "ENGAGE"}
-      </button>
+      {/* Roll button + mute */}
+      <div className="flex gap-2">
+        <button
+          onClick={rollDice}
+          disabled={isRolling}
+          className="flex-1 h-16 bg-lcars-gold text-primary-foreground font-display text-2xl font-bold tracking-[0.3em] uppercase lcars-pill hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-60"
+        >
+          {isRolling ? "SCANNING..." : "ENGAGE"}
+        </button>
+        <button
+          onClick={toggleMute}
+          className="h-16 w-16 bg-muted rounded-sm flex items-center justify-center hover:bg-muted/80 transition-all"
+          title={muted ? "Unmute" : "Mute"}
+        >
+          {muted ? (
+            <VolumeX className="h-5 w-5 text-muted-foreground" />
+          ) : (
+            <Volume2 className="h-5 w-5 text-lcars-teal" />
+          )}
+        </button>
+      </div>
 
       {/* Dice display */}
       <div className="min-h-[200px] flex flex-col items-center justify-center gap-6">

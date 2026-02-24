@@ -2,8 +2,18 @@
 // Inspired by the distinctive chirps, beeps, and tones heard on Star Trek bridge consoles
 
 let audioCtx: AudioContext | null = null;
+let muted = false;
 
-function getCtx(): AudioContext {
+export function isMuted(): boolean {
+  return muted;
+}
+
+export function setMuted(value: boolean) {
+  muted = value;
+}
+
+function getCtx(): AudioContext | null {
+  if (muted) return null;
   if (!audioCtx) audioCtx = new AudioContext();
   return audioCtx;
 }
@@ -33,6 +43,7 @@ function tone(
  *  officers interact with a console. A quick high-low chirp pair. */
 export function playRollSound() {
   const ctx = getCtx();
+  if (!ctx) return;
   const now = ctx.currentTime;
 
   // Primary chirp pair (the iconic LCARS "di-dit")
@@ -49,6 +60,7 @@ export function playRollSound() {
  *  computer confirms a positive result. Two identical tones. */
 export function playSuccessSound() {
   const ctx = getCtx();
+  if (!ctx) return;
   const now = ctx.currentTime;
 
   // Classic confirmation double-beep
@@ -60,6 +72,7 @@ export function playSuccessSound() {
  *  the computer finishes an important operation. Three quick ascending tones. */
 export function playCriticalSound() {
   const ctx = getCtx();
+  if (!ctx) return;
   const now = ctx.currentTime;
 
   // Ascending confirmation trill
@@ -75,6 +88,7 @@ export function playCriticalSound() {
  *  red alert, more like a system caution). A descending two-note warning. */
 export function playComplicationSound() {
   const ctx = getCtx();
+  if (!ctx) return;
   const now = ctx.currentTime;
 
   // Warning tone pair — descending, slightly buzzy
