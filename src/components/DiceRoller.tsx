@@ -275,7 +275,7 @@ const DiceRoller = () => {
             <p className="font-display text-lg tracking-wider uppercase lcars-blink">
               Awaiting Orders
             </p>
-            <p className="text-xs mt-2 tracking-wide opacity-60">
+            <p className="text-xs mt-2 tracking-wide">
               Set your parameters and press ENGAGE
             </p>
           </div>

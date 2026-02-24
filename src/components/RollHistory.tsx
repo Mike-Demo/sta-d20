@@ -34,7 +34,7 @@ const RollHistory = ({ entries }: RollHistoryProps) => {
         <p className="text-muted-foreground font-display text-sm tracking-wider uppercase">
           No entries in ship's log
         </p>
-        <p className="text-muted-foreground/60 text-xs mt-1 tracking-wide">
+        <p className="text-muted-foreground text-xs mt-1 tracking-wide">
           Roll dice to begin recording
         </p>
       </div>
