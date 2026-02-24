@@ -6,45 +6,45 @@
 
 @layer base {
   :root {
-    --background: 230 25% 8%;
-    --foreground: 40 100% 85%;
+    --background: 222 36% 10%;
+    --foreground: 33 100% 90%;
 
-    --card: 230 20% 12%;
-    --card-foreground: 40 100% 85%;
+    --card: 222 30% 14%;
+    --card-foreground: 33 100% 90%;
 
-    --popover: 230 20% 12%;
-    --popover-foreground: 40 100% 85%;
+    --popover: 222 30% 14%;
+    --popover-foreground: 33 100% 90%;
 
-    --primary: 36 100% 50%;
-    --primary-foreground: 230 25% 8%;
+    --primary: 33 100% 63%;
+    --primary-foreground: 222 36% 10%;
 
-    --secondary: 240 50% 70%;
-    --secondary-foreground: 230 25% 8%;
+    --secondary: 216 80% 64%;
+    --secondary-foreground: 222 36% 10%;
 
-    --muted: 230 15% 18%;
-    --muted-foreground: 40 30% 60%;
+    --muted: 222 25% 20%;
+    --muted-foreground: 33 40% 65%;
 
-    --accent: 300 30% 65%;
-    --accent-foreground: 230 25% 8%;
+    --accent: 200 100% 70%;
+    --accent-foreground: 222 36% 10%;
 
-    --destructive: 0 70% 63%;
+    --destructive: 16 100% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 230 15% 22%;
-    --input: 230 15% 22%;
-    --ring: 36 100% 50%;
+    --border: 222 20% 24%;
+    --input: 222 20% 24%;
+    --ring: 33 100% 63%;
 
     --radius: 0.5rem;
 
-    /* LCARS custom tokens */
-    --lcars-gold: 36 100% 50%;
-    --lcars-amber: 30 100% 45%;
-    --lcars-blue: 240 50% 70%;
-    --lcars-mauve: 300 30% 65%;
-    --lcars-red: 0 65% 55%;
-    --lcars-teal: 180 50% 45%;
-    --lcars-peach: 20 80% 70%;
-    --lcars-lavender: 260 40% 72%;
+    /* Lower Decks LCARS tokens (thelcars.com) */
+    --lcars-gold: 33 100% 63%;
+    --lcars-amber: 33 100% 53%;
+    --lcars-blue: 216 80% 64%;
+    --lcars-mauve: 200 100% 70%;
+    --lcars-red: 16 100% 50%;
+    --lcars-teal: 180 100% 77%;
+    --lcars-peach: 30 100% 80%;
+    --lcars-lavender: 210 100% 80%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
