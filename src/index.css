@@ -1,4 +1,4 @@
-/* Fonts loaded via index.html <link> to avoid render-blocking @import */
+/* Fonts self-hosted via @fontsource packages — no third-party requests */
 
 @tailwind base;
 @tailwind components;
