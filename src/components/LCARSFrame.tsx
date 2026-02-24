@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { ExternalLink } from "lucide-react";
 
 interface LCARSFrameProps {
   title: string;
@@ -56,6 +57,28 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           {/* Main area */}
           <div className="flex-1 bg-card/50 border border-border rounded-sm p-4 md:p-6 overflow-auto">
             {children}
+          </div>
+
+          {/* External links */}
+          <div className="flex flex-wrap gap-2">
+            <a
+              href="https://www.startrek.com/category/games"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-lcars-blue hover:bg-lcars-teal transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
+            >
+              <ExternalLink className="w-3 h-3" />
+              Star Trek Games
+            </a>
+            <a
+              href="https://sta.bcholmes.org/index.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-lcars-mauve hover:bg-lcars-lavender transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
+            >
+              <ExternalLink className="w-3 h-3" />
+              STA Reference
+            </a>
           </div>
 
           {/* Bottom bar */}
