@@ -65,6 +65,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               href="https://www.startrek.com/category/games"
               target="_blank"
               rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
               className="bg-lcars-blue hover:bg-lcars-teal transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
             >
               <ExternalLink className="w-3 h-3" />
@@ -74,6 +75,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               href="https://sta.bcholmes.org/index.html"
               target="_blank"
               rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
               className="bg-lcars-mauve hover:bg-lcars-lavender transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
             >
               <ExternalLink className="w-3 h-3" />
@@ -83,6 +85,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               href="https://gaymingfoundation.org/donate/"
               target="_blank"
               rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
               className="bg-lcars-peach hover:bg-lcars-gold transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
             >
               🏳️‍🌈 Gayming Foundation
@@ -91,6 +94,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               href="https://www.zeffy.com/en-US/donation-form/ggp-gay-gaming-professionals"
               target="_blank"
               rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
               className="bg-lcars-teal hover:bg-lcars-blue transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
             >
               🏳️‍⚧️ Gay Gaming Professionals
@@ -119,7 +123,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               Some elements of this interface were replicated with AI assistance. Safety protocols remain engaged.
             </p>
             <p className="text-muted-foreground text-[8px] leading-tight">
-              <a href="https://www.flaticon.com/free-icons/enterprise" target="_blank" rel="noopener noreferrer" title="enterprise icons" className="underline hover:text-primary transition-colors">Enterprise icons created by pocike - Flaticon</a>
+              <a href="https://www.flaticon.com/free-icons/enterprise" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" title="enterprise icons" className="underline hover:text-primary transition-colors">Enterprise icons created by pocike - Flaticon</a>
             </p>
           </footer>
         </div>
