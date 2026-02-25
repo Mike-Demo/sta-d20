@@ -102,6 +102,9 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             <p className="text-muted-foreground text-[8px] leading-tight">
               Some elements of this interface were replicated with AI assistance. Safety protocols remain engaged.
             </p>
+            <p className="text-muted-foreground text-[8px] leading-tight">
+              <a href="https://www.flaticon.com/free-icons/enterprise" target="_blank" rel="noopener noreferrer" title="enterprise icons" className="underline hover:text-primary transition-colors">Enterprise icons created by pocike - Flaticon</a>
+            </p>
           </footer>
         </div>
       </div>
