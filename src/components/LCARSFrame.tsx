@@ -79,6 +79,22 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               <ExternalLink className="w-3 h-3" />
               STA Reference
             </a>
+            <a
+              href="https://gaymingfoundation.org/donate/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-lcars-peach hover:bg-lcars-gold transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
+            >
+              🏳️‍🌈 Gayming Foundation
+            </a>
+            <a
+              href="https://www.zeffy.com/en-US/donation-form/ggp-gay-gaming-professionals"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-lcars-teal hover:bg-lcars-blue transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
+            >
+              🏳️‍⚧️ Gay Gaming Professionals
+            </a>
           </div>
 
           {/* Bottom bar */}
