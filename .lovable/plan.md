@@ -1,55 +1,45 @@
 
 
-# Apple Watch-Friendly Layout
+# PWA Splash Screen
 
-The app currently works well on phones and desktops, but Apple Watch screens (roughly 160-200px wide) need a drastically simplified UI. The approach: detect ultra-small viewports and render a compact, single-purpose dice roller that strips away the LCARS chrome, history, links, and footer.
+Since this is a Progressive Web App, the "splash screen" works differently than a native app. There are two approaches, and I recommend both:
 
-## What changes
+## 1. Native PWA Splash (automatic, via manifest)
 
-### 1. New component: `WatchDiceRoller.tsx`
-A minimal dice roller designed for ~180px wide screens:
-- **No LCARS frame** -- skip the top bar, sidebar, bottom bar, links, and footer entirely
-- **Compact controls**: A single row showing dice count (tappable number), target number, and focus range -- all as small tappable elements
-- **Large ENGAGE button** filling the width
-- **Results**: Show just the success count (big number) and complication count if any
-- **No roll history**, no info panel, no sound controls
-- Minimal padding (4-8px), smaller fonts
+When users install the PWA and launch it, the browser automatically generates a splash screen from the manifest's `name`, `background_color`, `theme_color`, and icon. This is already partially configured. We just need to ensure the icon is high quality and the manifest values are correct -- which they are (`#141a2e` background, `STA2E-D20` name, 512px icon). No changes needed here.
 
-### 2. Update `Index.tsx`
-Use a media query or viewport width check to conditionally render `WatchDiceRoller` instead of the full `LCARSFrame > DiceRoller` layout when the screen is very small (under 220px wide).
+## 2. In-App Splash Screen (animated, on first load)
 
-### 3. CSS additions in `index.css`
-Add a `@media (max-width: 220px)` block to handle any watch-specific overrides if needed.
+This adds a brief LCARS-themed splash overlay that appears while the app loads, then fades out. This gives the app a polished, branded feel on every launch (not just PWA installs).
 
-## Technical details
+### What it looks like
+- Full-screen dark background matching the app theme (`#141a2e`)
+- The app icon (star) centered and pulsing
+- "STA2E-D20" title in Orbitron font with an LCARS gold glow
+- A small LCARS-style scanning bar animation below
+- Auto-dismisses after ~2 seconds with a fade-out transition
 
-- **Breakpoint**: `max-width: 220px` covers Apple Watch SE (162px), Series 7-9 (176-198px)
-- **Detection**: A `useIsWatch()` hook using `window.matchMedia`, similar to existing `useIsMobile()`
-- **No new dependencies** required
-- The watch version reuses the same dice logic (inline, not extracted) to keep it self-contained
-- Controls use a stepper-style UI: tap left/right arrows around a number, all sized for touch targets (~32px minimum)
+### Files to modify
 
-## Layout sketch (watch view)
+**`src/components/SplashScreen.tsx`** (new)
+- A simple component rendering the splash overlay
+- Uses `useState` + `useEffect` with a 2-second timer to trigger fade-out
+- After fade-out animation completes (~300ms), removes itself from the DOM
+- Uses the existing LCARS color tokens and Orbitron font
 
-```text
-+------------------+
-| STA2E-D20        |
-|                  |
-| Dice:  < 2 >    |
-| TN:    < 10 >   |
-| Focus: < 1 >    |
-|                  |
-| [   ENGAGE   ]   |
-|                  |
-|      3           |
-|   SUCCESSES      |
-|   1 COMP         |
-+------------------+
-```
+**`src/App.tsx`** (modify)
+- Import and render `SplashScreen` at the top level
+- The splash renders on top of everything via fixed positioning and high z-index
+- Once dismissed, it unmounts and the app is fully interactive underneath
 
-## Files to create/modify
-- **Create**: `src/components/WatchDiceRoller.tsx`
-- **Create**: `src/hooks/use-watch.ts`
-- **Modify**: `src/pages/Index.tsx` -- conditionally render watch vs full layout
-- **Modify**: `src/index.css` -- optional watch-specific styles
+**`src/index.css`** (modify)
+- Add a `@keyframes splash-fade-out` animation
+- Add a subtle pulse animation for the icon
+
+### Technical notes
+- No new dependencies required
+- The splash uses existing CSS variables and font classes
+- It renders in parallel with the lazy-loaded routes (via `Suspense`), so the app loads behind it
+- The 2-second duration is short enough to not annoy repeat users but long enough to mask any loading jank
+- Uses `pointer-events: none` during fade-out so users can interact immediately
 
