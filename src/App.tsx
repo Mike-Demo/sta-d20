@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import SplashScreen from "@/components/SplashScreen";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +16,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <SplashScreen />
       <BrowserRouter>
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <Routes>
