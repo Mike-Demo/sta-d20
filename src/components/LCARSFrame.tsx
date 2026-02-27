@@ -123,7 +123,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               Some elements of this interface were replicated with AI assistance. Safety protocols remain engaged.
             </p>
             <p className="text-muted-foreground text-[8px] leading-tight">
-              <a href="https://www.flaticon.com/free-icons/enterprise" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" title="enterprise icons" className="underline hover:text-primary transition-colors">Enterprise icons created by pocike - Flaticon</a>
+              <a href="https://icons8.com/icon/21039/star-trek" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Star Trek</a> icon by <a href="https://icons8.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Icons8</a>
             </p>
           </footer>
         </div>
