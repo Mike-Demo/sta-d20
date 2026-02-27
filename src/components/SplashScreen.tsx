@@ -29,18 +29,13 @@ const SplashScreen = () => {
     >
       {/* Pulsing star icon */}
       <div className="splash-pulse mb-6">
-        <svg
+        <img
+          src="/favicon.png"
+          alt="Enterprise"
           width="80"
           height="80"
-          viewBox="0 0 80 80"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polygon
-            points="40,8 47,30 70,30 51,44 58,66 40,52 22,66 29,44 10,30 33,30"
-            fill="hsl(var(--lcars-gold))"
-          />
-        </svg>
+          className="drop-shadow-[0_0_15px_hsl(var(--lcars-gold)/0.6)]"
+        />
       </div>
 
       {/* Title */}
