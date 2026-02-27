@@ -30,8 +30,8 @@ const SplashScreen = () => {
       {/* Pulsing star icon */}
       <div className="splash-pulse mb-6">
         <img
-          src="/favicon.png"
-          alt="Enterprise"
+          src="/pwa-icon.svg"
+          alt="Star Trek"
           width="80"
           height="80"
           className="drop-shadow-[0_0_15px_hsl(var(--lcars-gold)/0.6)]"
