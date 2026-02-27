@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react";
 
 const SplashScreen = () => {
-  const [phase, setPhase] = useState<"visible" | "fading" | "gone">("visible");
+  const isStandalone =
+    window.matchMedia("(display-mode: standalone)").matches ||
+    (navigator as any).standalone === true;
+
+  const [phase, setPhase] = useState<"visible" | "fading" | "gone">(
+    isStandalone ? "visible" : "gone"
+  );
 
   useEffect(() => {
+    if (!isStandalone) return;
     const fadeTimer = setTimeout(() => setPhase("fading"), 2000);
     const removeTimer = setTimeout(() => setPhase("gone"), 2300);
     return () => {
