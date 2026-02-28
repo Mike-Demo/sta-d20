@@ -58,4 +58,21 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          recharts: ["recharts"],
+          radix: [
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-collapsible",
+            "@radix-ui/react-scroll-area",
+            "@radix-ui/react-tooltip",
+            "@radix-ui/react-toast",
+          ],
+          vendor: ["react", "react-dom", "react-router-dom"],
+        },
+      },
+    },
+  },
 }));
