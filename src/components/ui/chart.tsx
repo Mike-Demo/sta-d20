@@ -58,8 +58,20 @@ const ChartContainer = React.forwardRef<
 });
 ChartContainer.displayName = "Chart";
 
+// Strict allowlist: only hex, rgb(), hsl(), oklch(), or named CSS colors
 function isValidCssColor(color: string): boolean {
-  return /^#[0-9a-fA-F]{3,8}$|^rgb\([^)]+\)$|^hsl\([^)]+\)$|^[a-zA-Z]{1,30}$/.test(color.trim());
+  const trimmed = color.trim();
+  // Block anything with semicolons, braces, urls, expressions, or escape chars
+  if (/[;{}\\]|url\s*\(|expression\s*\(/i.test(trimmed)) {
+    return false;
+  }
+  return /^#[0-9a-fA-F]{3,8}$/.test(trimmed) ||
+    /^(rgb|hsl|oklch)a?\([0-9.,\s/%deg]+\)$/.test(trimmed) ||
+    /^[a-zA-Z]{1,20}$/.test(trimmed);
+}
+
+function sanitizeCssKey(key: string): string {
+  return key.replace(/[^a-zA-Z0-9-_]/g, "");
 }
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
@@ -69,24 +81,24 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
     return null;
   }
 
+  // Build CSS using element.style approach via a ref to avoid dangerouslySetInnerHTML
+  const cssText = Object.entries(THEMES)
+    .map(([theme, prefix]) => {
+      const vars = colorConfig
+        .map(([key, itemConfig]) => {
+          const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
+          const safeKey = sanitizeCssKey(key);
+          return color && isValidCssColor(color) ? `  --color-${safeKey}: ${color};` : null;
+        })
+        .filter(Boolean)
+        .join("\n");
+      return `${prefix} [data-chart=${id}] {\n${vars}\n}`;
+    })
+    .join("\n");
+
   return (
     <style
-      dangerouslySetInnerHTML={{
-        __html: Object.entries(THEMES)
-          .map(
-            ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
-${colorConfig
-  .map(([key, itemConfig]) => {
-    const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
-    return color && isValidCssColor(color) ? `  --color-${key}: ${color};` : null;
-  })
-  .join("\n")}
-}
-`,
-          )
-          .join("\n"),
-      }}
+      dangerouslySetInnerHTML={{ __html: cssText }}
     />
   );
 };
