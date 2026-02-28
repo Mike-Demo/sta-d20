@@ -14,7 +14,8 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
       <div className="flex items-stretch gap-2 mb-2">
         <div className="bg-lcars-arctic-ice lcars-pill-left h-12 w-32 md:w-48 flex-shrink-0" />
         <div className="bg-lcars-alpha-blue h-12 flex-1" />
-        <div className="bg-lcars-beta-blue h-12 w-20 md:w-32 flex items-center justify-center">
+        <div className="bg-lcars-beta-blue h-12 w-20 md:w-32 flex items-center justify-center gap-2">
+          <img src="/pwa-icon-512.png" alt="STA2E-D20" className="h-7 w-7 rounded-sm" />
           <span className="text-primary-foreground font-display text-xs md:text-sm font-bold tracking-widest uppercase">
             LCARS
           </span>
