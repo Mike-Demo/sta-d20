@@ -10,7 +10,7 @@ interface DieResult {
 const WatchDiceRoller = () => {
   const [numDice, setNumDice] = useState(2);
   const [targetNumber, setTargetNumber] = useState(10);
-  const [focusRange, setFocusRange] = useState(1);
+  
   const [totalSuccesses, setTotalSuccesses] = useState<number | null>(null);
   const [complications, setComplications] = useState(0);
   const [isRolling, setIsRolling] = useState(false);
@@ -26,7 +26,7 @@ const WatchDiceRoller = () => {
         dice.push({
           value,
           isSuccess: value <= targetNumber,
-          isCritical: value <= focusRange,
+          isCritical: value === 1,
           isComplication: value === 20,
         });
       }
@@ -41,7 +41,7 @@ const WatchDiceRoller = () => {
       setComplications(dice.filter((d) => d.isComplication).length);
       setIsRolling(false);
     }, 500);
-  }, [numDice, targetNumber, focusRange]);
+  }, [numDice, targetNumber]);
 
   return (
     <div className="watch-layout flex flex-col items-center gap-1 p-1 min-h-screen bg-background text-foreground">
@@ -53,7 +53,7 @@ const WatchDiceRoller = () => {
       <div className="w-full flex flex-col gap-1">
         <StepperRow label="Dice" value={numDice} min={1} max={5} onChange={setNumDice} />
         <StepperRow label="TN" value={targetNumber} min={1} max={20} onChange={setTargetNumber} />
-        <StepperRow label="Focus" value={focusRange} min={1} max={5} onChange={setFocusRange} />
+        
       </div>
 
       {/* Engage */}
