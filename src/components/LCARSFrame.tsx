@@ -109,6 +109,9 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             <div className="bg-lcars-night-rain h-6 w-24 flex items-center justify-center">
               <span className="text-primary-foreground text-[9px] font-bold tracking-widest">STARDATE 2402.7</span>
             </div>
+            <a href="http://www.wtfpl.net/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="bg-lcars-night-rain h-6 flex items-center justify-center px-2 hover:opacity-80 transition-opacity" title="WTFPL v2 License">
+              <img src={wtfplLogo} alt="WTFPL License" className="h-4 w-auto invert opacity-70" />
+            </a>
             <div className="bg-lcars-alpha-blue h-6 w-12 md:w-20 lcars-pill-right" />
           </div>
 
@@ -126,11 +129,8 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             <p className="text-muted-foreground text-[8px] leading-tight">
               No trackers detected on 2d20.space. Privacy score: 90/100. <a href="https://geckoadvisor.com/privacy-report/2d20.space" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">GeckoAdvisor Report</a>
             </p>
-            <p className="text-muted-foreground text-[8px] leading-tight flex items-center justify-center gap-1">
+            <p className="text-muted-foreground text-[8px] leading-tight">
               LCARS style inspired by <a href="https://thelcars.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">thelcars.com</a> by Jim Robertus
-              <a href="http://www.wtfpl.net/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="inline-flex items-center hover:opacity-80 transition-opacity" title="WTFPL v2 License">
-                <img src={wtfplLogo} alt="WTFPL License" className="h-3 w-auto inline-block ml-1 invert opacity-60" />
-              </a>
             </p>
             <p className="text-muted-foreground text-[8px] leading-tight">
               <a href="https://icons8.com/icon/21039/star-trek" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Star Trek</a> icon by <a href="https://icons8.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Icons8</a>
