@@ -19,7 +19,7 @@ interface RollResult {
 const DiceRoller = () => {
   const [numDice, setNumDice] = useState(2);
   const [targetNumber, setTargetNumber] = useState(10);
-  const [focusRange, setFocusRange] = useState(1);
+  
   const [result, setResult] = useState<RollResult | null>(null);
   const [isRolling, setIsRolling] = useState(false);
   const [history, setHistory] = useState<RollHistoryEntry[]>([]);
@@ -41,7 +41,7 @@ const DiceRoller = () => {
       const dice: DieResult[] = [];
       for (let i = 0; i < numDice; i++) {
         const value = Math.floor(Math.random() * 20) + 1;
-        const isCritical = value <= focusRange;
+        const isCritical = value === 1;
         const isSuccess = value <= targetNumber;
         const isComplication = value === 20;
         dice.push({ value, isSuccess, isCritical, isComplication });
@@ -78,7 +78,6 @@ const DiceRoller = () => {
           stardate: generateStardate(),
           numDice,
           targetNumber,
-          focusRange,
           totalSuccesses,
           complications,
           dice,
@@ -87,12 +86,12 @@ const DiceRoller = () => {
         ...prev,
       ].slice(0, 50));
     }, 700);
-  }, [numDice, targetNumber, focusRange, rollId]);
+  }, [numDice, targetNumber, rollId]);
 
   return (
     <div className="flex flex-col gap-6 max-w-2xl mx-auto">
       {/* Controls */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Number of dice */}
         <div className="flex flex-col gap-2">
           <label className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
@@ -133,30 +132,6 @@ const DiceRoller = () => {
             <button
               onClick={() => setTargetNumber(Math.min(20, targetNumber + 1))}
               className="h-10 w-10 bg-lcars-arctic-ice text-primary-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        {/* Focus range */}
-        <div className="flex flex-col gap-2">
-          <label className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
-            Focus Range
-          </label>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setFocusRange(Math.max(1, focusRange - 1))}
-              className="h-10 w-10 bg-lcars-radioactive text-accent-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
-            >
-              −
-            </button>
-            <div className="h-10 w-14 bg-muted rounded-sm flex items-center justify-center">
-              <span className="text-lcars-radioactive font-display text-2xl font-bold">{focusRange}</span>
-            </div>
-            <button
-              onClick={() => setFocusRange(Math.min(5, focusRange + 1))}
-              className="h-10 w-10 bg-lcars-radioactive text-accent-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
             >
               +
             </button>
@@ -286,7 +261,7 @@ const DiceRoller = () => {
       <div className="grid grid-cols-3 gap-2 text-center">
         <div className="bg-muted rounded-sm py-2 px-3">
           <div className="text-[9px] text-muted-foreground font-bold tracking-widest uppercase">Critical</div>
-          <div className="text-lcars-alpha-blue text-xs mt-1">≤ {focusRange} = 2 successes</div>
+          <div className="text-lcars-alpha-blue text-xs mt-1">1 = 2 successes</div>
         </div>
         <div className="bg-muted rounded-sm py-2 px-3">
           <div className="text-[9px] text-muted-foreground font-bold tracking-widest uppercase">Success</div>

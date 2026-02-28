@@ -5,7 +5,7 @@ export interface RollHistoryEntry {
   stardate: string;
   numDice: number;
   targetNumber: number;
-  focusRange: number;
+  
   totalSuccesses: number;
   complications: number;
   dice: { value: number; isSuccess: boolean; isCritical: boolean; isComplication: boolean }[];
@@ -54,7 +54,7 @@ const RollHistory = ({ entries }: RollHistoryProps) => {
                 SD {entry.stardate}
               </span>
               <span className="text-muted-foreground text-[9px] tracking-wider uppercase">
-                {entry.numDice}d20 · TN {entry.targetNumber} · F {entry.focusRange}
+                {entry.numDice}d20 · TN {entry.targetNumber}
               </span>
             </div>
 
