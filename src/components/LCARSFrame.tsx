@@ -113,11 +113,11 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
 
           {/* Disclaimer */}
           <footer className="mt-2 px-2 text-center space-y-1">
-            <p className="text-muted-foreground text-[9px] leading-tight">
-              This is a community-created tool for Star Trek Adventures, and has no official affiliation with Modiphius.
-            </p>
             <p className="text-muted-foreground text-[8px] leading-tight">
               TM &amp; © 2026 CBS Studios Inc. STAR TREK and related marks and logos are trademarks of CBS Studios Inc. All Rights Reserved.
+            </p>
+            <p className="text-muted-foreground text-[9px] leading-tight">
+              This is a community-created tool for Star Trek Adventures, and has no official affiliation with Modiphius.
             </p>
             <p className="text-muted-foreground text-[8px] leading-tight">
               Some elements of this interface were replicated with AI assistance. Safety protocols remain engaged.
