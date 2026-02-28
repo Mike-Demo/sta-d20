@@ -128,6 +128,9 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             <p className="text-muted-foreground text-[8px] leading-tight">
               <a href="https://icons8.com/icon/21039/star-trek" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Star Trek</a> icon by <a href="https://icons8.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Icons8</a>
             </p>
+            <p className="text-muted-foreground text-[8px] leading-tight">
+              No trackers detected on 2d20.space. Privacy score: 90/100. <a href="https://geckoadvisor.com/privacy-report/2d20.space" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">GeckoAdvisor Report</a>
+            </p>
           </footer>
         </div>
       </div>
