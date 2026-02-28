@@ -11,32 +11,32 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
     <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col">
       {/* Top bar */}
       <div className="flex items-stretch gap-2 mb-2">
-        <div className="bg-lcars-mauve lcars-pill-left h-12 w-32 md:w-48 flex-shrink-0" />
-        <div className="bg-lcars-blue h-12 flex-1" />
-        <div className="bg-lcars-gold h-12 w-20 md:w-32 flex items-center justify-center">
+        <div className="bg-lcars-arctic-ice lcars-pill-left h-12 w-32 md:w-48 flex-shrink-0" />
+        <div className="bg-lcars-alpha-blue h-12 flex-1" />
+        <div className="bg-lcars-beta-blue h-12 w-20 md:w-32 flex items-center justify-center">
           <span className="text-primary-foreground font-display text-xs md:text-sm font-bold tracking-widest uppercase">
             LCARS
           </span>
         </div>
-        <div className="bg-lcars-amber lcars-pill-right h-12 w-16 md:w-24 flex-shrink-0" />
+        <div className="bg-lcars-night-rain lcars-pill-right h-12 w-16 md:w-24 flex-shrink-0" />
       </div>
 
       {/* Main content area */}
       <div className="flex flex-1 gap-2">
         {/* Left sidebar */}
         <div className="hidden md:flex flex-col gap-2 w-32 lg:w-48 flex-shrink-0">
-          <div className="bg-lcars-gold lcars-elbow-tl h-20 flex items-end p-2">
+          <div className="bg-lcars-alpha-blue lcars-elbow-tl h-20 flex items-end p-2">
             <span className="text-primary-foreground text-[10px] font-bold tracking-wider">01-4774</span>
           </div>
-          <div className="bg-lcars-amber h-10" />
-          <div className="bg-lcars-peach h-6" />
-          <div className="bg-lcars-blue h-14" />
-          <div className="bg-lcars-mauve h-8" />
-          <div className="bg-lcars-lavender h-6" />
-          <div className="bg-lcars-teal h-10" />
-          <div className="bg-lcars-gold flex-1" />
-          <div className="bg-lcars-amber h-8" />
-          <div className="bg-lcars-mauve lcars-elbow-bl h-16 flex items-start p-2">
+          <div className="bg-lcars-beta-blue h-10" />
+          <div className="bg-lcars-arctic-snow h-6" />
+          <div className="bg-lcars-arctic-ice h-14" />
+          <div className="bg-lcars-night-rain h-8" />
+          <div className="bg-lcars-arctic-snow h-6" />
+          <div className="bg-lcars-radioactive h-10" />
+          <div className="bg-lcars-alpha-blue flex-1" />
+          <div className="bg-lcars-beta-blue h-8" />
+          <div className="bg-lcars-night-cloud lcars-elbow-bl h-16 flex items-start p-2">
             <span className="text-accent-foreground text-[10px] font-bold tracking-wider">47-0198</span>
           </div>
         </div>
@@ -45,13 +45,13 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
         <div className="flex-1 flex flex-col gap-2">
           {/* Title bar */}
           <div className="flex items-center gap-2">
-            <div className="bg-lcars-gold h-8 w-4 md:hidden rounded-l-full" />
+            <div className="bg-lcars-alpha-blue h-8 w-4 md:hidden rounded-l-full" />
             <div className="bg-muted h-8 flex-1 flex items-center px-4">
               <h1 className="text-primary font-display text-lg md:text-2xl font-bold tracking-[0.2em] uppercase">
                 {title}
               </h1>
             </div>
-            <div className="bg-lcars-blue h-8 w-16 lcars-pill-right" />
+            <div className="bg-lcars-arctic-ice h-8 w-16 lcars-pill-right" />
           </div>
 
           {/* Main area */}
@@ -66,7 +66,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               target="_blank"
               rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="bg-lcars-blue hover:bg-lcars-teal transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
+              className="bg-lcars-alpha-blue hover:bg-lcars-radioactive transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
             >
               <ExternalLink className="w-3 h-3" />
               Star Trek Games
@@ -76,7 +76,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               target="_blank"
               rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="bg-lcars-mauve hover:bg-lcars-lavender transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
+              className="bg-lcars-arctic-ice hover:bg-lcars-arctic-snow transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
             >
               <ExternalLink className="w-3 h-3" />
               STA Reference
@@ -86,7 +86,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               target="_blank"
               rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="bg-lcars-peach hover:bg-lcars-gold transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
+              className="bg-lcars-beta-blue hover:bg-lcars-alpha-blue transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
             >
               🏳️‍🌈 Gayming Foundation
             </a>
@@ -95,7 +95,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               target="_blank"
               rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="bg-lcars-teal hover:bg-lcars-blue transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
+              className="bg-lcars-radioactive hover:bg-lcars-arctic-ice transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-accent-foreground text-[11px] font-bold tracking-wider uppercase"
             >
               🏳️‍⚧️ Gay Gaming Professionals
             </a>
@@ -103,12 +103,12 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
 
           {/* Bottom bar */}
           <div className="flex items-stretch gap-2">
-            <div className="bg-lcars-teal h-6 w-12 md:w-20 lcars-pill-left" />
-            <div className="bg-lcars-peach h-6 flex-1" />
-            <div className="bg-lcars-lavender h-6 w-24 flex items-center justify-center">
-              <span className="text-accent-foreground text-[9px] font-bold tracking-widest">STARDATE 2402.7</span>
+            <div className="bg-lcars-radioactive h-6 w-12 md:w-20 lcars-pill-left" />
+            <div className="bg-lcars-arctic-snow h-6 flex-1" />
+            <div className="bg-lcars-night-rain h-6 w-24 flex items-center justify-center">
+              <span className="text-primary-foreground text-[9px] font-bold tracking-widest">STARDATE 2402.7</span>
             </div>
-            <div className="bg-lcars-gold h-6 w-12 md:w-20 lcars-pill-right" />
+            <div className="bg-lcars-alpha-blue h-6 w-12 md:w-20 lcars-pill-right" />
           </div>
 
           {/* Disclaimer */}
@@ -121,6 +121,9 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             </p>
             <p className="text-muted-foreground text-[8px] leading-tight">
               Some elements of this interface were replicated with AI assistance. Safety protocols remain engaged.
+            </p>
+            <p className="text-muted-foreground text-[8px] leading-tight">
+              LCARS style inspired by <a href="https://thelcars.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">thelcars.com</a> by Jim Robertus
             </p>
             <p className="text-muted-foreground text-[8px] leading-tight">
               <a href="https://icons8.com/icon/21039/star-trek" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Star Trek</a> icon by <a href="https://icons8.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Icons8</a>

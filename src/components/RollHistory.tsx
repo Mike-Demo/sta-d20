@@ -50,7 +50,7 @@ const RollHistory = ({ entries }: RollHistoryProps) => {
             className="bg-muted/50 border border-border rounded-sm p-3 result-pop"
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="text-lcars-amber font-display text-xs font-bold tracking-widest">
+              <span className="text-lcars-arctic-ice font-display text-xs font-bold tracking-widest">
                 SD {entry.stardate}
               </span>
               <span className="text-muted-foreground text-[9px] tracking-wider uppercase">
@@ -66,9 +66,9 @@ const RollHistory = ({ entries }: RollHistoryProps) => {
                     die.isComplication
                       ? "bg-destructive/20 text-destructive"
                       : die.isCritical
-                      ? "bg-lcars-gold/20 text-lcars-gold"
+                      ? "bg-lcars-alpha-blue/20 text-lcars-alpha-blue"
                       : die.isSuccess
-                      ? "bg-lcars-teal/20 text-lcars-teal"
+                      ? "bg-lcars-radioactive/20 text-lcars-radioactive"
                       : "bg-muted text-muted-foreground"
                   }`}
                 >
@@ -78,7 +78,7 @@ const RollHistory = ({ entries }: RollHistoryProps) => {
             </div>
 
             <div className="flex items-center gap-3 text-xs">
-              <span className="text-lcars-teal font-bold">
+              <span className="text-lcars-radioactive font-bold">
                 {entry.totalSuccesses} success{entry.totalSuccesses !== 1 ? "es" : ""}
               </span>
               {entry.complications > 0 && (

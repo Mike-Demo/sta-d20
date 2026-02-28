@@ -6,45 +6,46 @@
 
 @layer base {
   :root {
-    --background: 222 36% 10%;
-    --foreground: 33 100% 90%;
+    /* Lower Decks PADD Theme v24.2 — Jim Robertus / thelcars.com */
+    --background: 224 38% 12%;
+    --foreground: 210 60% 90%;
 
-    --card: 222 30% 14%;
-    --card-foreground: 33 100% 90%;
+    --card: 224 30% 17%;
+    --card-foreground: 210 60% 90%;
 
-    --popover: 222 30% 14%;
-    --popover-foreground: 33 100% 90%;
+    --popover: 224 30% 17%;
+    --popover-foreground: 210 60% 90%;
 
-    --primary: 33 100% 63%;
-    --primary-foreground: 222 36% 10%;
+    --primary: 224 78% 63%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 216 80% 64%;
-    --secondary-foreground: 222 36% 10%;
+    --secondary: 218 56% 54%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 222 25% 20%;
-    --muted-foreground: 33 50% 72%;
+    --muted: 224 35% 22%;
+    --muted-foreground: 210 40% 72%;
 
-    --accent: 200 100% 70%;
-    --accent-foreground: 222 36% 10%;
+    --accent: 180 100% 73%;
+    --accent-foreground: 224 38% 12%;
 
-    --destructive: 16 100% 60%;
+    --destructive: 16 100% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 20% 24%;
-    --input: 222 20% 24%;
-    --ring: 33 100% 63%;
+    --border: 224 28% 26%;
+    --input: 224 28% 26%;
+    --ring: 224 78% 63%;
 
     --radius: 0.5rem;
 
-    /* Lower Decks LCARS tokens (thelcars.com) */
-    --lcars-gold: 33 100% 63%;
-    --lcars-amber: 33 100% 53%;
-    --lcars-blue: 216 80% 64%;
-    --lcars-mauve: 200 100% 70%;
-    --lcars-red: 16 100% 50%;
-    --lcars-teal: 180 100% 77%;
-    --lcars-peach: 30 100% 80%;
-    --lcars-lavender: 210 100% 80%;
+    /* Lower Decks LCARS tokens (thelcars.com PADD theme) */
+    --lcars-alpha-blue: 224 78% 63%;
+    --lcars-arctic-ice: 200 100% 70%;
+    --lcars-arctic-snow: 210 100% 80%;
+    --lcars-radioactive: 180 100% 73%;
+    --lcars-beta-blue: 218 56% 54%;
+    --lcars-night-cloud: 224 38% 32%;
+    --lcars-night-rain: 224 30% 42%;
+    --lcars-sunset-red: 16 100% 50%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
