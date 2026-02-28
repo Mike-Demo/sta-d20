@@ -120,6 +120,9 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               TM &amp; © 2026 CBS Studios Inc. STAR TREK and related marks and logos are trademarks of CBS Studios Inc. All Rights Reserved.
             </p>
             <p className="text-muted-foreground text-[8px] leading-tight">
+              No trackers detected on 2d20.space. Privacy score: 90/100. <a href="https://geckoadvisor.com/privacy-report/2d20.space" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">GeckoAdvisor Report</a>
+            </p>
+            <p className="text-muted-foreground text-[8px] leading-tight">
               Some elements of this interface were replicated with AI assistance. Safety protocols remain engaged.
             </p>
             <p className="text-muted-foreground text-[8px] leading-tight">
@@ -127,9 +130,6 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             </p>
             <p className="text-muted-foreground text-[8px] leading-tight">
               <a href="https://icons8.com/icon/21039/star-trek" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Star Trek</a> icon by <a href="https://icons8.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Icons8</a>
-            </p>
-            <p className="text-muted-foreground text-[8px] leading-tight">
-              No trackers detected on 2d20.space. Privacy score: 90/100. <a href="https://geckoadvisor.com/privacy-report/2d20.space" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">GeckoAdvisor Report</a>
             </p>
           </footer>
         </div>
