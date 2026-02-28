@@ -19,7 +19,17 @@ export default defineConfig(({ mode }) => ({
     {
       name: "inject-build-date",
       transformIndexHtml(html: string) {
-        return html.replace("__BUILD_DATE__", new Date().toISOString().split("T")[0]);
+        const buildDate = new Date().toISOString().split("T")[0];
+        return html.replace(/__BUILD_DATE__/g, buildDate);
+      },
+      generateBundle(_options: unknown, bundle: unknown) {
+        const buildDate = new Date().toISOString().split("T")[0];
+        const b = bundle as Record<string, { type: string; source?: string | Uint8Array }>;
+        for (const file of Object.values(b)) {
+          if (file.type === "asset" && typeof file.source === "string" && file.source.includes("__BUILD_DATE__")) {
+            file.source = file.source.replace(/__BUILD_DATE__/g, buildDate);
+          }
+        }
       },
     },
     VitePWA({
