@@ -130,6 +130,31 @@ Disallow: /
 User-agent: cohere-ai
 Disallow: /
 
+# --- Block undocumented AI agents ---
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Crawl4AI
+Disallow: /
+
+User-agent: DeepSeekBot
+Disallow: /
+
+User-agent: iAskBot
+Disallow: /
+
+User-agent: iaskspider
+Disallow: /
+
+User-agent: KunatoCrawler
+Disallow: /
+
+User-agent: TerraCotta
+Disallow: /
+
+User-agent: WRTNBot
+Disallow: /
+
 # --- Block ad/tracking bots ---
 User-agent: adidxbot
 Disallow: /
