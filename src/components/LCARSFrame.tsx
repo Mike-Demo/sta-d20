@@ -76,7 +76,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               target="_blank"
               rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="bg-lcars-arctic-ice hover:bg-lcars-arctic-snow transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
+              className="bg-lcars-arctic-ice hover:bg-lcars-arctic-snow transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-accent-foreground text-[11px] font-bold tracking-wider uppercase"
             >
               <ExternalLink className="w-3 h-3" />
               STA Reference
