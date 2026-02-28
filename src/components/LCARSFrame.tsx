@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { ExternalLink } from "lucide-react";
 import wtfplLogo from "@/assets/wtfpl.svg";
+import CarbonBadge from "@/components/CarbonBadge";
 
 interface LCARSFrameProps {
   title: string;
@@ -129,6 +130,9 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             <p className="text-muted-foreground text-[8px] leading-tight">
               No trackers detected on 2d20.space. Privacy score: 90/100. <a href="https://geckoadvisor.com/privacy-report/2d20.space" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">GeckoAdvisor Report</a>
             </p>
+            <div className="pt-0.5">
+              <CarbonBadge />
+            </div>
             <p className="text-muted-foreground text-[8px] leading-tight">
               LCARS style inspired by <a href="https://thelcars.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">thelcars.com</a> by Jim Robertus
             </p>
