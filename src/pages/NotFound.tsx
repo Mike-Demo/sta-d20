@@ -12,6 +12,17 @@ const NotFound = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Prevent search engines from indexing 404 pages
+  useEffect(() => {
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex, nofollow";
+    document.head.appendChild(meta);
+    return () => {
+      document.head.removeChild(meta);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col" role="main" aria-label="404 Error Page">
       {/* Top bar */}
