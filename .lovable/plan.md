@@ -1,22 +1,40 @@
 
-## Add JSON-LD Schema to the Site
 
-### What will change
+## 404 Page Polish -- Lower Decks Flavor Pass
 
-1. **Add JSON-LD schema script to `index.html`** -- Insert the provided schema markup as a `<script type="application/ld+json">` block in the `<head>` section.
+Four small, scoped changes to `src/pages/NotFound.tsx` only. No global styles or other files touched.
 
-2. **Auto-update `dateModified` at build time** -- Use Vite's `define` or `html` plugin to inject the current date into the schema at build time, so every publish automatically gets today's date in the `dateModified` field.
+### 1. Add two tiny LCARS flavor labels
 
-### Technical Details
+Insert a row of two small LCARS status chips between the Heisenberg compensator indicator and the return button:
 
-- **Vite HTML transform plugin**: Add a small custom Vite plugin in `vite.config.ts` that replaces a placeholder (e.g., `__BUILD_DATE__`) in `index.html` with the current ISO date string (`YYYY-MM-DD`) at build time.
+- "Temporal Integrity: Nominal (for now)"
+- "Cerritos Ops: Mildly Concerned"
 
-- **Schema placement**: The JSON-LD block goes at the end of `<head>` in `index.html`, right before `</head>`. The `dateModified` value will use the `__BUILD_DATE__` placeholder.
+Styled as small `bg-muted` rounded bars with `text-lcars-arctic-snow` and `text-lcars-gold` respectively, matching the existing compact label style.
 
-- **Files modified**:
-  - `index.html` -- add the `<script type="application/ld+json">` block with the schema content
-  - `vite.config.ts` -- add a small `transformIndexHtml` plugin that replaces `__BUILD_DATE__` with the current date
+### 2. Add a micro-gag under the error code
 
-### Schema content
+In the diagnostic readout panel, add a tiny italic footnote line below the data rows:
 
-The exact JSON-LD from the uploaded file will be used, with `dateModified` set to `__BUILD_DATE__` so it updates automatically on each build/publish.
+*"GNDN: Goes Nowhere, Does Nothing -- like this page."*
+
+Styled as `text-muted-foreground text-[10px] italic` to match the existing tiny-text convention used elsewhere on the page.
+
+### 3. Make the return button chunkier
+
+- Increase vertical padding from `py-4` to `py-5`
+- Add a visible border: `border-2 border-lcars-arctic-ice`
+- Add a subtle left/right segmented accent by wrapping the button in a flex row with two small decorative LCARS blocks (thin `bg-lcars-beta-blue` bars) flanking it, giving it the segmented panel look
+
+### 4. Add an animated LCARS processing bar
+
+Insert a small horizontal bar below the diagnostic readout panel -- a thin (`h-1.5`) rounded bar with a CSS shimmer/sweep animation. The bar background will be `bg-lcars-night-cloud` with a lighter `bg-lcars-arctic-ice` segment that slides left-to-right using a scoped `@keyframes` added to the existing `<style>` block. This sells the "system running diagnostics" illusion.
+
+### Technical details
+
+- File changed: `src/pages/NotFound.tsx` only
+- Animations added to the existing scoped `<style>` block (no global CSS changes)
+- All new elements use existing Tailwind color tokens and font classes
+- Responsive and accessible (decorative elements marked `aria-hidden`)
+
