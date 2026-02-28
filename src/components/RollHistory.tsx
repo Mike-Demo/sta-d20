@@ -1,15 +1,20 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
+import type { StaDieResult } from "@/lib/sta-dice";
 
 export interface RollHistoryEntry {
   id: number;
   stardate: string;
   numDice: number;
   targetNumber: number;
-  focusRange: number;
   totalSuccesses: number;
   complications: number;
   dice: { value: number; isSuccess: boolean; isCritical: boolean; isComplication: boolean }[];
   timestamp: Date;
+  // STA 2e extensions
+  difficulty?: number;
+  passed?: boolean;
+  momentum?: number;
+  assistDie?: StaDieResult;
 }
 
 function generateStardate(): string {
@@ -54,7 +59,8 @@ const RollHistory = ({ entries }: RollHistoryProps) => {
                 SD {entry.stardate}
               </span>
               <span className="text-muted-foreground text-[9px] tracking-wider uppercase">
-                {entry.numDice}d20 · TN {entry.targetNumber} · F {entry.focusRange}
+                {entry.numDice}d20 · TN {entry.targetNumber}
+                {entry.difficulty != null && ` · D${entry.difficulty}`}
               </span>
             </div>
 
@@ -75,15 +81,38 @@ const RollHistory = ({ entries }: RollHistoryProps) => {
                   {die.value}
                 </span>
               ))}
+              {entry.assistDie && (
+                <span className={`font-display text-sm font-bold px-1.5 py-0.5 rounded-sm border border-dashed ${
+                  entry.assistDie.isComplication
+                    ? "bg-destructive/20 text-destructive border-destructive"
+                    : entry.assistDie.isCritical
+                    ? "bg-lcars-alpha-blue/20 text-lcars-alpha-blue border-lcars-alpha-blue"
+                    : entry.assistDie.successes > 0
+                    ? "bg-lcars-radioactive/20 text-lcars-radioactive border-lcars-radioactive"
+                    : "bg-muted text-muted-foreground border-border"
+                }`}>
+                  {entry.assistDie.value}
+                </span>
+              )}
             </div>
 
             <div className="flex items-center gap-3 text-xs">
               <span className="text-lcars-radioactive font-bold">
-                {entry.totalSuccesses} success{entry.totalSuccesses !== 1 ? "es" : ""}
+                {entry.totalSuccesses} succ
               </span>
               {entry.complications > 0 && (
                 <span className="text-destructive font-bold">
-                  {entry.complications} complication{entry.complications !== 1 ? "s" : ""}
+                  {entry.complications} comp
+                </span>
+              )}
+              {entry.passed != null && (
+                <span className={`font-bold ${entry.passed ? "text-lcars-radioactive" : "text-destructive"}`}>
+                  {entry.passed ? "PASS" : "FAIL"}
+                </span>
+              )}
+              {entry.momentum != null && entry.momentum > 0 && (
+                <span className="text-lcars-alpha-blue font-bold">
+                  +{entry.momentum} mom
                 </span>
               )}
             </div>
