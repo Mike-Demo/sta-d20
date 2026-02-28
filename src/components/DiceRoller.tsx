@@ -105,8 +105,8 @@ const DiceRoller = () => {
                 onClick={() => setNumDice(n)}
                 className={`h-10 w-10 rounded-sm font-display text-lg font-bold transition-all ${
                   numDice === n
-                    ? "bg-lcars-gold text-primary-foreground scale-110"
-                    : "bg-muted text-muted-foreground hover:bg-lcars-amber hover:text-primary-foreground"
+                    ? "bg-lcars-alpha-blue text-primary-foreground scale-110"
+                    : "bg-muted text-muted-foreground hover:bg-lcars-beta-blue hover:text-primary-foreground"
                 }`}
               >
                 {n}
@@ -123,7 +123,7 @@ const DiceRoller = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setTargetNumber(Math.max(1, targetNumber - 1))}
-              className="h-10 w-10 bg-lcars-blue text-secondary-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
+              className="h-10 w-10 bg-lcars-arctic-ice text-primary-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
             >
               −
             </button>
@@ -132,7 +132,7 @@ const DiceRoller = () => {
             </div>
             <button
               onClick={() => setTargetNumber(Math.min(20, targetNumber + 1))}
-              className="h-10 w-10 bg-lcars-blue text-secondary-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
+              className="h-10 w-10 bg-lcars-arctic-ice text-primary-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
             >
               +
             </button>
@@ -147,16 +147,16 @@ const DiceRoller = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setFocusRange(Math.max(1, focusRange - 1))}
-              className="h-10 w-10 bg-lcars-teal text-primary-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
+              className="h-10 w-10 bg-lcars-radioactive text-accent-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
             >
               −
             </button>
             <div className="h-10 w-14 bg-muted rounded-sm flex items-center justify-center">
-              <span className="text-lcars-teal font-display text-2xl font-bold">{focusRange}</span>
+              <span className="text-lcars-radioactive font-display text-2xl font-bold">{focusRange}</span>
             </div>
             <button
               onClick={() => setFocusRange(Math.min(5, focusRange + 1))}
-              className="h-10 w-10 bg-lcars-teal text-primary-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
+              className="h-10 w-10 bg-lcars-radioactive text-accent-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
             >
               +
             </button>
@@ -169,7 +169,7 @@ const DiceRoller = () => {
         <button
           onClick={rollDice}
           disabled={isRolling}
-          className="flex-1 h-16 bg-lcars-gold text-primary-foreground font-display text-2xl font-bold tracking-[0.3em] uppercase lcars-pill hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-60"
+          className="flex-1 h-16 bg-lcars-alpha-blue text-primary-foreground font-display text-2xl font-bold tracking-[0.3em] uppercase lcars-pill hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-60"
         >
           {isRolling ? "SCANNING..." : "ENGAGE"}
         </button>
@@ -181,7 +181,7 @@ const DiceRoller = () => {
           {muted ? (
             <VolumeX className="h-5 w-5 text-muted-foreground" />
           ) : (
-            <Volume2 className="h-5 w-5 text-lcars-teal" />
+            <Volume2 className="h-5 w-5 text-lcars-radioactive" />
           )}
         </button>
       </div>
@@ -213,9 +213,9 @@ const DiceRoller = () => {
                     die.isComplication
                       ? "bg-destructive/20 border-destructive"
                       : die.isCritical
-                      ? "bg-lcars-gold/20 border-lcars-gold"
+                      ? "bg-lcars-alpha-blue/20 border-lcars-alpha-blue"
                       : die.isSuccess
-                      ? "bg-lcars-teal/20 border-lcars-teal"
+                      ? "bg-lcars-radioactive/20 border-lcars-radioactive"
                       : "bg-muted border-border"
                   }`}
                   style={{ animationDelay: `${i * 0.1}s` }}
@@ -225,9 +225,9 @@ const DiceRoller = () => {
                       die.isComplication
                         ? "text-destructive"
                         : die.isCritical
-                        ? "text-lcars-gold"
+                        ? "text-lcars-alpha-blue"
                         : die.isSuccess
-                        ? "text-lcars-teal"
+                        ? "text-lcars-radioactive"
                         : "text-muted-foreground"
                     }`}
                   >
@@ -248,8 +248,8 @@ const DiceRoller = () => {
 
             {/* Summary */}
             <div className="flex gap-4 items-center">
-              <div className="bg-lcars-teal/20 border border-lcars-teal rounded-sm px-6 py-3 text-center">
-                <div className="text-lcars-teal font-display text-4xl font-bold">
+              <div className="bg-lcars-radioactive/20 border border-lcars-radioactive rounded-sm px-6 py-3 text-center">
+                <div className="text-lcars-radioactive font-display text-4xl font-bold">
                   {result.totalSuccesses}
                 </div>
                 <div className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
@@ -286,11 +286,11 @@ const DiceRoller = () => {
       <div className="grid grid-cols-3 gap-2 text-center">
         <div className="bg-muted rounded-sm py-2 px-3">
           <div className="text-[9px] text-muted-foreground font-bold tracking-widest uppercase">Critical</div>
-          <div className="text-lcars-gold text-xs mt-1">≤ {focusRange} = 2 successes</div>
+          <div className="text-lcars-alpha-blue text-xs mt-1">≤ {focusRange} = 2 successes</div>
         </div>
         <div className="bg-muted rounded-sm py-2 px-3">
           <div className="text-[9px] text-muted-foreground font-bold tracking-widest uppercase">Success</div>
-          <div className="text-lcars-teal text-xs mt-1">≤ {targetNumber} = 1 success</div>
+          <div className="text-lcars-radioactive text-xs mt-1">≤ {targetNumber} = 1 success</div>
         </div>
         <div className="bg-muted rounded-sm py-2 px-3">
           <div className="text-[9px] text-muted-foreground font-bold tracking-widest uppercase">Complication</div>
@@ -300,11 +300,11 @@ const DiceRoller = () => {
       {/* Ship's Log */}
       <div className="mt-2">
         <div className="flex items-center gap-2 mb-3">
-          <div className="bg-lcars-amber h-4 w-2 lcars-pill-left" />
-          <h2 className="text-lcars-amber font-display text-sm font-bold tracking-[0.3em] uppercase">
+          <div className="bg-lcars-beta-blue h-4 w-2 lcars-pill-left" />
+          <h2 className="text-lcars-arctic-ice font-display text-sm font-bold tracking-[0.3em] uppercase">
             Ship's Log
           </h2>
-          <div className="bg-lcars-amber/30 h-px flex-1" />
+          <div className="bg-lcars-arctic-ice/30 h-px flex-1" />
           {history.length > 0 && (
             <button
               onClick={() => setHistory([])}

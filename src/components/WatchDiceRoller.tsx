@@ -68,7 +68,7 @@ const WatchDiceRoller = () => {
       {/* Result */}
       {totalSuccesses !== null && !isRolling && (
         <div className="flex flex-col items-center gap-0.5 mt-1">
-          <span className="text-lcars-teal font-display text-3xl font-bold leading-none">
+          <span className="text-lcars-radioactive font-display text-3xl font-bold leading-none">
             {totalSuccesses}
           </span>
           <span className="text-muted-foreground text-[8px] font-bold tracking-widest uppercase">
