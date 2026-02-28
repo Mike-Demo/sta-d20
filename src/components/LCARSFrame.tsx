@@ -109,7 +109,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             <div className="bg-lcars-night-rain h-6 w-24 flex items-center justify-center">
               <span className="text-primary-foreground text-[9px] font-bold tracking-widest">STARDATE 2402.7</span>
             </div>
-            <a href="http://www.wtfpl.net/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="bg-lcars-night-rain h-6 flex items-center justify-center px-2 hover:opacity-80 transition-opacity" title="WTFPL v2 License">
+            <a href="https://www.wtfpl.net/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="bg-lcars-night-rain h-6 flex items-center justify-center px-2 hover:opacity-80 transition-opacity" title="WTFPL v2 License">
               <img src={wtfplLogo} alt="WTFPL License" className="h-4 w-auto invert opacity-70" />
             </a>
             <div className="bg-lcars-alpha-blue h-6 w-12 md:w-20 lcars-pill-right" />
