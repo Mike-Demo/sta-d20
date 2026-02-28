@@ -46,6 +46,7 @@
     --lcars-night-cloud: 224 38% 32%;
     --lcars-night-rain: 224 30% 42%;
     --lcars-sunset-red: 16 100% 50%;
+    --lcars-gold: 45 100% 50%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -130,6 +131,10 @@
 
 .result-pop {
   animation: result-appear 0.4s ease-out forwards;
+}
+
+.lcars-glow-blue {
+  box-shadow: 0 0 8px hsl(200 100% 70% / 0.6);
 }
 
 /* Splash screen */

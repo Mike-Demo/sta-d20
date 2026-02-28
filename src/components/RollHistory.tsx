@@ -5,11 +5,14 @@ export interface RollHistoryEntry {
   stardate: string;
   numDice: number;
   targetNumber: number;
-  
   totalSuccesses: number;
   complications: number;
   dice: { value: number; isSuccess: boolean; isCritical: boolean; isComplication: boolean }[];
   timestamp: Date;
+  difficulty: number;
+  focusOn: boolean;
+  complicationRange: number;
+  momentum: number;
 }
 
 function generateStardate(): string {
@@ -86,6 +89,17 @@ const RollHistory = ({ entries }: RollHistoryProps) => {
                   {entry.complications} complication{entry.complications !== 1 ? "s" : ""}
                 </span>
               )}
+            </div>
+            <div className="flex items-center gap-2 text-[9px] text-muted-foreground tracking-wider mt-1">
+              <span>Diff {entry.difficulty}</span>
+              <span>·</span>
+              <span>Focus {entry.focusOn ? "ON" : "OFF"}</span>
+              <span>·</span>
+              <span>CR {entry.complicationRange}</span>
+              <span>·</span>
+              <span className={entry.momentum >= 0 ? "text-lcars-radioactive" : "text-destructive"}>
+                Momentum: {entry.momentum >= 0 ? `+${entry.momentum}` : entry.momentum}
+              </span>
             </div>
           </div>
         ))}
