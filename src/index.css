@@ -16,19 +16,19 @@
     --popover: 224 30% 17%;
     --popover-foreground: 210 60% 90%;
 
-    --primary: 224 78% 63%;
+    --primary: 224 78% 56%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 218 56% 54%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 224 35% 22%;
-    --muted-foreground: 210 40% 78%;
+    --muted-foreground: 210 40% 82%;
 
     --accent: 180 100% 73%;
     --accent-foreground: 224 38% 12%;
 
-    --destructive: 16 100% 50%;
+    --destructive: 16 100% 56%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 224 28% 26%;
@@ -38,11 +38,11 @@
     --radius: 0.5rem;
 
     /* Lower Decks LCARS tokens (thelcars.com PADD theme) */
-    --lcars-alpha-blue: 224 78% 63%;
+    --lcars-alpha-blue: 224 78% 56%;
     --lcars-arctic-ice: 200 100% 70%;
     --lcars-arctic-snow: 210 100% 80%;
     --lcars-radioactive: 180 100% 73%;
-    --lcars-beta-blue: 218 56% 54%;
+    --lcars-beta-blue: 218 56% 46%;
     --lcars-night-cloud: 224 38% 32%;
     --lcars-night-rain: 224 30% 42%;
     --lcars-sunset-red: 16 100% 50%;
@@ -106,9 +106,9 @@
 }
 
 @keyframes lcars-scan {
-  0% { opacity: 0.3; }
+  0% { opacity: 0.5; }
   50% { opacity: 1; }
-  100% { opacity: 0.3; }
+  100% { opacity: 0.5; }
 }
 
 @keyframes result-appear {

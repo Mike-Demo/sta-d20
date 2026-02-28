@@ -37,7 +37,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           <div className="bg-lcars-alpha-blue flex-1" />
           <div className="bg-lcars-beta-blue h-8" />
           <div className="bg-lcars-night-cloud lcars-elbow-bl h-16 flex items-start p-2">
-            <span className="text-accent-foreground text-[10px] font-bold tracking-wider">47-0198</span>
+            <span className="text-foreground text-[10px] font-bold tracking-wider">47-0198</span>
           </div>
         </div>
 
