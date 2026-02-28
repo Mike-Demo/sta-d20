@@ -60,6 +60,7 @@ export default {
           "night-cloud": "hsl(var(--lcars-night-cloud))",
           "night-rain": "hsl(var(--lcars-night-rain))",
           "sunset-red": "hsl(var(--lcars-sunset-red))",
+          "gold": "hsl(var(--lcars-gold))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
