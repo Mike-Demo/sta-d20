@@ -130,7 +130,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             <p className="text-muted-foreground text-[8px] leading-tight">
               No trackers detected on 2d20.space. Privacy score: 90/100. <a href="https://geckoadvisor.com/privacy-report/2d20.space" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">GeckoAdvisor Report</a>
             </p>
-            <div className="pt-0.5">
+            <div className="pt-1">
               <CarbonBadge />
             </div>
             <p className="text-muted-foreground text-[8px] leading-tight">
