@@ -155,6 +155,9 @@ Disallow: /
 User-agent: WRTNBot
 Disallow: /
 
+User-agent: Automattic Analytics Crawler
+Disallow: /
+
 # --- Block ad/tracking bots ---
 User-agent: adidxbot
 Disallow: /
