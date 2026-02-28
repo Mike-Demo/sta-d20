@@ -142,7 +142,15 @@ const NotFound = () => {
                     <span className="text-foreground">{value}</span>
                   </div>
                 ))}
+                <p className="text-muted-foreground text-[10px] italic pt-2" aria-hidden="true">
+                  GNDN: Goes Nowhere, Does Nothing — like this page.
+                </p>
               </div>
+            </div>
+
+            {/* LCARS processing bar */}
+            <div className="w-full h-1.5 rounded-full bg-lcars-night-cloud overflow-hidden" aria-hidden="true">
+              <div className="h-full w-1/4 rounded-full bg-lcars-arctic-ice" style={{ animation: "lcars-shimmer 2s ease-in-out infinite" }} />
             </div>
 
             {/* Heisenberg compensator indicator */}
@@ -157,15 +165,29 @@ const NotFound = () => {
               </span>
             </div>
 
+            {/* LCARS flavor labels */}
+            <div className="flex flex-wrap gap-2" aria-hidden="true">
+              <div className="bg-muted rounded-full px-4 py-1">
+                <span className="text-lcars-arctic-snow font-lcars text-[10px] tracking-wider">Temporal Integrity: Nominal (for now)</span>
+              </div>
+              <div className="bg-muted rounded-full px-4 py-1">
+                <span className="text-lcars-gold font-lcars text-[10px] tracking-wider">Cerritos Ops: Mildly Concerned</span>
+              </div>
+            </div>
+
             {/* 5. Return button */}
             <div className="flex flex-col items-center gap-3 pt-4">
-              <a
-                href="/"
-                className="bg-lcars-alpha-blue hover:bg-lcars-radioactive transition-colors lcars-pill px-8 py-4 text-primary-foreground font-display text-sm md:text-base font-bold tracking-[0.2em] uppercase text-center"
-                aria-label="Return to main console"
-              >
-                RETURN TO MAIN CONSOLE
-              </a>
+              <div className="flex items-stretch gap-1">
+                <div className="w-2 bg-lcars-beta-blue rounded-l-full" aria-hidden="true" />
+                <a
+                  href="/"
+                  className="bg-lcars-alpha-blue hover:bg-lcars-radioactive transition-colors px-8 py-5 text-primary-foreground font-display text-sm md:text-base font-bold tracking-[0.2em] uppercase text-center border-2 border-lcars-arctic-ice"
+                  aria-label="Return to main console"
+                >
+                  RETURN TO MAIN CONSOLE
+                </a>
+                <div className="w-2 bg-lcars-beta-blue rounded-r-full" aria-hidden="true" />
+              </div>
               <p className="text-muted-foreground font-lcars text-[10px] tracking-wider italic">
                 Seriously, Ensign. Before something actually explodes.
               </p>
@@ -189,6 +211,10 @@ const NotFound = () => {
         @keyframes lcars-alert-pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.3; }
+        }
+        @keyframes lcars-shimmer {
+          0% { transform: translateX(-150%); }
+          100% { transform: translateX(500%); }
         }
       `}</style>
     </div>
