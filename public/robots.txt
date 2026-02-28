@@ -76,6 +76,37 @@ Disallow: /
 User-agent: img2dataset
 Disallow: /
 
+# --- Block ad/tracking bots ---
+User-agent: adidxbot
+Disallow: /
+
+User-agent: AdsBot-Google
+Disallow: /
+
+User-agent: AdsBot-Google-Mobile
+Disallow: /
+
+User-agent: Mediapartners-Google
+Disallow: /
+
+User-agent: AdsTxtCrawler
+Disallow: /
+
+User-agent: Adsbot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
 # --- Default allow ---
 User-agent: *
 Allow: /
