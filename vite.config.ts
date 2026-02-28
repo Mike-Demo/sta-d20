@@ -16,6 +16,12 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === "development" && componentTagger(),
+    {
+      name: "inject-build-date",
+      transformIndexHtml(html: string) {
+        return html.replace("__BUILD_DATE__", new Date().toISOString().split("T")[0]);
+      },
+    },
     VitePWA({
       registerType: "autoUpdate",
       injectRegister: "inline",
