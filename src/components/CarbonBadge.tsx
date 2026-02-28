@@ -12,10 +12,10 @@ const CarbonBadge = () => {
     >
       <Leaf className="w-2.5 h-2.5 text-lcars-radioactive flex-shrink-0" />
       <span className="text-lcars-radioactive font-lcars text-[8px] tracking-wider font-bold uppercase">
-        0.02g CO₂
+        0.01g CO₂
       </span>
       <span className="text-muted-foreground font-lcars text-[8px] tracking-wider">
-        — Cleaner than 98% of sites
+        — Cleaner than 97% of sites
       </span>
     </a>
   );
