@@ -21,9 +21,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             LCARS
           </span>
         </div>
-        <div className="h-12 flex items-center">
-          <ThemeSwitcher />
-        </div>
+        <ThemeSwitcher />
         <div className="bg-lcars-night-rain lcars-pill-right h-12 w-16 md:w-24 flex-shrink-0" />
       </div>
 

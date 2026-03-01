@@ -24,7 +24,7 @@ const ThemeSwitcher = () => {
     <div ref={ref} className="relative z-50">
       <button
         onClick={() => setOpen(!open)}
-        className="bg-lcars-night-rain hover:bg-lcars-beta-blue transition-colors h-8 w-8 flex items-center justify-center"
+        className="bg-lcars-night-rain hover:bg-lcars-beta-blue transition-colors h-12 w-12 flex items-center justify-center"
       >
         <span className="flex flex-wrap gap-0.5 w-4 h-4 items-center justify-center">
           {themes[current].swatches.slice(0, 4).map((c, i) => (
