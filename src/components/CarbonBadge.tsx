@@ -15,7 +15,7 @@ const CarbonBadge = () => {
         0.01g CO₂
       </span>
       <span className="text-muted-foreground font-lcars text-[8px] tracking-wider">
-        — Cleaner than 97% of sites
+        — Cleaner than 98% of sites
       </span>
     </a>
   );
