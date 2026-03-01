@@ -4,7 +4,8 @@ export type ThemeId =
   | "classic"
   | "classic-ultra"
   | "nemesis-blue"
-  | "nemesis-blue-ultra";
+  | "nemesis-blue-ultra"
+  | "strategic-ops";
 
 interface ThemeDefinition {
   name: string;
@@ -208,6 +209,42 @@ export const themes: Record<ThemeId, ThemeDefinition> = {
       "--lcars-gold": "30 100% 82%",
     },
   },
+
+  "strategic-ops": {
+    name: "Strategic Ops",
+    era: "1983 Sega Arcade",
+    swatches: ["#00ff00", "#00aaff", "#ff0000", "#ffff00"],
+    vars: {
+      "--background": "0 0% 2%",
+      "--foreground": "120 100% 70%",
+      "--card": "0 0% 5%",
+      "--card-foreground": "120 100% 70%",
+      "--popover": "0 0% 5%",
+      "--popover-foreground": "120 100% 70%",
+      "--primary": "120 100% 50%",
+      "--primary-foreground": "0 0% 0%",
+      "--secondary": "200 100% 50%",
+      "--secondary-foreground": "0 0% 0%",
+      "--muted": "0 0% 8%",
+      "--muted-foreground": "120 60% 55%",
+      "--accent": "60 100% 50%",
+      "--accent-foreground": "0 0% 0%",
+      "--destructive": "0 100% 50%",
+      "--destructive-foreground": "0 0% 100%",
+      "--border": "120 100% 20%",
+      "--input": "120 100% 20%",
+      "--ring": "120 100% 50%",
+      "--lcars-alpha-blue": "200 100% 50%",
+      "--lcars-arctic-ice": "120 100% 50%",
+      "--lcars-arctic-snow": "60 100% 50%",
+      "--lcars-radioactive": "120 100% 70%",
+      "--lcars-beta-blue": "0 100% 50%",
+      "--lcars-night-cloud": "0 0% 10%",
+      "--lcars-night-rain": "120 100% 30%",
+      "--lcars-sunset-red": "0 100% 50%",
+      "--lcars-gold": "60 100% 50%",
+    },
+  },
 };
 
 export const themeIds = Object.keys(themes) as ThemeId[];
@@ -235,5 +272,20 @@ export function applyTheme(id: ThemeId) {
   for (const [prop, value] of Object.entries(vars)) {
     style.setProperty(prop, value);
   }
+
+  // Toggle pixel font for Strategic Ops theme
+  const pixelFont = "'Press Start 2P', monospace";
+  const defaultLcars = "Antonio, Orbitron, sans-serif";
+  const defaultDisplay = "Orbitron, Antonio, sans-serif";
+  if (id === "strategic-ops") {
+    document.documentElement.classList.add("theme-strategic-ops");
+    style.setProperty("--font-lcars", pixelFont);
+    style.setProperty("--font-display", pixelFont);
+  } else {
+    document.documentElement.classList.remove("theme-strategic-ops");
+    style.setProperty("--font-lcars", defaultLcars);
+    style.setProperty("--font-display", defaultDisplay);
+  }
+
   setTheme(id);
 }
