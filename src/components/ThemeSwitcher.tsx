@@ -10,7 +10,8 @@ const ThemeSwitcher = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   const applyCrt = useCallback((on: boolean) => {
-    document.documentElement.classList.toggle("crt-scanlines", on && current === "strategic-ops");
+    const isRetro = current === "strategic-ops" || current === "25th-anniversary";
+    document.documentElement.classList.toggle("crt-scanlines", on && isRetro);
   }, [current]);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const ThemeSwitcher = () => {
     localStorage.setItem(CRT_KEY, next ? "on" : "off");
   };
 
-  const isStrategicOps = current === "strategic-ops";
+  const isRetroTheme = current === "strategic-ops" || current === "25th-anniversary";
 
   return (
     <div ref={ref} className="relative z-50 flex items-stretch gap-0">
@@ -53,7 +54,7 @@ const ThemeSwitcher = () => {
         </span>
       </button>
 
-      {isStrategicOps && (
+      {isRetroTheme && (
         <button
           onClick={toggleCrt}
           aria-label={crt ? "Disable CRT scanlines" : "Enable CRT scanlines"}

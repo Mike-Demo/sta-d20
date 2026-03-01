@@ -5,7 +5,8 @@ export type ThemeId =
   | "classic-ultra"
   | "nemesis-blue"
   | "nemesis-blue-ultra"
-  | "strategic-ops";
+  | "strategic-ops"
+  | "25th-anniversary";
 
 interface ThemeDefinition {
   name: string;
@@ -245,6 +246,42 @@ export const themes: Record<ThemeId, ThemeDefinition> = {
       "--lcars-gold": "60 100% 50%",
     },
   },
+
+  "25th-anniversary": {
+    name: "25th Anniversary",
+    era: "1991 NES",
+    swatches: ["#d4a44c", "#5c94d4", "#e4945c", "#1c1c4c"],
+    vars: {
+      "--background": "240 45% 8%",
+      "--foreground": "210 50% 80%",
+      "--card": "240 35% 12%",
+      "--card-foreground": "210 50% 80%",
+      "--popover": "240 35% 12%",
+      "--popover-foreground": "210 50% 80%",
+      "--primary": "40 60% 56%",
+      "--primary-foreground": "240 45% 8%",
+      "--secondary": "214 55% 60%",
+      "--secondary-foreground": "0 0% 100%",
+      "--muted": "240 30% 16%",
+      "--muted-foreground": "210 30% 62%",
+      "--accent": "24 70% 63%",
+      "--accent-foreground": "240 45% 8%",
+      "--destructive": "0 70% 50%",
+      "--destructive-foreground": "0 0% 100%",
+      "--border": "240 25% 22%",
+      "--input": "240 25% 22%",
+      "--ring": "40 60% 50%",
+      "--lcars-alpha-blue": "214 55% 60%",
+      "--lcars-arctic-ice": "40 60% 56%",
+      "--lcars-arctic-snow": "24 70% 63%",
+      "--lcars-radioactive": "40 75% 65%",
+      "--lcars-beta-blue": "240 40% 35%",
+      "--lcars-night-cloud": "240 35% 18%",
+      "--lcars-night-rain": "240 30% 30%",
+      "--lcars-sunset-red": "0 70% 50%",
+      "--lcars-gold": "40 75% 65%",
+    },
+  },
 };
 
 export const themeIds = Object.keys(themes) as ThemeId[];
@@ -273,11 +310,12 @@ export function applyTheme(id: ThemeId) {
     style.setProperty(prop, value);
   }
 
-  // Toggle pixel font for Strategic Ops theme
+  // Toggle pixel font for retro game themes
   const pixelFont = "'Press Start 2P', monospace";
   const defaultLcars = "Antonio, Orbitron, sans-serif";
   const defaultDisplay = "Orbitron, Antonio, sans-serif";
-  if (id === "strategic-ops") {
+  const isPixelTheme = id === "strategic-ops" || id === "25th-anniversary";
+  if (isPixelTheme) {
     document.documentElement.classList.add("theme-strategic-ops");
     style.setProperty("--font-lcars", pixelFont);
     style.setProperty("--font-display", pixelFont);
