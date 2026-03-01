@@ -1,81 +1,80 @@
+# LCARS Theme Switcher
+
+## Overview
+
+Add a theme selector button to the LCARS frame that lets users switch between 6 LCARS themes from thelcars.com v24.2. The selected theme persists via localStorage. Lower Decks PADD remains the default.
+
+## Themes
 
 
-## Reducing Environmental Impact -- Sustainable Web Design Model v4
+| Theme                 | Era              | Palette Character                       |
+| --------------------- | ---------------- | --------------------------------------- |
+| Lower Decks PADD      | 2380s (animated) | Cool blues, cyan accents                |
+| Lower Decks Standard  | 2380s (animated) | Warm oranges, amber, pumpkin            |
+| Classic Standard      | TNG/DS9/VOY      | Purple, orange, peach                   |
+| Classic Ultra         | TNG/DS9/VOY      | Same colors as Classic, bolder contrast |
+| Nemesis Blue Standard | TNG films        | Steel blues, wheat accents              |
+| Nemesis Blue Ultra    | TNG films        | Same as Nemesis Blue, bolder contrast   |
 
-The SWDM v4 framework uses **data transfer as the primary proxy for energy use**. Less bytes transferred = less energy consumed across networks, data centers, and devices. Here is what we can do.
 
-### Current State
+## What Changes
 
-Your app is already well-optimized in several ways:
-- Dark theme by default (reduces OLED display energy)
-- Code-splitting with lazy routes
-- PWA with service worker caching
-- Self-hosted fonts (no third-party requests)
-- Strict CSP preventing external resource loading
-- No analytics or tracking scripts
+### 1. New file: `src/lib/themes.ts`
 
-However, the project carries significant **dead weight** from unused dependencies that inflate the bundle.
+A theme definitions module containing:
 
----
+- A `ThemeId` union type for the 6 theme keys
+- A `themes` record mapping each ID to its display name and full set of CSS custom property overrides (all `--background`, `--foreground`, `--primary`, `--card`, `--muted`, `--accent`, `--destructive`, `--border`, `--lcars-*` tokens)
+- `getTheme()` / `setTheme()` helpers that read/write `localStorage` key `lcars-theme`
+- `applyTheme(id)` function that sets all CSS variables on `document.documentElement.style`
 
-### 1. Remove ~30 unused dependencies (biggest impact)
+Color mappings derived from thelcars.com/colors.php (v24.2):
 
-The app only imports 5 UI components (dialog, collapsible, scroll-area, toaster/sonner, tooltip), but ships with 40+ Radix packages and many unused libraries. Removing them eliminates dead code from the install/build pipeline and reduces bundle size.
+- **Lower Decks PADD**: Current values (no change)
+- **Lower Decks Standard**: Background stays dark black. Primary bars use `#ff7700` (orange), `#ffaa44` (harvestgold), `#ff9911` (daybreak). Accent: `#ffeecc` (butter). Destructive: `#ff4400` (october-sunset). Sidebar bars: `#cc5500` (rich-pumpkin), `#ffcc99` (honey).
+- **Classic Standard**: Primary: `#cc99ff` (african-violet). Bars: `#ff9966` (butterscotch), `#ff8800` (orange), `#ffaa00` (gold). Accent: `#99ccff` (ice). Muted: `#666688` (gray). Destructive: `#ff2200` (mars).
+- **Classic Ultra**: Same palette as Classic Standard with slightly brighter/bolder primary and accent values for higher contrast on wider layouts.
+- **Nemesis Blue Standard**: Primary: `#6699ff` (cool). Bars: `#2266ff` (evening), `#88bbff` (ghost). Accent: `#ebf0ff` (moonbeam). Muted: `#52526a` (galaxy-gray). Destructive: `#cc2233` (cardinal).
+- **Nemesis Blue Ultra**: Same palette as Nemesis Blue Standard with bolder primary and richer blues.
 
-**Unused packages to remove:**
+### 2. New file: `src/components/ThemeSwitcher.tsx`
 
-- `@tanstack/react-query` -- not imported anywhere
-- `@hookform/resolvers`, `react-hook-form` -- only used in unused `form.tsx` UI component
-- `zod` -- only used with react-hook-form
-- `date-fns`, `react-day-picker` -- only in unused `calendar.tsx`
-- `embla-carousel-react` -- only in unused `carousel.tsx`
-- `input-otp` -- only in unused `input-otp.tsx`
-- `cmdk` -- only in unused `command.tsx`
-- `react-resizable-panels` -- only in unused `resizable.tsx`
-- `vaul` -- only in unused `drawer.tsx`
-- `next-themes` -- only in unused `sonner.tsx` theme hook (sonner still works without it)
-- ~25 Radix UI packages that are only used by unused UI component files (accordion, alert-dialog, aspect-ratio, avatar, checkbox, context-menu, dropdown-menu, hover-card, menubar, navigation-menu, popover, progress, radio-group, select, separator, slider, switch, tabs, toggle, toggle-group)
+A small dropdown/popover button component:
 
-**Keep:** `@radix-ui/react-dialog`, `@radix-ui/react-collapsible`, `@radix-ui/react-scroll-area`, `@radix-ui/react-toast`, `@radix-ui/react-tooltip`, `@radix-ui/react-slot`, `@radix-ui/react-label` (used by active components)
+- Renders an LCARS-styled pill button labeled with the current theme name (or a palette icon)
+- On click, shows a dropdown list of 6 theme options
+- Each option shows the theme name and a small color swatch preview (3-4 dots of the theme's key colors)
+- Selecting a theme calls `applyTheme()` and saves to localStorage
+- Styled consistently with existing LCARS button patterns (pill shapes, font-display, tracking)
 
-### 2. Delete unused UI component files
+### 3. Modify: `src/components/LCARSFrame.tsx`
 
-Remove the ~30 unused component files in `src/components/ui/` that correspond to the removed packages. Keep only: `dialog.tsx`, `collapsible.tsx`, `scroll-area.tsx`, `toast.tsx`, `toaster.tsx`, `tooltip.tsx`, `sonner.tsx`, `button.tsx`, and any others actually imported.
+- Import and place `ThemeSwitcher` in the top bar area, next to the "LCARS" label in the beta-blue panel (or as an additional pill in the top bar row)
 
-### 3. Remove unused static assets
+### 4. Modify: `src/App.tsx`
 
-- Delete `public/placeholder.svg` -- not referenced anywhere in the codebase
-- Delete `public/favicon.ico` -- redundant with `favicon.png` and `pwa-icon.svg`
-- Consider removing `public/pwa-icon-180.png` if `pwa-icon-192.png` and the SVG cover all use cases
+- On mount, call `applyTheme(getTheme())` to restore the saved theme before first render
 
-### 4. Fix Sonner to not depend on `next-themes`
+### 5. Modify: `src/index.css`
 
-The `sonner.tsx` component imports `useTheme` from `next-themes`, but the app doesn't use theme switching. Replace this with a hardcoded `theme="dark"` prop so `next-themes` can be removed entirely.
+- No structural changes needed. The `:root` variables remain as the Lower Decks PADD defaults. The theme switcher overrides them at runtime via inline styles on `<html>`.
 
-### 5. Add font `display: swap` and subset
+## Technical Details
 
-The font imports load full character sets. Adding `display: swap` ensures text renders immediately with a fallback while fonts load, reducing perceived load time and avoiding invisible text that wastes energy on re-renders.
+- Theme state is purely CSS custom properties -- no React re-render needed for color changes
+- `applyTheme` sets properties via `document.documentElement.style.setProperty()`
+- localStorage key: `lcars-theme`, values: `lower-decks-padd` | `lower-decks` | `classic` | `classic-ultra` | `nemesis-blue` | `nemesis-blue-ultra`
+- The "Standard" vs "Ultra" variants share the same color palette but Ultra uses slightly bolder/brighter values for the primary and accent tokens to increase contrast
+- The dropdown uses a simple `useState` toggle (no additional dependency needed), positioned absolutely below the trigger button
+- Click-outside closes the dropdown
+- Make sure all files are loaded locally
 
-### 6. Add `loading="lazy"` to non-critical images
+## Files Summary
 
-The PWA icon in the splash screen and any other images should use native lazy loading to defer off-screen image fetches.
 
----
-
-### Estimated Impact
-
-| Change | Data Saved (approx.) |
-|---|---|
-| Remove ~30 unused packages | ~200-400 KB from install, faster builds |
-| Delete unused UI files | ~50 KB source, cleaner tree-shaking |
-| Remove unused assets | ~20-50 KB per page load |
-| Fix sonner theme dependency | ~15 KB (next-themes bundle) |
-
-### Files Changed
-
-- `package.json` -- remove unused dependencies
-- `src/components/ui/sonner.tsx` -- hardcode dark theme
-- Delete ~25-30 unused files from `src/components/ui/`
-- Delete `public/placeholder.svg`
-- No changes to the app's design, layout, or functionality
-
+| File                               | Action                       |
+| ---------------------------------- | ---------------------------- |
+| `src/lib/themes.ts`                | Create                       |
+| `src/components/ThemeSwitcher.tsx` | Create                       |
+| `src/components/LCARSFrame.tsx`    | Add ThemeSwitcher to top bar |
+| `src/App.tsx`                      | Apply saved theme on mount   |
