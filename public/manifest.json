@@ -1,0 +1,37 @@
+{
+  "name": "STA2E-D20 — Star Trek Adventures Dice Roller",
+  "short_name": "STA2E-D20",
+  "description": "LCARS-style Star Trek Adventures 2nd Edition 2d20 dice roller",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#141a2e",
+  "theme_color": "#141a2e",
+  "categories": ["games", "utilities"],
+  "icons": [
+    {
+      "src": "/pwa-icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-icon-180.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "any"
+    }
+  ]
+}

@@ -12,6 +12,7 @@
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';" />
     <link rel="apple-touch-icon" href="/pwa-icon-512.png" />
+    <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href="https://2d20.space/" />
     <title>Star Trek Adventures 2d20 Dice Roller — LCARS‑Style Tool</title>
     <meta name="description" content="2d20 dice roller for STA 2e. Roll d20s and challenge dice, track successes, complications, and rerolls in a clean, rules‑accurate interface.">
@@ -95,5 +96,10 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js");
+      }
+    </script>
   </body>
 </html>
