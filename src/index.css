@@ -161,16 +161,10 @@
   100% { transform: translateX(400%); }
 }
 
-/* Strategic Ops Simulator theme — subtle vector glow */
-.theme-strategic-ops h1,
-.theme-strategic-ops button,
-.theme-strategic-ops [class*="font-display"] {
-  text-shadow: 0 0 4px currentColor;
-}
-
-.theme-strategic-ops .text-\[8px\],
-.theme-strategic-ops .text-\[9px\],
-.theme-strategic-ops .text-\[10px\],
-.theme-strategic-ops .text-\[11px\] {
-  text-shadow: none;
+/* Strategic Ops Simulator theme — subtle vector glow on decorative bars only */
+.theme-strategic-ops .lcars-pill-left,
+.theme-strategic-ops .lcars-pill-right,
+.theme-strategic-ops .lcars-elbow-tl,
+.theme-strategic-ops .lcars-elbow-bl {
+  box-shadow: 0 0 6px currentColor;
 }
