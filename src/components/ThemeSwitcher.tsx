@@ -24,6 +24,7 @@ const ThemeSwitcher = () => {
     <div ref={ref} className="relative z-50">
       <button
         onClick={() => setOpen(!open)}
+        aria-label="Switch LCARS theme"
         className="bg-lcars-night-rain hover:bg-lcars-beta-blue transition-colors h-12 w-12 flex items-center justify-center"
       >
         <span className="flex flex-wrap gap-0.5 w-4 h-4 items-center justify-center">
