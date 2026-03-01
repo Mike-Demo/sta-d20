@@ -11,7 +11,7 @@ interface LCARSFrameProps {
 
 const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
   return (
-    <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col">
+    <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col" style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top))", paddingLeft: "max(0.75rem, env(safe-area-inset-left))", paddingRight: "max(0.75rem, env(safe-area-inset-right))", paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
       {/* Top bar */}
       <div className="flex items-stretch gap-2 mb-2">
         <div className="bg-lcars-arctic-ice lcars-pill-left h-12 w-32 md:w-48 flex-shrink-0" />
