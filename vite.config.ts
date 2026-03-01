@@ -1,8 +1,18 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import fs from "node:fs";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { VitePWA } from "vite-plugin-pwa";
+
+const getBuildMetadata = () => {
+  const now = new Date();
+
+  return {
+    buildDate: now.toISOString().split("T")[0],
+    buildDatetime: now.toISOString().replace(/\.\d{3}Z$/, "+00:00"),
+  };
+};
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -19,22 +29,34 @@ export default defineConfig(({ mode }) => ({
     {
       name: "inject-build-date",
       transformIndexHtml(html: string) {
-        const buildDate = new Date().toISOString().split("T")[0];
+        const { buildDate } = getBuildMetadata();
         return html.replace(/__BUILD_DATE__/g, buildDate);
       },
       generateBundle(_options: unknown, bundle: unknown) {
-        const buildDate = new Date().toISOString().split("T")[0];
-        const buildDatetime = new Date().toISOString();
+        const { buildDate, buildDatetime } = getBuildMetadata();
         const b = bundle as Record<string, { type: string; source?: string | Uint8Array }>;
+
         for (const file of Object.values(b)) {
           if (file.type === "asset" && typeof file.source === "string") {
-            if (file.source.includes("__BUILD_DATETIME__")) {
-              file.source = file.source.replace(/__BUILD_DATETIME__/g, buildDatetime);
-            }
-            if (file.source.includes("__BUILD_DATE__")) {
-              file.source = file.source.replace(/__BUILD_DATE__/g, buildDate);
-            }
+            file.source = file.source
+              .replace(/__BUILD_DATETIME__/g, buildDatetime)
+              .replace(/__BUILD_DATE__/g, buildDate);
           }
+        }
+      },
+      closeBundle() {
+        const sitemapPath = path.resolve(__dirname, "dist/sitemap.xml");
+
+        if (!fs.existsSync(sitemapPath)) return;
+
+        const { buildDate, buildDatetime } = getBuildMetadata();
+        const sitemap = fs.readFileSync(sitemapPath, "utf8");
+        const updatedSitemap = sitemap
+          .replace(/__BUILD_DATETIME__/g, buildDatetime)
+          .replace(/__BUILD_DATE__/g, buildDate);
+
+        if (updatedSitemap !== sitemap) {
+          fs.writeFileSync(sitemapPath, updatedSitemap, "utf8");
         }
       },
     },
