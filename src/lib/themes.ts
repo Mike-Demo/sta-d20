@@ -6,7 +6,8 @@ export type ThemeId =
   | "nemesis-blue"
   | "nemesis-blue-ultra"
   | "strategic-ops"
-  | "25th-anniversary";
+  | "25th-anniversary"
+  | "elite-force";
 
 interface ThemeDefinition {
   name: string;
@@ -280,6 +281,42 @@ export const themes: Record<ThemeId, ThemeDefinition> = {
       "--lcars-night-rain": "240 30% 30%",
       "--lcars-sunset-red": "0 70% 50%",
       "--lcars-gold": "40 75% 65%",
+    },
+  },
+
+  "elite-force": {
+    name: "Elite Force",
+    era: "VOY · 2000 FPS",
+    swatches: ["#00ccaa", "#ff8844", "#44ddee", "#1a2a2a"],
+    vars: {
+      "--background": "170 30% 7%",
+      "--foreground": "170 40% 85%",
+      "--card": "170 25% 11%",
+      "--card-foreground": "170 40% 85%",
+      "--popover": "170 25% 11%",
+      "--popover-foreground": "170 40% 85%",
+      "--primary": "168 100% 40%",
+      "--primary-foreground": "0 0% 0%",
+      "--secondary": "24 100% 63%",
+      "--secondary-foreground": "0 0% 0%",
+      "--muted": "170 20% 15%",
+      "--muted-foreground": "170 25% 60%",
+      "--accent": "186 80% 57%",
+      "--accent-foreground": "170 30% 7%",
+      "--destructive": "12 90% 55%",
+      "--destructive-foreground": "0 0% 100%",
+      "--border": "170 20% 20%",
+      "--input": "170 20% 20%",
+      "--ring": "168 100% 40%",
+      "--lcars-alpha-blue": "168 100% 40%",
+      "--lcars-arctic-ice": "186 80% 57%",
+      "--lcars-arctic-snow": "170 40% 85%",
+      "--lcars-radioactive": "168 100% 50%",
+      "--lcars-beta-blue": "24 100% 63%",
+      "--lcars-night-cloud": "170 20% 18%",
+      "--lcars-night-rain": "170 30% 30%",
+      "--lcars-sunset-red": "12 90% 55%",
+      "--lcars-gold": "24 100% 63%",
     },
   },
 };
