@@ -161,14 +161,16 @@
   100% { transform: translateX(400%); }
 }
 
-/* Strategic Ops Simulator theme — vector glow & pixel text scaling */
-.theme-strategic-ops * {
-  text-shadow: 0 0 6px currentColor;
+/* Strategic Ops Simulator theme — subtle vector glow */
+.theme-strategic-ops h1,
+.theme-strategic-ops button,
+.theme-strategic-ops [class*="font-display"] {
+  text-shadow: 0 0 4px currentColor;
 }
 
-.theme-strategic-ops .font-display,
-.theme-strategic-ops .font-lcars {
-  font-size: 0.7em;
-  letter-spacing: 0.05em;
-  line-height: 1.4;
+.theme-strategic-ops .text-\[8px\],
+.theme-strategic-ops .text-\[9px\],
+.theme-strategic-ops .text-\[10px\],
+.theme-strategic-ops .text-\[11px\] {
+  text-shadow: none;
 }
