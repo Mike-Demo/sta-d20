@@ -1,10 +1,21 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { themes, themeIds, getTheme, applyTheme, type ThemeId } from "@/lib/themes";
+
+const CRT_KEY = "lcars-crt";
 
 const ThemeSwitcher = () => {
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState<ThemeId>(getTheme);
+  const [crt, setCrt] = useState(() => localStorage.getItem(CRT_KEY) !== "off");
   const ref = useRef<HTMLDivElement>(null);
+
+  const applyCrt = useCallback((on: boolean) => {
+    document.documentElement.classList.toggle("crt-scanlines", on && current === "strategic-ops");
+  }, [current]);
+
+  useEffect(() => {
+    applyCrt(crt);
+  }, [crt, applyCrt]);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -20,8 +31,16 @@ const ThemeSwitcher = () => {
     setOpen(false);
   };
 
+  const toggleCrt = () => {
+    const next = !crt;
+    setCrt(next);
+    localStorage.setItem(CRT_KEY, next ? "on" : "off");
+  };
+
+  const isStrategicOps = current === "strategic-ops";
+
   return (
-    <div ref={ref} className="relative z-50">
+    <div ref={ref} className="relative z-50 flex items-stretch gap-0">
       <button
         onClick={() => setOpen(!open)}
         aria-label="Switch LCARS theme"
@@ -33,6 +52,21 @@ const ThemeSwitcher = () => {
           ))}
         </span>
       </button>
+
+      {isStrategicOps && (
+        <button
+          onClick={toggleCrt}
+          aria-label={crt ? "Disable CRT scanlines" : "Enable CRT scanlines"}
+          title={crt ? "CRT: ON" : "CRT: OFF"}
+          className={`h-12 w-10 flex items-center justify-center text-[9px] font-bold font-lcars tracking-wider transition-colors ${
+            crt
+              ? "bg-lcars-arctic-ice text-accent-foreground"
+              : "bg-lcars-night-cloud text-muted-foreground"
+          }`}
+        >
+          CRT
+        </button>
+      )}
 
       {open && (
         <div className="absolute right-0 top-full mt-1 bg-card border border-border rounded-sm shadow-lg min-w-[220px] overflow-hidden">
