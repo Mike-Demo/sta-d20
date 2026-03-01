@@ -141,6 +141,13 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             <p className="text-muted-foreground text-[8px] leading-tight">
               <a href="https://icons8.com/icon/21039/star-trek" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Star Trek</a> icon by <a href="https://icons8.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Icons8</a>
             </p>
+            <p className="text-muted-foreground text-[8px] leading-tight">
+              <a href="/robots.txt" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">robots.txt</a>
+              {" · "}
+              <a href="/llms.txt" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">llms.txt</a>
+              {" · "}
+              <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">sitemap.xml</a>
+            </p>
           </footer>
         </div>
       </div>
