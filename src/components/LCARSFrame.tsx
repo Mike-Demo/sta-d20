@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ChevronDown } from "lucide-react";
 import wtfplLogo from "@/assets/wtfpl.svg";
 
 import ThemeSwitcher from "@/components/ThemeSwitcher";
@@ -121,7 +121,8 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           {/* Disclaimer */}
           <footer className="mt-2 px-2">
             <details className="rounded-sm border border-lcars-night-rain/40 bg-background overflow-hidden transition-all">
-              <summary className="bg-lcars-night-rain text-primary-foreground font-display text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 cursor-pointer list-none lcars-pill-right hover:bg-lcars-arctic-snow hover:text-accent-foreground transition-colors select-none [&::-webkit-details-marker]:hidden">
+              <summary className="bg-lcars-night-rain text-primary-foreground font-display text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 cursor-pointer list-none lcars-pill-right hover:bg-lcars-arctic-snow hover:text-accent-foreground transition-colors select-none [&::-webkit-details-marker]:hidden flex items-center gap-2 group">
+                <ChevronDown className="w-3 h-3 transition-transform duration-200 [[open]>&]:rotate-180" />
                 LEGAL &amp; CREDITS
               </summary>
               <div className="px-4 py-3">
