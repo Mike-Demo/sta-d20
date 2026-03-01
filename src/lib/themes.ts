@@ -19,6 +19,14 @@ interface ThemeDefinition {
 }
 
 const STORAGE_KEY = "lcars-theme";
+let pixelFontLoaded = false;
+
+/** Lazy-load Press Start 2P only when a pixel theme is activated */
+function loadPixelFont() {
+  if (pixelFontLoaded) return;
+  pixelFontLoaded = true;
+  import("@fontsource/press-start-2p/latin-400.css");
+}
 
 /**
  * Lower Decks PADD is the default — its values live in :root in index.css,
@@ -353,6 +361,7 @@ export function applyTheme(id: ThemeId) {
   const defaultDisplay = "Orbitron, Antonio, sans-serif";
   const isPixelTheme = id === "strategic-ops" || id === "25th-anniversary";
   if (isPixelTheme) {
+    loadPixelFont();
     document.documentElement.classList.add("theme-strategic-ops");
     style.setProperty("--font-lcars", pixelFont);
     style.setProperty("--font-display", pixelFont);
