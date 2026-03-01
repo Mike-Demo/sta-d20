@@ -298,7 +298,7 @@ const DiceRoller = () => {
         <button
           onClick={rollDice}
           disabled={isRolling}
-          aria-label="Roll dice"
+          aria-label={isRolling ? "Scanning, rolling dice" : "Engage, roll dice"}
           className="flex-1 h-16 bg-lcars-alpha-blue text-primary-foreground font-display text-2xl font-bold tracking-[0.3em] uppercase lcars-pill hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-60"
         >
           {isRolling ? "SCANNING..." : "ENGAGE"}
