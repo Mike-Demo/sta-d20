@@ -191,6 +191,8 @@ const DiceRoller = () => {
               <button
                 key={n}
                 onClick={() => setNumDice(n)}
+                aria-label={`Roll ${n} ${n === 1 ? "die" : "dice"}`}
+                aria-pressed={numDice === n}
                 className={`h-10 w-10 rounded-sm font-display text-lg font-bold transition-all ${
                   numDice === n
                     ? "bg-lcars-alpha-blue text-primary-foreground scale-110"
@@ -211,15 +213,17 @@ const DiceRoller = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setTargetNumber(Math.max(1, targetNumber - 1))}
+              aria-label="Decrease target number"
               className="h-10 w-10 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
             >
               −
             </button>
-            <div className="h-10 w-14 bg-muted rounded-sm flex items-center justify-center">
+            <div className="h-10 w-14 bg-muted rounded-sm flex items-center justify-center" role="status" aria-label={`Target number: ${targetNumber}`}>
               <span className="text-primary font-display text-2xl font-bold">{targetNumber}</span>
             </div>
             <button
               onClick={() => setTargetNumber(Math.min(20, targetNumber + 1))}
+              aria-label="Increase target number"
               className="h-10 w-10 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
             >
               +
@@ -232,9 +236,12 @@ const DiceRoller = () => {
           <label className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
             Focus
           </label>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1" role="radiogroup" aria-label="Focus toggle">
             <button
               onClick={() => setFocusOn(true)}
+              role="radio"
+              aria-checked={focusOn}
+              aria-label="Focus on"
               className={`h-10 px-4 rounded-sm font-display text-sm font-bold tracking-wider transition-all ${
                 focusOn
                   ? "bg-lcars-radioactive text-accent-foreground"
@@ -245,6 +252,9 @@ const DiceRoller = () => {
             </button>
             <button
               onClick={() => setFocusOn(false)}
+              role="radio"
+              aria-checked={!focusOn}
+              aria-label="Focus off"
               className={`h-10 px-4 rounded-sm font-display text-sm font-bold tracking-wider transition-all ${
                 !focusOn
                   ? "bg-lcars-radioactive text-accent-foreground"
@@ -264,15 +274,17 @@ const DiceRoller = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setDifficulty(Math.max(1, difficulty - 1))}
+              aria-label="Decrease difficulty"
               className="h-10 w-10 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
             >
               −
             </button>
-            <div className="h-10 w-14 bg-muted rounded-sm flex items-center justify-center">
+            <div className="h-10 w-14 bg-muted rounded-sm flex items-center justify-center" role="status" aria-label={`Difficulty: ${difficulty}`}>
               <span className="text-primary font-display text-2xl font-bold">{difficulty}</span>
             </div>
             <button
               onClick={() => setDifficulty(Math.min(5, difficulty + 1))}
+              aria-label="Increase difficulty"
               className="h-10 w-10 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-xl font-bold hover:brightness-125 transition-all"
             >
               +
@@ -286,14 +298,15 @@ const DiceRoller = () => {
         <button
           onClick={rollDice}
           disabled={isRolling}
+          aria-label="Roll dice"
           className="flex-1 h-16 bg-lcars-alpha-blue text-primary-foreground font-display text-2xl font-bold tracking-[0.3em] uppercase lcars-pill hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-60"
         >
           {isRolling ? "SCANNING..." : "ENGAGE"}
         </button>
         <button
           onClick={toggleMute}
+          aria-label={muted ? "Unmute sound effects" : "Mute sound effects"}
           className="h-16 w-16 bg-muted rounded-sm flex items-center justify-center hover:bg-muted/80 transition-all"
-          title={muted ? "Unmute" : "Mute"}
         >
           {muted ? (
             <VolumeX className="h-5 w-5 text-muted-foreground" />
@@ -345,7 +358,7 @@ const DiceRoller = () => {
                         ? "bg-muted border-border opacity-60"
                         : "bg-muted border-border"
                     } ${isSelectable && !isSelected ? "cursor-pointer hover:border-lcars-arctic-ice/50 lcars-glow-blue" : ""}`}
-                    style={{ animationDelay: `${i * 0.1}s` }}
+                    aria-label={`Die ${i + 1}: rolled ${die.value}, ${die.isComplication ? "complication" : die.isCritical ? "critical success" : die.isSuccess ? "success" : "miss"}${isSelectable ? ", click to select for reroll" : ""}`}
                   >
                     <span
                       className={`font-display text-2xl font-bold ${
@@ -380,6 +393,7 @@ const DiceRoller = () => {
             {selectedForReroll.size > 0 && (
               <button
                 onClick={rerollSelected}
+                aria-label={`Reroll ${selectedForReroll.size} selected ${selectedForReroll.size === 1 ? "die" : "dice"}`}
                 className="h-10 px-8 bg-lcars-arctic-ice text-accent-foreground font-display text-sm font-bold tracking-[0.2em] uppercase lcars-pill hover:brightness-110 active:scale-[0.98] transition-all"
               >
                 REROLL ({selectedForReroll.size})
@@ -416,7 +430,7 @@ const DiceRoller = () => {
                   OUTCOME
                 </span>
                 <div className="bg-lcars-arctic-ice/30 h-px flex-1" />
-                <button onClick={() => setShowExplain(true)} title="Explain Result">
+                <button onClick={() => setShowExplain(true)} aria-label="Explain roll result breakdown" title="Explain Result">
                   <Info className="w-4 h-4 text-muted-foreground hover:text-lcars-arctic-ice transition-colors" />
                 </button>
               </div>
@@ -487,15 +501,17 @@ const DiceRoller = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setComplicationRange(Math.max(16, complicationRange - 1))}
+                  aria-label="Decrease complication range"
                   className="h-8 w-8 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-lg font-bold hover:brightness-125 transition-all"
                 >
                   −
                 </button>
-                <div className="h-8 w-12 bg-muted rounded-sm flex items-center justify-center">
+                <div className="h-8 w-12 bg-muted rounded-sm flex items-center justify-center" role="status" aria-label={`Complication range: ${complicationRange}`}>
                   <span className="text-primary font-display text-lg font-bold">{complicationRange}</span>
                 </div>
                 <button
                   onClick={() => setComplicationRange(Math.min(20, complicationRange + 1))}
+                  aria-label="Increase complication range"
                   className="h-8 w-8 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-lg font-bold hover:brightness-125 transition-all"
                 >
                   +
@@ -508,9 +524,12 @@ const DiceRoller = () => {
               <label className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
                 Assist
               </label>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1" role="radiogroup" aria-label="Assist toggle">
                 <button
                   onClick={() => setAssistOn(true)}
+                  role="radio"
+                  aria-checked={assistOn}
+                  aria-label="Assist on"
                   className={`h-8 px-3 rounded-sm font-display text-xs font-bold tracking-wider transition-all ${
                     assistOn
                       ? "bg-lcars-radioactive text-accent-foreground"
@@ -521,6 +540,9 @@ const DiceRoller = () => {
                 </button>
                 <button
                   onClick={() => setAssistOn(false)}
+                  role="radio"
+                  aria-checked={!assistOn}
+                  aria-label="Assist off"
                   className={`h-8 px-3 rounded-sm font-display text-xs font-bold tracking-wider transition-all ${
                     !assistOn
                       ? "bg-lcars-radioactive text-accent-foreground"
@@ -541,15 +563,17 @@ const DiceRoller = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setShipTN(Math.max(1, shipTN - 1))}
+                    aria-label="Decrease ship target number"
                     className="h-8 w-8 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-lg font-bold hover:brightness-125 transition-all"
                   >
                     −
                   </button>
-                  <div className="h-8 w-12 bg-muted rounded-sm flex items-center justify-center">
+                  <div className="h-8 w-12 bg-muted rounded-sm flex items-center justify-center" role="status" aria-label={`Ship target number: ${shipTN}`}>
                     <span className="text-primary font-display text-lg font-bold">{shipTN}</span>
                   </div>
                   <button
                     onClick={() => setShipTN(Math.min(20, shipTN + 1))}
+                    aria-label="Increase ship target number"
                     className="h-8 w-8 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-lg font-bold hover:brightness-125 transition-all"
                   >
                     +
@@ -566,15 +590,17 @@ const DiceRoller = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setMomentumBuy(Math.max(0, momentumBuy - 1))}
+                  aria-label="Decrease momentum buy"
                   className="h-8 w-8 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-lg font-bold hover:brightness-125 transition-all"
                 >
                   −
                 </button>
-                <div className="h-8 w-12 bg-muted rounded-sm flex items-center justify-center">
+                <div className="h-8 w-12 bg-muted rounded-sm flex items-center justify-center" role="status" aria-label={`Momentum buy: ${momentumBuy}`}>
                   <span className="text-primary font-display text-lg font-bold">{momentumBuy}</span>
                 </div>
                 <button
                   onClick={() => setMomentumBuy(Math.min(3, momentumBuy + 1))}
+                  aria-label="Increase momentum buy"
                   className="h-8 w-8 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-lg font-bold hover:brightness-125 transition-all"
                 >
                   +
@@ -590,15 +616,17 @@ const DiceRoller = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setThreatBuy(Math.max(0, threatBuy - 1))}
+                  aria-label="Decrease threat buy"
                   className="h-8 w-8 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-lg font-bold hover:brightness-125 transition-all"
                 >
                   −
                 </button>
-                <div className="h-8 w-12 bg-muted rounded-sm flex items-center justify-center">
+                <div className="h-8 w-12 bg-muted rounded-sm flex items-center justify-center" role="status" aria-label={`Threat buy: ${threatBuy}`}>
                   <span className="text-primary font-display text-lg font-bold">{threatBuy}</span>
                 </div>
                 <button
                   onClick={() => setThreatBuy(Math.min(3, threatBuy + 1))}
+                  aria-label="Increase threat buy"
                   className="h-8 w-8 bg-lcars-arctic-ice text-accent-foreground rounded-sm font-display text-lg font-bold hover:brightness-125 transition-all"
                 >
                   +
@@ -620,6 +648,7 @@ const DiceRoller = () => {
           {history.length > 0 && (
             <button
               onClick={() => setHistory([])}
+              aria-label="Clear roll history"
               className="text-muted-foreground text-[9px] font-bold tracking-widest uppercase hover:text-destructive transition-colors"
             >
               CLEAR
