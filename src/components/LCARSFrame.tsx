@@ -13,7 +13,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
   return (
     <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col" style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top))", paddingLeft: "max(0.75rem, env(safe-area-inset-left))", paddingRight: "max(0.75rem, env(safe-area-inset-right))", paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
       {/* Top bar */}
-      <div className="flex items-stretch gap-2 mb-2">
+      <div className="flex items-stretch gap-2 mb-2" role="img" aria-label="LCARS-style top navigation bar for Star Trek Adventures 2e dice roller">
         <div className="bg-lcars-arctic-ice lcars-pill-left h-12 w-32 md:w-48 flex-shrink-0" />
         <div className="bg-lcars-alpha-blue h-12 flex-1" />
         <div className="bg-lcars-beta-blue h-12 w-20 md:w-32 flex items-center justify-center">
@@ -28,7 +28,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
       {/* Main content area */}
       <div className="flex flex-1 gap-2">
         {/* Left sidebar */}
-        <div className="hidden md:flex flex-col gap-2 w-32 lg:w-48 flex-shrink-0">
+        <div className="hidden md:flex flex-col gap-2 w-32 lg:w-48 flex-shrink-0" role="img" aria-label="LCARS-style sidebar panel with decorative status indicators">
           <div className="bg-lcars-alpha-blue lcars-elbow-tl h-20 flex items-end p-2">
             <span className="text-primary-foreground text-[10px] font-bold tracking-wider">01-4774</span>
           </div>
@@ -59,7 +59,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           </div>
 
           {/* Main area */}
-          <main className="flex-1 bg-card/50 border border-border rounded-sm p-4 md:p-6 overflow-auto">
+          <main className="flex-1 bg-card/50 border border-border rounded-sm p-4 md:p-6 overflow-auto" aria-label="LCARS-style panel showing d20 roll results">
             {children}
           </main>
 
@@ -106,7 +106,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex items-stretch gap-2">
+          <div className="flex items-stretch gap-2" role="img" aria-label="LCARS-style bottom status bar with stardate display">
             <div className="bg-lcars-radioactive h-6 w-12 md:w-20 lcars-pill-left" />
             <div className="bg-lcars-arctic-snow h-6 flex-1" />
             <div className="bg-lcars-night-rain h-6 w-24 flex items-center justify-center">
