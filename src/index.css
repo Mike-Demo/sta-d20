@@ -168,3 +168,19 @@
 .theme-strategic-ops .lcars-elbow-bl {
   box-shadow: 0 0 6px currentColor;
 }
+
+/* CRT scanline overlay */
+.crt-scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+}
