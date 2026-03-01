@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { ExternalLink } from "lucide-react";
 import wtfplLogo from "@/assets/wtfpl.svg";
 import CarbonBadge from "@/components/CarbonBadge";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 interface LCARSFrameProps {
   title: string;
@@ -19,6 +20,9 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           <span className="text-primary-foreground font-display text-xs md:text-sm font-bold tracking-widest uppercase">
             LCARS
           </span>
+        </div>
+        <div className="h-12 flex items-center">
+          <ThemeSwitcher />
         </div>
         <div className="bg-lcars-night-rain lcars-pill-right h-12 w-16 md:w-24 flex-shrink-0" />
       </div>
