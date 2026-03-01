@@ -31,9 +31,10 @@ const SplashScreen = () => {
       <div className="splash-pulse mb-6">
         <img
           src="/pwa-icon.svg"
-          alt="Star Trek"
+          alt="Star Trek delta insignia"
           width="80"
           height="80"
+          loading="lazy"
           className="drop-shadow-[0_0_15px_hsl(var(--lcars-alpha-blue)/0.6)]"
         />
       </div>
