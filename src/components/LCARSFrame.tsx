@@ -120,8 +120,8 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
 
           {/* Disclaimer */}
           <footer className="mt-2 px-2">
-            <details className="rounded-sm border border-lcars-gold/40 bg-background overflow-hidden transition-all">
-              <summary className="bg-lcars-gold text-background font-display text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 cursor-pointer list-none lcars-pill-right hover:bg-lcars-arctic-ice transition-colors select-none [&::-webkit-details-marker]:hidden">
+            <details className="rounded-sm border border-lcars-night-rain/40 bg-background overflow-hidden transition-all">
+              <summary className="bg-lcars-night-rain text-primary-foreground font-display text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 cursor-pointer list-none lcars-pill-right hover:bg-lcars-arctic-snow hover:text-accent-foreground transition-colors select-none [&::-webkit-details-marker]:hidden">
                 LEGAL &amp; CREDITS
               </summary>
               <div className="px-4 py-3">
