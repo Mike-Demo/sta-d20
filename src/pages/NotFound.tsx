@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 
 const NotFound = () => {
   const location = useLocation();
+  const sanitizedPath = (() => {
+    const raw = location.pathname.split("?")[0].split("#")[0];
+    return raw.length > 40 ? raw.slice(0, 40) + "…" : raw;
+  })();
   const [compensatorDots, setCompensatorDots] = useState("");
 
   useEffect(() => {
@@ -120,7 +124,7 @@ const NotFound = () => {
                 <span className="text-lcars-arctic-ice">"Oops, that's not real,"</span>{" "}
                 triggering a Level‑0.5 Diagnostic. The requested path{" "}
                 <code className="text-lcars-radioactive bg-muted px-1.5 py-0.5 rounded text-xs">
-                  {location.pathname}
+                  {sanitizedPath}
                 </code>{" "}
                 could not be located in any known database.
               </p>
