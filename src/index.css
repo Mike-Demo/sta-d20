@@ -160,3 +160,15 @@
   0% { transform: translateX(-100%); }
   100% { transform: translateX(400%); }
 }
+
+/* Strategic Ops Simulator theme — vector glow & pixel text scaling */
+.theme-strategic-ops * {
+  text-shadow: 0 0 6px currentColor;
+}
+
+.theme-strategic-ops .font-display,
+.theme-strategic-ops .font-lcars {
+  font-size: 0.7em;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}

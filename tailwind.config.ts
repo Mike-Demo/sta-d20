@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        lcars: ["Antonio", "Orbitron", "sans-serif"],
-        display: ["Orbitron", "Antonio", "sans-serif"],
+        lcars: ["var(--font-lcars, Antonio, Orbitron, sans-serif)"],
+        display: ["var(--font-display, Orbitron, Antonio, sans-serif)"],
       },
       colors: {
         border: "hsl(var(--border))",
