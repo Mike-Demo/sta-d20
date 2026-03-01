@@ -24,15 +24,13 @@ const ThemeSwitcher = () => {
     <div ref={ref} className="relative z-50">
       <button
         onClick={() => setOpen(!open)}
-        className="bg-lcars-night-rain hover:bg-lcars-beta-blue transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase whitespace-nowrap"
+        className="bg-lcars-night-rain hover:bg-lcars-beta-blue transition-colors h-8 w-8 flex items-center justify-center"
       >
-        <span className="flex gap-1">
-          {themes[current].swatches.slice(0, 3).map((c, i) => (
-            <span key={i} className="w-2 h-2 rounded-full inline-block" style={{ background: c }} />
+        <span className="flex flex-wrap gap-0.5 w-4 h-4 items-center justify-center">
+          {themes[current].swatches.slice(0, 4).map((c, i) => (
+            <span key={i} className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: c }} />
           ))}
         </span>
-        <span className="hidden sm:inline">{themes[current].name}</span>
-        <span className="sm:hidden">Theme</span>
       </button>
 
       {open && (
