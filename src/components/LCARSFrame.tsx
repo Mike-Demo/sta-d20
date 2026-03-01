@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { ExternalLink } from "lucide-react";
 import wtfplLogo from "@/assets/wtfpl.svg";
-import CarbonBadge from "@/components/CarbonBadge";
+
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 interface LCARSFrameProps {
@@ -119,35 +119,17 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           </div>
 
           {/* Disclaimer */}
-          <footer className="mt-2 px-2 text-center space-y-1">
-            <p className="text-muted-foreground text-[8px] leading-tight">
-              TM &amp; © 2026 CBS Studios Inc. STAR TREK and related marks and logos are trademarks of CBS Studios Inc. All Rights Reserved.
-            </p>
-            <p className="text-muted-foreground text-[8px] leading-tight">
-              This is a community-created tool for Star Trek Adventures, and has no official affiliation with Modiphius.
-            </p>
-            <p className="text-muted-foreground text-[8px] leading-tight">
-              Some elements of this interface were replicated with AI assistance. Safety protocols remain engaged.
-            </p>
-            <p className="text-muted-foreground text-[8px] leading-tight">
-              No trackers detected on 2d20.space. Privacy score: 90/100. <a href="https://geckoadvisor.com/privacy-report/2d20.space" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">GeckoAdvisor Report</a>
-            </p>
-            <div className="pt-1">
-              <CarbonBadge />
-            </div>
-            <p className="text-muted-foreground text-[8px] leading-tight">
-              LCARS style inspired by <a href="https://thelcars.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">thelcars.com</a> by Jim Robertus
-            </p>
-            <p className="text-muted-foreground text-[8px] leading-tight">
-              <a href="https://icons8.com/icon/21039/star-trek" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Star Trek</a> icon by <a href="https://icons8.com" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Icons8</a>
-            </p>
-            <p className="text-muted-foreground text-[8px] leading-tight">
-              <a href="/robots.txt" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">robots.txt</a>
-              {" · "}
-              <a href="/llms.txt" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">llms.txt</a>
-              {" · "}
-              <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">sitemap.xml</a>
-            </p>
+          <footer className="mt-2 px-2">
+            <details className="rounded-sm border border-lcars-gold/40 bg-background overflow-hidden transition-all">
+              <summary className="bg-lcars-gold text-background font-display text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 cursor-pointer list-none lcars-pill-right hover:bg-lcars-arctic-ice transition-colors select-none [&::-webkit-details-marker]:hidden">
+                LEGAL &amp; CREDITS
+              </summary>
+              <div className="px-4 py-3">
+                <p className="text-muted-foreground text-[8px] leading-relaxed">
+                  TM &amp; © 2026 CBS Studios Inc. STAR TREK and related marks and logos are trademarks of CBS Studios Inc. All rights reserved. This site is a community-created tool for the Star Trek Adventures tabletop role-playing game and is not affiliated with or endorsed by Modiphius Entertainment. Some interface elements were created or refined with AI assistance. No trackers were detected on 2d20.space, and the site holds a 90/100 privacy score according to <a href="https://geckoadvisor.com/privacy-report/2d20.space" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">GeckoAdvisor</a>. Estimated emissions are 0.01g CO₂ per visit, cleaner than 98% of tested sites, as measured by <a href="https://www.websitecarbon.com/website/2d20-space/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Website Carbon</a>. The LCARS-inspired interface draws on design principles popularized by <a href="https://thelcars.com/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">thelcars.com</a> by Jim Robertus, and the <a href="https://icons8.com/icon/21039/star-trek" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Star Trek</a> icon is provided by <a href="https://icons8.com/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Icons8</a>. Technical files available: <a href="/robots.txt" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">robots.txt</a>, <a href="/llms.txt" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">llms.txt</a>, <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">sitemap.xml</a>.
+                </p>
+              </div>
+            </details>
           </footer>
         </div>
       </div>
