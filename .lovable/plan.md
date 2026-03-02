@@ -1,80 +1,60 @@
-# LCARS Theme Switcher
 
-## Overview
+# Fix Focus Mechanic with Discipline Support
 
-Add a theme selector button to the LCARS frame that lets users switch between 6 LCARS themes from thelcars.com v24.2. The selected theme persists via localStorage. Lower Decks PADD remains the default.
+## The Problem
 
-## Themes
+User feedback (Tony Pi, Kenton Campbell) correctly identifies that Focus is broken. Currently, when Focus is ON, **all** results at or below the Target Number count as 2 successes. This is wrong.
 
+Per STA 2nd Edition rules:
+- **Target Number (TN)** = Attribute + Discipline
+- **Natural 1** = always 2 successes (critical)
+- **Focus ON** = results at or below the **Discipline score** count as 2 successes (instead of just natural 1s)
+- All other results at or below TN = 1 success as normal
 
-| Theme                 | Era              | Palette Character                       |
-| --------------------- | ---------------- | --------------------------------------- |
-| Lower Decks PADD      | 2380s (animated) | Cool blues, cyan accents                |
-| Lower Decks Standard  | 2380s (animated) | Warm oranges, amber, pumpkin            |
-| Classic Standard      | TNG/DS9/VOY      | Purple, orange, peach                   |
-| Classic Ultra         | TNG/DS9/VOY      | Same colors as Classic, bolder contrast |
-| Nemesis Blue Standard | TNG films        | Steel blues, wheat accents              |
-| Nemesis Blue Ultra    | TNG films        | Same as Nemesis Blue, bolder contrast   |
+The app is missing a **Discipline** input, so it has no threshold for the Focus double-success check.
 
+## The Fix
 
-## What Changes
+When Focus is toggled ON, reveal a **Discipline stepper** (range 1--5) inline next to the Focus toggle. The success calculation changes from "all hits = 2" to "hits where value is at or below Discipline = 2."
 
-### 1. New file: `src/lib/themes.ts`
+### UI Change (DiceRoller.tsx)
 
-A theme definitions module containing:
+- Add `discipline` state (default 3, range 1--5)
+- When Focus is ON, show a small stepper for Discipline right next to or below the Focus toggle, keeping the 4-column grid clean
+- When Focus is OFF, the Discipline stepper hides (not needed)
 
-- A `ThemeId` union type for the 6 theme keys
-- A `themes` record mapping each ID to its display name and full set of CSS custom property overrides (all `--background`, `--foreground`, `--primary`, `--card`, `--muted`, `--accent`, `--destructive`, `--border`, `--lcars-*` tokens)
-- `getTheme()` / `setTheme()` helpers that read/write `localStorage` key `lcars-theme`
-- `applyTheme(id)` function that sets all CSS variables on `document.documentElement.style`
+### Logic Changes (DiceRoller.tsx)
 
-Color mappings derived from thelcars.com/colors.php (v24.2):
+Update `calcSuccesses`:
+```text
+Current:  if focusOn && isSuccess -> +2
+Correct:  if focusOn && value <= discipline && isSuccess -> +2
+          else if isSuccess -> +1
+```
 
-- **Lower Decks PADD**: Current values (no change)
-- **Lower Decks Standard**: Background stays dark black. Primary bars use `#ff7700` (orange), `#ffaa44` (harvestgold), `#ff9911` (daybreak). Accent: `#ffeecc` (butter). Destructive: `#ff4400` (october-sunset). Sidebar bars: `#cc5500` (rich-pumpkin), `#ffcc99` (honey).
-- **Classic Standard**: Primary: `#cc99ff` (african-violet). Bars: `#ff9966` (butterscotch), `#ff8800` (orange), `#ffaa00` (gold). Accent: `#99ccff` (ice). Muted: `#666688` (gray). Destructive: `#ff2200` (mars).
-- **Classic Ultra**: Same palette as Classic Standard with slightly brighter/bolder primary and accent values for higher contrast on wider layouts.
-- **Nemesis Blue Standard**: Primary: `#6699ff` (cool). Bars: `#2266ff` (evening), `#88bbff` (ghost). Accent: `#ebf0ff` (moonbeam). Muted: `#52526a` (galaxy-gray). Destructive: `#cc2233` (cardinal).
-- **Nemesis Blue Ultra**: Same palette as Nemesis Blue Standard with bolder primary and richer blues.
+### Info Panel Update (bottom of DiceRoller.tsx)
 
-### 2. New file: `src/components/ThemeSwitcher.tsx`
+The "Success" info box currently reads: `<= TN = 2 successes` when Focus is on.
+Update to: `<= Disc. X = 2 successes` when Focus is on, showing the actual Discipline value.
 
-A small dropdown/popover button component:
+### ExplainModal Update
 
-- Renders an LCARS-styled pill button labeled with the current theme name (or a palette icon)
-- On click, shows a dropdown list of 6 theme options
-- Each option shows the theme name and a small color swatch preview (3-4 dots of the theme's key colors)
-- Selecting a theme calls `applyTheme()` and saves to localStorage
-- Styled consistently with existing LCARS button patterns (pill shapes, font-display, tracking)
+- Pass `discipline` as a new prop
+- Update the label for focus successes from `"Focus Success (value <= TN, +2)"` to `"Focus Success (value <= Disc. X, +2)"`
+- Non-focus successes that are still hits show as regular `"+1"` successes
 
-### 3. Modify: `src/components/LCARSFrame.tsx`
+### WatchDiceRoller Update
 
-- Import and place `ThemeSwitcher` in the top bar area, next to the "LCARS" label in the beta-blue panel (or as an additional pill in the top bar row)
+- Add the same Discipline stepper (compact) that appears when Focus would be relevant
+- Note: The watch layout currently has no Focus toggle, so this is optional / future work
 
-### 4. Modify: `src/App.tsx`
+### RollHistory Update
 
-- On mount, call `applyTheme(getTheme())` to restore the saved theme before first render
+- Add `discipline` field to `RollHistoryEntry` so the log records what Discipline was used
+- Display it in the history entry detail line
 
-### 5. Modify: `src/index.css`
+## Files Modified
 
-- No structural changes needed. The `:root` variables remain as the Lower Decks PADD defaults. The theme switcher overrides them at runtime via inline styles on `<html>`.
-
-## Technical Details
-
-- Theme state is purely CSS custom properties -- no React re-render needed for color changes
-- `applyTheme` sets properties via `document.documentElement.style.setProperty()`
-- localStorage key: `lcars-theme`, values: `lower-decks-padd` | `lower-decks` | `classic` | `classic-ultra` | `nemesis-blue` | `nemesis-blue-ultra`
-- The "Standard" vs "Ultra" variants share the same color palette but Ultra uses slightly bolder/brighter values for the primary and accent tokens to increase contrast
-- The dropdown uses a simple `useState` toggle (no additional dependency needed), positioned absolutely below the trigger button
-- Click-outside closes the dropdown
-- Make sure all files are loaded locally
-
-## Files Summary
-
-
-| File                               | Action                       |
-| ---------------------------------- | ---------------------------- |
-| `src/lib/themes.ts`                | Create                       |
-| `src/components/ThemeSwitcher.tsx` | Create                       |
-| `src/components/LCARSFrame.tsx`    | Add ThemeSwitcher to top bar |
-| `src/App.tsx`                      | Apply saved theme on mount   |
+1. **src/components/DiceRoller.tsx** -- Add discipline state, conditional UI, fix calcSuccesses
+2. **src/components/ExplainModal.tsx** -- Add discipline prop, fix labels
+3. **src/components/RollHistory.tsx** -- Add discipline to interface and display
