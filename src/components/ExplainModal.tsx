@@ -22,6 +22,7 @@ interface ExplainModalProps {
   complications: number;
   difficulty: number;
   focusOn: boolean;
+  discipline: number;
   complicationRange: number;
   momentumBuy: number;
   threatBuy: number;
@@ -36,6 +37,7 @@ const ExplainModal = ({
   complications,
   difficulty,
   focusOn,
+  discipline,
   complicationRange,
   momentumBuy,
   threatBuy,
@@ -66,8 +68,8 @@ const ExplainModal = ({
             } else if (die.isCritical) {
               label = "Critical Success (natural 1, +2)";
               successCount = 2;
-            } else if (die.isSuccess && focusOn) {
-              label = `Focus Success (${die.value} ≤ TN ${targetNumber}, +2)`;
+            } else if (die.isSuccess && focusOn && die.value <= discipline) {
+              label = `Focus Success (${die.value} ≤ Disc. ${discipline}, +2)`;
               successCount = 2;
             } else if (die.isSuccess) {
               label = `Success (${die.value} ≤ TN ${targetNumber}, +1)`;

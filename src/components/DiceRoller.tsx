@@ -22,6 +22,7 @@ const DiceRoller = () => {
   const [numDice, setNumDice] = useState(2);
   const [targetNumber, setTargetNumber] = useState(10);
   const [focusOn, setFocusOn] = useState(false);
+  const [discipline, setDiscipline] = useState(3);
   const [difficulty, setDifficulty] = useState(2);
 
   // Advanced options
@@ -50,11 +51,11 @@ const DiceRoller = () => {
   const calcSuccesses = useCallback((dice: DieResult[]) => {
     return dice.reduce((sum, d) => {
       if (d.isCritical) return sum + 2;
-      if (focusOn && d.isSuccess) return sum + 2;
+      if (focusOn && d.isSuccess && d.value <= discipline) return sum + 2;
       if (d.isSuccess) return sum + 1;
       return sum;
     }, 0);
-  }, [focusOn]);
+  }, [focusOn, discipline]);
 
   const makeDie = useCallback((value: number): DieResult => ({
     value,
@@ -110,13 +111,14 @@ const DiceRoller = () => {
           timestamp: new Date(),
           difficulty,
           focusOn,
+          discipline,
           complicationRange,
           momentum: effectiveSuccesses - difficulty,
         },
         ...prev,
       ].slice(0, 50));
     }, 700);
-  }, [numDice, targetNumber, rollId, focusOn, difficulty, complicationRange, momentumBuy, threatBuy, calcSuccesses, makeDie]);
+  }, [numDice, targetNumber, rollId, focusOn, discipline, difficulty, complicationRange, momentumBuy, threatBuy, calcSuccesses, makeDie]);
 
   const toggleDieSelection = useCallback((index: number) => {
     if (!result || hasRerolled) return;
@@ -231,7 +233,7 @@ const DiceRoller = () => {
           </div>
         </div>
 
-        {/* Focus toggle */}
+        {/* Focus toggle + Discipline */}
         <div className="flex flex-col gap-2">
           <label className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
             Focus
@@ -264,6 +266,26 @@ const DiceRoller = () => {
               OFF
             </button>
           </div>
+          {focusOn && (
+            <div className="flex items-center gap-1 mt-1">
+              <span className="text-muted-foreground text-[9px] font-bold tracking-widest uppercase">Disc.</span>
+              {[1, 2, 3, 4, 5].map((n) => (
+                <button
+                  key={n}
+                  onClick={() => setDiscipline(n)}
+                  aria-label={`Discipline ${n}`}
+                  aria-pressed={discipline === n}
+                  className={`h-7 w-7 rounded-sm font-display text-xs font-bold transition-all ${
+                    discipline === n
+                      ? "bg-lcars-gold text-accent-foreground scale-110"
+                      : "bg-muted text-muted-foreground hover:bg-muted/80"
+                  }`}
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Difficulty */}
@@ -473,7 +495,7 @@ const DiceRoller = () => {
         </div>
         <div className="bg-muted rounded-sm py-2 px-3">
           <div className="text-[9px] text-muted-foreground font-bold tracking-widest uppercase">Success</div>
-          <div className="text-lcars-radioactive text-xs mt-1">≤ {targetNumber} = {focusOn ? "2" : "1"} success{!focusOn ? "" : "es"}</div>
+          <div className="text-lcars-radioactive text-xs mt-1">{focusOn ? `≤ Disc. ${discipline} = 2 successes` : `≤ ${targetNumber} = 1 success`}</div>
         </div>
         <div className="bg-muted rounded-sm py-2 px-3">
           <div className="text-[9px] text-muted-foreground font-bold tracking-widest uppercase">Complication</div>
@@ -669,6 +691,7 @@ const DiceRoller = () => {
           complications={result.complications}
           difficulty={difficulty}
           focusOn={focusOn}
+          discipline={discipline}
           complicationRange={complicationRange}
           momentumBuy={momentumBuy}
           threatBuy={threatBuy}

@@ -11,6 +11,7 @@ export interface RollHistoryEntry {
   timestamp: Date;
   difficulty: number;
   focusOn: boolean;
+  discipline: number;
   complicationRange: number;
   momentum: number;
 }
@@ -93,7 +94,7 @@ const RollHistory = ({ entries }: RollHistoryProps) => {
             <div className="flex items-center gap-2 text-[9px] text-muted-foreground tracking-wider mt-1">
               <span>Diff {entry.difficulty}</span>
               <span>·</span>
-              <span>Focus {entry.focusOn ? "ON" : "OFF"}</span>
+              <span>Focus {entry.focusOn ? `ON (D${entry.discipline})` : "OFF"}</span>
               <span>·</span>
               <span>CR {entry.complicationRange}</span>
               <span>·</span>
