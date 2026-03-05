@@ -1,54 +1,60 @@
 
+# Fix Focus Mechanic with Discipline Support
 
-# Accessibility Audit Fixes
+## The Problem
 
-Based on the human accessibility audit, here are the changes organized by priority.
+User feedback (Tony Pi, Kenton Campbell) correctly identifies that Focus is broken. Currently, when Focus is ON, **all** results at or below the Target Number count as 2 successes. This is wrong.
 
-## 1. Add Headings (h2) to Control Sections
+Per STA 2nd Edition rules:
+- **Target Number (TN)** = Attribute + Discipline
+- **Natural 1** = always 2 successes (critical)
+- **Focus ON** = results at or below the **Discipline score** count as 2 successes (instead of just natural 1s)
+- All other results at or below TN = 1 success as normal
 
-**DiceRoller.tsx**: Convert the plain `<label>` text for each settings group into `<h2>` elements so screen reader users can navigate by heading. Affected sections:
-- Dice Pool, Target Number, Focus, Difficulty (main controls)
-- Advanced Options (collapsible trigger)
-- Ship's Log (already has `<h2>` -- confirmed good)
+The app is missing a **Discipline** input, so it has no threshold for the Focus double-success check.
 
-The `<h2>` elements will keep the same visual styling (small uppercase text) but provide heading-level navigation.
+## The Fix
 
-## 2. Add `aria-live="polite"` to Results
+When Focus is toggled ON, reveal a **Discipline stepper** (range 1--5) inline next to the Focus toggle. The success calculation changes from "all hits = 2" to "hits where value is at or below Discipline = 2."
 
-**DiceRoller.tsx**: Wrap the results area (dice display + successes + outcome panel) in a container with `aria-live="polite"` so screen readers announce results when a roll completes. The live region will contain a summary like "Rolled 3, 8, 15. 2 successes, 1 complication."
+### UI Change (DiceRoller.tsx)
 
-## 3. Move Advanced Options Above the Results
+- Add `discipline` state (default 3, range 1--5)
+- When Focus is ON, show a small stepper for Discipline right next to or below the Focus toggle, keeping the 4-column grid clean
+- When Focus is OFF, the Discipline stepper hides (not needed)
 
-**DiceRoller.tsx**: Reorder the JSX so Advanced Options appears between the controls and the Engage button (or directly after the Engage button but before the dice display area). This prevents screen reader users from missing it by placing all configuration before the output.
+### Logic Changes (DiceRoller.tsx)
 
-New order:
-1. Main controls (Dice Pool, TN, Focus, Difficulty)
-2. Advanced Options (collapsible)
-3. Engage button + mute
-4. Info panel (Critical / Success / Complication reference)
-5. Results area (dice, outcome, reroll)
-6. Ship's Log
+Update `calcSuccesses`:
+```text
+Current:  if focusOn && isSuccess -> +2
+Correct:  if focusOn && value <= discipline && isSuccess -> +2
+          else if isSuccess -> +1
+```
 
-## 4. Hide Decorative Elements from Screen Readers
+### Info Panel Update (bottom of DiceRoller.tsx)
 
-**LCARSFrame.tsx**: Change the decorative LCARS bars from `role="img" aria-label="..."` to `aria-hidden="true"`. The top bar, sidebar, and bottom bar are purely decorative and should be skipped by screen readers. The auditor specifically noted these labels are unnecessary and should be hidden.
+The "Success" info box currently reads: `<= TN = 2 successes` when Focus is on.
+Update to: `<= Disc. X = 2 successes` when Focus is on, showing the actual Discipline value.
 
-Also add `aria-hidden="true"` to decorative icon SVGs (the `<Volume2>`, `<VolumeX>`, `<Info>`, `<ExternalLink>`, `<ChevronDown>` icons that sit next to text labels).
+### ExplainModal Update
 
-## 5. Add High-Contrast Theme ("Captain Proton")
+- Pass `discipline` as a new prop
+- Update the label for focus successes from `"Focus Success (value <= TN, +2)"` to `"Focus Success (value <= Disc. X, +2)"`
+- Non-focus successes that are still hits show as regular `"+1"` successes
 
-**src/lib/themes.ts**: Add a new high-contrast theme with dark background and bright yellow/white foreground, inspired by the Captain Proton holodeck program (black-and-white / monochrome). This aids low-vision users.
+### WatchDiceRoller Update
 
-- Name: "Captain Proton"
-- Era: "VOY Holodeck"
-- Colors: Near-black background, high-contrast yellow primary, white foreground, monochrome LCARS bars
-- Minimum 7:1 contrast ratio (WCAG AAA) for all text
+- Add the same Discipline stepper (compact) that appears when Focus would be relevant
+- Note: The watch layout currently has no Focus toggle, so this is optional / future work
 
-**ThemeSwitcher.tsx**: The new theme ID will appear automatically since it reads from the `themes` object.
+### RollHistory Update
+
+- Add `discipline` field to `RollHistoryEntry` so the log records what Discipline was used
+- Display it in the history entry detail line
 
 ## Files Modified
 
-1. **src/components/DiceRoller.tsx** -- headings, aria-live region, reorder layout, aria-hidden on icons
-2. **src/components/LCARSFrame.tsx** -- aria-hidden on decorative bars and icons
-3. **src/lib/themes.ts** -- add Captain Proton high-contrast theme
-
+1. **src/components/DiceRoller.tsx** -- Add discipline state, conditional UI, fix calcSuccesses
+2. **src/components/ExplainModal.tsx** -- Add discipline prop, fix labels
+3. **src/components/RollHistory.tsx** -- Add discipline to interface and display

@@ -7,7 +7,8 @@ export type ThemeId =
   | "nemesis-blue-ultra"
   | "strategic-ops"
   | "25th-anniversary"
-  | "elite-force";
+  | "elite-force"
+  | "captain-proton";
 
 interface ThemeDefinition {
   name: string;
@@ -325,6 +326,41 @@ export const themes: Record<ThemeId, ThemeDefinition> = {
       "--lcars-night-rain": "170 30% 30%",
       "--lcars-sunset-red": "12 90% 55%",
       "--lcars-gold": "24 100% 63%",
+    },
+  },
+  "captain-proton": {
+    name: "Captain Proton",
+    era: "VOY Holodeck",
+    swatches: ["#ffffff", "#ffdd00", "#cccccc", "#000000"],
+    vars: {
+      "--background": "0 0% 4%",
+      "--foreground": "0 0% 95%",
+      "--card": "0 0% 7%",
+      "--card-foreground": "0 0% 95%",
+      "--popover": "0 0% 7%",
+      "--popover-foreground": "0 0% 95%",
+      "--primary": "48 100% 50%",
+      "--primary-foreground": "0 0% 0%",
+      "--secondary": "0 0% 75%",
+      "--secondary-foreground": "0 0% 0%",
+      "--muted": "0 0% 12%",
+      "--muted-foreground": "0 0% 70%",
+      "--accent": "48 100% 60%",
+      "--accent-foreground": "0 0% 0%",
+      "--destructive": "0 0% 65%",
+      "--destructive-foreground": "0 0% 0%",
+      "--border": "0 0% 22%",
+      "--input": "0 0% 22%",
+      "--ring": "48 100% 50%",
+      "--lcars-alpha-blue": "0 0% 80%",
+      "--lcars-arctic-ice": "48 100% 50%",
+      "--lcars-arctic-snow": "0 0% 95%",
+      "--lcars-radioactive": "48 100% 60%",
+      "--lcars-beta-blue": "0 0% 55%",
+      "--lcars-night-cloud": "0 0% 15%",
+      "--lcars-night-rain": "0 0% 40%",
+      "--lcars-sunset-red": "0 0% 65%",
+      "--lcars-gold": "48 100% 50%",
     },
   },
 };
