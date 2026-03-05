@@ -185,9 +185,9 @@ const DiceRoller = () => {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {/* Number of dice */}
         <div className="flex flex-col gap-2">
-          <label className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
+          <h2 className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
             Dice Pool
-          </label>
+          </h2>
           <div className="flex items-center gap-1">
             {[1, 2, 3, 4, 5].map((n) => (
               <button
@@ -209,9 +209,9 @@ const DiceRoller = () => {
 
         {/* Target number */}
         <div className="flex flex-col gap-2">
-          <label className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
+          <h2 className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
             Target Number
-          </label>
+          </h2>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setTargetNumber(Math.max(1, targetNumber - 1))}
@@ -235,9 +235,9 @@ const DiceRoller = () => {
 
         {/* Focus toggle + Discipline */}
         <div className="flex flex-col gap-2">
-          <label className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
+          <h2 className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
             Focus
-          </label>
+          </h2>
           <div className="flex items-center gap-1" role="radiogroup" aria-label="Focus toggle">
             <button
               onClick={() => setFocusOn(true)}
@@ -290,9 +290,9 @@ const DiceRoller = () => {
 
         {/* Difficulty */}
         <div className="flex flex-col gap-2">
-          <label className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
+          <h2 className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
             Difficulty
-          </label>
+          </h2>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setDifficulty(Math.max(1, difficulty - 1))}

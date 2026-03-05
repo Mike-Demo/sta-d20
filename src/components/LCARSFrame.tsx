@@ -13,7 +13,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
   return (
     <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col" style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top))", paddingLeft: "max(0.75rem, env(safe-area-inset-left))", paddingRight: "max(0.75rem, env(safe-area-inset-right))", paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
       {/* Top bar */}
-      <div className="flex items-stretch gap-2 mb-2" role="img" aria-label="LCARS-style top navigation bar for Star Trek Adventures 2e dice roller">
+      <div className="flex items-stretch gap-2 mb-2" aria-hidden="true">
         <div className="bg-lcars-arctic-ice lcars-pill-left h-12 w-32 md:w-48 flex-shrink-0" />
         <div className="bg-lcars-alpha-blue h-12 flex-1" />
         <div className="bg-lcars-beta-blue h-12 w-20 md:w-32 flex items-center justify-center">
@@ -28,7 +28,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
       {/* Main content area */}
       <div className="flex flex-1 gap-2">
         {/* Left sidebar */}
-        <div className="hidden md:flex flex-col gap-2 w-32 lg:w-48 flex-shrink-0" role="img" aria-label="LCARS-style sidebar panel with decorative status indicators">
+        <div className="hidden md:flex flex-col gap-2 w-32 lg:w-48 flex-shrink-0" aria-hidden="true">
           <div className="bg-lcars-alpha-blue lcars-elbow-tl h-20 flex items-end p-2">
             <span className="text-primary-foreground text-[10px] font-bold tracking-wider">01-4774</span>
           </div>
@@ -72,7 +72,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               referrerPolicy="no-referrer"
               className="bg-lcars-alpha-blue hover:bg-lcars-radioactive transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-primary-foreground text-[11px] font-bold tracking-wider uppercase"
             >
-              <ExternalLink className="w-3 h-3" />
+              <ExternalLink className="w-3 h-3" aria-hidden="true" />
               Star Trek Games
             </a>
             <a
@@ -82,7 +82,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
               referrerPolicy="no-referrer"
               className="bg-lcars-arctic-ice hover:bg-lcars-arctic-snow transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-accent-foreground text-[11px] font-bold tracking-wider uppercase"
             >
-              <ExternalLink className="w-3 h-3" />
+              <ExternalLink className="w-3 h-3" aria-hidden="true" />
               STA Reference
             </a>
             <a
@@ -106,7 +106,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex items-stretch gap-2" role="img" aria-label="LCARS-style bottom status bar with stardate display">
+          <div className="flex items-stretch gap-2" aria-hidden="true">
             <div className="bg-lcars-radioactive h-6 w-12 md:w-20 lcars-pill-left" />
             <div className="bg-lcars-arctic-snow h-6 flex-1" />
             <div className="bg-lcars-night-rain h-6 w-24 flex items-center justify-center">
@@ -122,7 +122,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           <footer className="mt-2 px-2">
             <details className="rounded-sm border border-lcars-night-rain/40 bg-background overflow-hidden transition-all">
               <summary className="bg-lcars-night-rain text-primary-foreground font-display text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 cursor-pointer list-none lcars-pill-right hover:bg-lcars-arctic-snow hover:text-accent-foreground transition-colors select-none [&::-webkit-details-marker]:hidden flex items-center gap-2 group">
-                <ChevronDown className="w-3 h-3 transition-transform duration-200 [[open]>&]:rotate-180" />
+                <ChevronDown className="w-3 h-3 transition-transform duration-200 [[open]>&]:rotate-180" aria-hidden="true" />
                 LEGAL &amp; CREDITS
               </summary>
               <div className="px-4 py-3">
