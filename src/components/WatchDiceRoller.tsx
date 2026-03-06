@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { secureD20 } from "@/lib/diceRandom";
 
 interface DieResult {
   value: number;
@@ -22,7 +23,7 @@ const WatchDiceRoller = () => {
     setTimeout(() => {
       const dice: DieResult[] = [];
       for (let i = 0; i < numDice; i++) {
-        const value = Math.floor(Math.random() * 20) + 1;
+        const value = secureD20();
         dice.push({
           value,
           isSuccess: value <= targetNumber,
