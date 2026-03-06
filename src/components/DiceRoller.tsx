@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { secureD20 } from "@/lib/diceRandom";
-import { Volume2, VolumeX, Info } from "lucide-react";
+import { Volume2, VolumeX, Info, ShieldCheck } from "lucide-react";
 import RollHistory, { RollHistoryEntry, generateStardate } from "./RollHistory";
 import ExplainModal from "./ExplainModal";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
