@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { secureD20 } from "@/lib/diceRandom";
 import { Volume2, VolumeX, Info } from "lucide-react";
 import RollHistory, { RollHistoryEntry, generateStardate } from "./RollHistory";
 import ExplainModal from "./ExplainModal";
@@ -74,7 +75,7 @@ const DiceRoller = () => {
     setTimeout(() => {
       const dice: DieResult[] = [];
       for (let i = 0; i < numDice; i++) {
-        dice.push(makeDie(Math.floor(Math.random() * 20) + 1));
+        dice.push(makeDie(secureD20()));
       }
 
       const totalSuccesses = calcSuccesses(dice);
@@ -138,7 +139,7 @@ const DiceRoller = () => {
 
     const newDice = result.dice.map((die, i) => {
       if (!selectedForReroll.has(i)) return die;
-      return makeDie(Math.floor(Math.random() * 20) + 1);
+      return makeDie(secureD20());
     });
 
     const totalSuccesses = calcSuccesses(newDice);
