@@ -495,6 +495,11 @@ const DiceRoller = () => {
         </button>
       </div>
 
+      <div className="flex items-center justify-center gap-1 text-muted-foreground" title="Dice rolls use the Web Crypto API (crypto.getRandomValues) for cryptographically secure randomization">
+        <ShieldCheck className="h-3 w-3" aria-hidden="true" />
+        <span className="text-[9px] font-bold tracking-wider uppercase">Crypto-Secure Rolls</span>
+      </div>
+
       {/* Info panel */}
       <div className="grid grid-cols-3 gap-2 text-center">
         <div className="bg-muted rounded-sm py-2 px-3">
