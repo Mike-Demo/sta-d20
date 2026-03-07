@@ -1,60 +1,35 @@
 
-# Fix Focus Mechanic with Discipline Support
 
-## The Problem
+# Add SEO Information Accordion & Migrate Footer Credits
 
-User feedback (Tony Pi, Kenton Campbell) correctly identifies that Focus is broken. Currently, when Focus is ON, **all** results at or below the Target Number count as 2 successes. This is wrong.
+## Summary
 
-Per STA 2nd Edition rules:
-- **Target Number (TN)** = Attribute + Discipline
-- **Natural 1** = always 2 successes (critical)
-- **Focus ON** = results at or below the **Discipline score** count as 2 successes (instead of just natural 1s)
-- All other results at or below TN = 1 success as normal
+Create a new `LCARSInfoAccordion` component using semantic `<details>`/`<summary>` elements with three sections (Instructions, Details, Credits & Licensing). Place it in `LCARSFrame` between the title bar and the main content area. The `<h1>` already exists in the title bar — it stays as-is. The footer's credits content moves into the accordion's third section, and the footer is removed entirely.
 
-The app is missing a **Discipline** input, so it has no threshold for the Focus double-success check.
+## Files to Change
 
-## The Fix
+### 1. New: `src/components/LCARSInfoAccordion.tsx`
 
-When Focus is toggled ON, reveal a **Discipline stepper** (range 1--5) inline next to the Focus toggle. The success calculation changes from "all hits = 2" to "hits where value is at or below Discipline = 2."
+A reusable component with three `<details>` sections, each styled with LCARS colors and pill shapes:
 
-### UI Change (DiceRoller.tsx)
+- **Section 1 — "Instructions"**: The Lower Decks-tone usage guide (provided verbatim in the request).
+- **Section 2 — "Details"**: Rules coverage description (provided verbatim).
+- **Section 3 — "Credits & Licensing"**: The exact content currently in `LCARSFrame`'s footer (lines 129–131), including all links (GeckoAdvisor, Website Carbon, thelcars.com, Icons8, Rando.js, robots.txt, llms.txt, sitemap.xml, etc.).
 
-- Add `discipline` state (default 3, range 1--5)
-- When Focus is ON, show a small stepper for Discipline right next to or below the Focus toggle, keeping the 4-column grid clean
-- When Focus is OFF, the Discipline stepper hides (not needed)
+Desktop vs mobile behavior: Use a `useEffect` with `matchMedia` to set `open` attribute on desktop (`min-width: 768px`) and leave collapsed on mobile. Each `<details>` gets an `open` prop controlled by initial screen width.
 
-### Logic Changes (DiceRoller.tsx)
+Styling: LCARS-themed summaries using `bg-lcars-night-rain` / `bg-lcars-beta-blue` / `bg-lcars-alpha-blue` with `lcars-pill-right`, `font-display`, tracking, chevron icon — matching the existing footer accordion pattern.
 
-Update `calcSuccesses`:
-```text
-Current:  if focusOn && isSuccess -> +2
-Correct:  if focusOn && value <= discipline && isSuccess -> +2
-          else if isSuccess -> +1
-```
+### 2. Edit: `src/components/LCARSFrame.tsx`
 
-### Info Panel Update (bottom of DiceRoller.tsx)
+- **Add** `<LCARSInfoAccordion />` import and render it between the title bar (line 59) and the main area (line 62).
+- **Remove** the entire footer block (lines 121–134) — the `<footer>` with the `<details>` disclaimer.
+- Keep everything else (top bar, sidebar, external links, bottom bar, WTFPL logo) unchanged.
 
-The "Success" info box currently reads: `<= TN = 2 successes` when Focus is on.
-Update to: `<= Disc. X = 2 successes` when Focus is on, showing the actual Discipline value.
+## Technical Notes
 
-### ExplainModal Update
+- The `<h1>` already exists in the title bar at line 54 — no duplication needed.
+- All content uses `<details>`/`<summary>` (no `display:none`), so it remains crawlable.
+- The component accepts no props initially but could be extended for page-specific content.
+- ARIA: `aria-label` on each `<details>` for section identification.
 
-- Pass `discipline` as a new prop
-- Update the label for focus successes from `"Focus Success (value <= TN, +2)"` to `"Focus Success (value <= Disc. X, +2)"`
-- Non-focus successes that are still hits show as regular `"+1"` successes
-
-### WatchDiceRoller Update
-
-- Add the same Discipline stepper (compact) that appears when Focus would be relevant
-- Note: The watch layout currently has no Focus toggle, so this is optional / future work
-
-### RollHistory Update
-
-- Add `discipline` field to `RollHistoryEntry` so the log records what Discipline was used
-- Display it in the history entry detail line
-
-## Files Modified
-
-1. **src/components/DiceRoller.tsx** -- Add discipline state, conditional UI, fix calcSuccesses
-2. **src/components/ExplainModal.tsx** -- Add discipline prop, fix labels
-3. **src/components/RollHistory.tsx** -- Add discipline to interface and display
