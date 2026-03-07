@@ -43,9 +43,6 @@ Disallow: /
 User-agent: Applebot-Extended
 Disallow: /
 
-User-agent: Bytespider
-Disallow: /
-
 User-agent: CCBot
 Disallow: /
 
@@ -53,9 +50,6 @@ User-agent: CCBot-Research
 Disallow: /
 
 User-agent: ChatGLM-Spider
-Disallow: /
-
-User-agent: ClaudeBot
 Disallow: /
 
 User-agent: CloudVertexBot
