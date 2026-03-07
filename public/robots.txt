@@ -14,7 +14,7 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-# --- Allow AI search/retrieval bots ---
+# Allow AI assistants to cite your content
 User-agent: ChatGPT-User
 Allow: /
 
@@ -27,6 +27,12 @@ Allow: /
 User-agent: NeevaAI
 Allow: /
 
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 # --- Block AI data scrapers (knownagents.com list) ---
 User-agent: Ai2Bot-Dolma
 Disallow: /
@@ -37,9 +43,6 @@ Disallow: /
 User-agent: Applebot-Extended
 Disallow: /
 
-User-agent: Bytespider
-Disallow: /
-
 User-agent: CCBot
 Disallow: /
 
@@ -47,9 +50,6 @@ User-agent: CCBot-Research
 Disallow: /
 
 User-agent: ChatGLM-Spider
-Disallow: /
-
-User-agent: ClaudeBot
 Disallow: /
 
 User-agent: CloudVertexBot
