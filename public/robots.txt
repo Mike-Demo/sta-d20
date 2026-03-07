@@ -14,7 +14,7 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-# --- Allow AI search/retrieval bots ---
+# Allow AI assistants to cite your content
 User-agent: ChatGPT-User
 Allow: /
 
@@ -25,6 +25,12 @@ User-agent: YouBot
 Allow: /
 
 User-agent: NeevaAI
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bytespider
 Allow: /
 
 # --- Block AI data scrapers (knownagents.com list) ---
