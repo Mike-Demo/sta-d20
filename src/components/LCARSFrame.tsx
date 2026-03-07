@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ExternalLink, ChevronDown } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import wtfplLogo from "@/assets/wtfpl.svg";
 
 import ThemeSwitcher from "@/components/ThemeSwitcher";
