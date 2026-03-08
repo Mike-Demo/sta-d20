@@ -14,16 +14,16 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
   return (
     <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col" style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top))", paddingLeft: "max(0.75rem, env(safe-area-inset-left))", paddingRight: "max(0.75rem, env(safe-area-inset-right))", paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
       {/* Top bar */}
-      <div className="flex items-stretch gap-2 mb-2" aria-hidden="true">
-        <div className="bg-lcars-arctic-ice lcars-pill-left h-12 w-32 md:w-48 flex-shrink-0" />
-        <div className="bg-lcars-alpha-blue h-12 flex-1" />
-        <div className="bg-lcars-beta-blue h-12 w-20 md:w-32 flex items-center justify-center">
+      <div className="flex items-stretch gap-2 mb-2">
+        <div className="bg-lcars-arctic-ice lcars-pill-left h-12 w-32 md:w-48 flex-shrink-0" aria-hidden="true" />
+        <div className="bg-lcars-alpha-blue h-12 flex-1" aria-hidden="true" />
+        <div className="bg-lcars-beta-blue h-12 w-20 md:w-32 flex items-center justify-center" aria-hidden="true">
           <span className="text-primary-foreground font-display text-xs md:text-sm font-bold tracking-widest uppercase">
             LCARS
           </span>
         </div>
         <ThemeSwitcher />
-        <div className="bg-lcars-night-rain lcars-pill-right h-12 w-16 md:w-24 flex-shrink-0" />
+        <div className="bg-lcars-night-rain lcars-pill-right h-12 w-16 md:w-24 flex-shrink-0" aria-hidden="true" />
       </div>
 
       {/* Main content area */}
@@ -131,16 +131,16 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           </footer>
 
           {/* Bottom bar */}
-          <div className="flex items-stretch gap-2" aria-hidden="true">
-            <div className="bg-lcars-radioactive h-6 w-12 md:w-20 lcars-pill-left" />
-            <div className="bg-lcars-arctic-snow h-6 flex-1" />
-            <div className="bg-lcars-night-rain h-6 w-24 flex items-center justify-center">
+          <div className="flex items-stretch gap-2">
+            <div className="bg-lcars-radioactive h-6 w-12 md:w-20 lcars-pill-left" aria-hidden="true" />
+            <div className="bg-lcars-arctic-snow h-6 flex-1" aria-hidden="true" />
+            <div className="bg-lcars-night-rain h-6 w-24 flex items-center justify-center" aria-hidden="true">
               <span className="text-primary-foreground text-[9px] font-bold tracking-widest">STARDATE 2402.7</span>
             </div>
             <a href="/license.txt" target="_blank" rel="noopener noreferrer" className="bg-lcars-night-rain h-6 flex items-center justify-center px-2 hover:opacity-80 transition-opacity" title="WTFPL v2 License">
               <img src={wtfplLogo} alt="WTFPL License" loading="lazy" className="h-4 w-auto invert opacity-70" />
             </a>
-            <div className="bg-lcars-alpha-blue h-6 w-12 md:w-20 lcars-pill-right" />
+            <div className="bg-lcars-alpha-blue h-6 w-12 md:w-20 lcars-pill-right" aria-hidden="true" />
           </div>
 
         </div>
