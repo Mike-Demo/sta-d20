@@ -27,6 +27,7 @@ interface ExplainModalProps {
   complicationRange: number;
   momentumBuy: number;
   threatBuy: number;
+  shipTN?: number;
 }
 
 const ExplainModal = ({
