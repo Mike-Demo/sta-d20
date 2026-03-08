@@ -59,11 +59,12 @@ const DiceRoller = () => {
     }, 0);
   }, [focusOn, discipline]);
 
-  const makeDie = useCallback((value: number): DieResult => ({
+  const makeDie = useCallback((value: number, tnOverride?: number, assist?: boolean): DieResult => ({
     value,
     isCritical: value === 1,
-    isSuccess: value <= targetNumber,
+    isSuccess: value <= (tnOverride ?? targetNumber),
     isComplication: value >= complicationRange,
+    isAssist: assist || false,
   }), [targetNumber, complicationRange]);
 
   const rollDice = useCallback(() => {
