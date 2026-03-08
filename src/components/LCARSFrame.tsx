@@ -53,7 +53,8 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
             <div className="bg-lcars-alpha-blue h-8 w-4 md:hidden rounded-l-full" />
             <div className="bg-muted h-8 flex-1 flex items-center px-4">
               <h1 className="text-primary font-display text-lg md:text-2xl font-bold tracking-[0.2em] uppercase">
-                {title}
+                <span className="md:hidden">{title}</span>
+                <span className="hidden md:inline">Star Trek Adventures 2d20 Dice Roller</span>
               </h1>
             </div>
             <div className="bg-lcars-arctic-ice h-8 w-16 lcars-pill-right" />
