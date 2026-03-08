@@ -43,6 +43,7 @@ const ExplainModal = ({
   complicationRange,
   momentumBuy,
   threatBuy,
+  shipTN,
 }: ExplainModalProps) => {
   const bonusSuccesses = momentumBuy + threatBuy;
   const effectiveSuccesses = totalSuccesses + bonusSuccesses;
