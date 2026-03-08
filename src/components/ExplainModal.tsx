@@ -11,6 +11,7 @@ interface DieResult {
   isSuccess: boolean;
   isCritical: boolean;
   isComplication: boolean;
+  isAssist?: boolean;
 }
 
 interface ExplainModalProps {
@@ -26,6 +27,7 @@ interface ExplainModalProps {
   complicationRange: number;
   momentumBuy: number;
   threatBuy: number;
+  shipTN?: number;
 }
 
 const ExplainModal = ({
@@ -41,6 +43,7 @@ const ExplainModal = ({
   complicationRange,
   momentumBuy,
   threatBuy,
+  shipTN,
 }: ExplainModalProps) => {
   const bonusSuccesses = momentumBuy + threatBuy;
   const effectiveSuccesses = totalSuccesses + bonusSuccesses;
@@ -61,6 +64,8 @@ const ExplainModal = ({
 
         <div className="flex flex-col gap-2 text-sm">
           {dice.map((die, i) => {
+            const dieTN = die.isAssist && shipTN ? shipTN : targetNumber;
+            const dieLabel = die.isAssist ? "Assist " : "";
             let label: string;
             let successCount = 0;
             if (die.isComplication) {
@@ -68,20 +73,20 @@ const ExplainModal = ({
             } else if (die.isCritical) {
               label = "Critical Success (natural 1, +2)";
               successCount = 2;
-            } else if (die.isSuccess && focusOn && die.value <= discipline) {
+            } else if (die.isSuccess && focusOn && !die.isAssist && die.value <= discipline) {
               label = `Focus Success (${die.value} ≤ Disc. ${discipline}, +2)`;
               successCount = 2;
             } else if (die.isSuccess) {
-              label = `Success (${die.value} ≤ TN ${targetNumber}, +1)`;
+              label = `Success (${die.value} ≤ ${die.isAssist ? "Ship TN" : "TN"} ${dieTN}, +1)`;
               successCount = 1;
             } else {
-              label = `Miss (${die.value} > TN ${targetNumber})`;
+              label = `Miss (${die.value} > ${die.isAssist ? "Ship TN" : "TN"} ${dieTN})`;
             }
 
             return (
               <div key={i} className="flex items-center gap-2">
-                <span className="text-muted-foreground font-display text-xs w-12">
-                  Die {i + 1}:
+                <span className="text-muted-foreground font-display text-xs w-14">
+                  {dieLabel}Die {die.isAssist ? "" : i + 1}{die.isAssist ? "🚀" : ":"}
                 </span>
                 <span
                   className={`font-display font-bold w-6 text-center ${

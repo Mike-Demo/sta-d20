@@ -11,6 +11,7 @@ interface DieResult {
   isSuccess: boolean;
   isCritical: boolean;
   isComplication: boolean;
+  isAssist?: boolean;
 }
 
 interface RollResult {
@@ -58,11 +59,12 @@ const DiceRoller = () => {
     }, 0);
   }, [focusOn, discipline]);
 
-  const makeDie = useCallback((value: number): DieResult => ({
+  const makeDie = useCallback((value: number, tnOverride?: number, assist?: boolean): DieResult => ({
     value,
     isCritical: value === 1,
-    isSuccess: value <= targetNumber,
+    isSuccess: value <= (tnOverride ?? targetNumber),
     isComplication: value >= complicationRange,
+    isAssist: assist || false,
   }), [targetNumber, complicationRange]);
 
   const rollDice = useCallback(() => {
@@ -76,6 +78,9 @@ const DiceRoller = () => {
       const dice: DieResult[] = [];
       for (let i = 0; i < numDice; i++) {
         dice.push(makeDie(secureD20()));
+      }
+      if (assistOn) {
+        dice.push(makeDie(secureD20(), shipTN, true));
       }
 
       const totalSuccesses = calcSuccesses(dice);
@@ -119,7 +124,7 @@ const DiceRoller = () => {
         ...prev,
       ].slice(0, 50));
     }, 700);
-  }, [numDice, targetNumber, rollId, focusOn, discipline, difficulty, complicationRange, momentumBuy, threatBuy, calcSuccesses, makeDie]);
+  }, [numDice, targetNumber, rollId, focusOn, discipline, difficulty, complicationRange, momentumBuy, threatBuy, calcSuccesses, makeDie, assistOn, shipTN]);
 
   const toggleDieSelection = useCallback((index: number) => {
     if (!result || hasRerolled) return;
@@ -139,7 +144,7 @@ const DiceRoller = () => {
 
     const newDice = result.dice.map((die, i) => {
       if (!selectedForReroll.has(i)) return die;
-      return makeDie(secureD20());
+      return makeDie(secureD20(), die.isAssist ? shipTN : undefined, die.isAssist);
     });
 
     const totalSuccesses = calcSuccesses(newDice);
@@ -172,7 +177,7 @@ const DiceRoller = () => {
       };
       return updated;
     });
-  }, [result, selectedForReroll, calcSuccesses, makeDie, momentumBuy, threatBuy, difficulty]);
+  }, [result, selectedForReroll, calcSuccesses, makeDie, momentumBuy, threatBuy, difficulty, shipTN]);
 
   // Outcome calculations
   const bonusSuccesses = momentumBuy + threatBuy;
@@ -521,7 +526,7 @@ const DiceRoller = () => {
         <div className="min-h-[200px] flex flex-col items-center justify-center gap-6">
           {isRolling && (
             <div className="flex gap-3">
-              {Array.from({ length: numDice }).map((_, i) => (
+              {Array.from({ length: numDice + (assistOn ? 1 : 0) }).map((_, i) => (
                 <div
                   key={i}
                   className="dice-rolling h-16 w-16 bg-muted rounded-lg flex items-center justify-center"
@@ -563,8 +568,8 @@ const DiceRoller = () => {
                           : isLockedMiss
                           ? "bg-muted border-border opacity-60"
                           : "bg-muted border-border"
-                      } ${isSelectable && !isSelected ? "cursor-pointer hover:border-lcars-arctic-ice/50 lcars-glow-blue" : ""}`}
-                      aria-label={`Die ${i + 1}: rolled ${die.value}, ${die.isComplication ? "complication" : die.isCritical ? "critical success" : die.isSuccess ? "success" : "miss"}${isSelectable ? ", click to select for reroll" : ""}`}
+                      } ${die.isAssist ? "ring-1 ring-lcars-arctic-ice/50" : ""} ${isSelectable && !isSelected ? "cursor-pointer hover:border-lcars-arctic-ice/50 lcars-glow-blue" : ""}`}
+                      aria-label={`${die.isAssist ? "Assist " : ""}Die ${i + 1}: rolled ${die.value}, ${die.isComplication ? "complication" : die.isCritical ? "critical success" : die.isSuccess ? "success" : "miss"}${isSelectable ? ", click to select for reroll" : ""}`}
                     >
                       <span
                         className={`font-display text-2xl font-bold ${
@@ -582,7 +587,7 @@ const DiceRoller = () => {
                         {die.value}
                       </span>
                       <span className="text-[8px] font-bold tracking-wider text-muted-foreground uppercase">
-                        {die.isComplication
+                        {die.isAssist ? "ASSIST" : die.isComplication
                           ? "COMP"
                           : die.isCritical
                           ? "CRIT"
@@ -708,6 +713,7 @@ const DiceRoller = () => {
           complicationRange={complicationRange}
           momentumBuy={momentumBuy}
           threatBuy={threatBuy}
+          shipTN={shipTN}
         />
       )}
     </div>
