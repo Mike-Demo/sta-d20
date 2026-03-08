@@ -64,6 +64,8 @@ const ExplainModal = ({
 
         <div className="flex flex-col gap-2 text-sm">
           {dice.map((die, i) => {
+            const dieTN = die.isAssist && shipTN ? shipTN : targetNumber;
+            const dieLabel = die.isAssist ? "Assist " : "";
             let label: string;
             let successCount = 0;
             if (die.isComplication) {
@@ -71,14 +73,14 @@ const ExplainModal = ({
             } else if (die.isCritical) {
               label = "Critical Success (natural 1, +2)";
               successCount = 2;
-            } else if (die.isSuccess && focusOn && die.value <= discipline) {
+            } else if (die.isSuccess && focusOn && !die.isAssist && die.value <= discipline) {
               label = `Focus Success (${die.value} ≤ Disc. ${discipline}, +2)`;
               successCount = 2;
             } else if (die.isSuccess) {
-              label = `Success (${die.value} ≤ TN ${targetNumber}, +1)`;
+              label = `Success (${die.value} ≤ ${die.isAssist ? "Ship TN" : "TN"} ${dieTN}, +1)`;
               successCount = 1;
             } else {
-              label = `Miss (${die.value} > TN ${targetNumber})`;
+              label = `Miss (${die.value} > ${die.isAssist ? "Ship TN" : "TN"} ${dieTN})`;
             }
 
             return (
