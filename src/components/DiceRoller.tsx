@@ -79,6 +79,9 @@ const DiceRoller = () => {
       for (let i = 0; i < numDice; i++) {
         dice.push(makeDie(secureD20()));
       }
+      if (assistOn) {
+        dice.push(makeDie(secureD20(), shipTN, true));
+      }
 
       const totalSuccesses = calcSuccesses(dice);
       const complications = dice.filter((d) => d.isComplication).length;
