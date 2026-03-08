@@ -144,7 +144,7 @@ const DiceRoller = () => {
 
     const newDice = result.dice.map((die, i) => {
       if (!selectedForReroll.has(i)) return die;
-      return makeDie(secureD20());
+      return makeDie(secureD20(), die.isAssist ? shipTN : undefined, die.isAssist);
     });
 
     const totalSuccesses = calcSuccesses(newDice);
