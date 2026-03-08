@@ -713,6 +713,7 @@ const DiceRoller = () => {
           complicationRange={complicationRange}
           momentumBuy={momentumBuy}
           threatBuy={threatBuy}
+          shipTN={shipTN}
         />
       )}
     </div>
