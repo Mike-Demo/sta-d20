@@ -85,8 +85,8 @@ const ExplainModal = ({
 
             return (
               <div key={i} className="flex items-center gap-2">
-                <span className="text-muted-foreground font-display text-xs w-12">
-                  Die {i + 1}:
+                <span className="text-muted-foreground font-display text-xs w-14">
+                  {dieLabel}Die {die.isAssist ? "" : i + 1}{die.isAssist ? "🚀" : ":"}
                 </span>
                 <span
                   className={`font-display font-bold w-6 text-center ${
