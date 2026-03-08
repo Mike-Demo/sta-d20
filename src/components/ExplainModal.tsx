@@ -11,6 +11,7 @@ interface DieResult {
   isSuccess: boolean;
   isCritical: boolean;
   isComplication: boolean;
+  isAssist?: boolean;
 }
 
 interface ExplainModalProps {
