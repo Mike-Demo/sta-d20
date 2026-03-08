@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 
 const sections = [
@@ -29,25 +28,11 @@ const sections = [
 ] as const;
 
 const LCARSInfoAccordion = () => {
-  const [defaultOpen, setDefaultOpen] = useState(false);
-  const refs = useRef<(HTMLDetailsElement | null)[]>([]);
-
-  useEffect(() => {
-    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-    setDefaultOpen(isDesktop);
-    if (isDesktop) {
-      refs.current.forEach((el) => {
-        if (el) el.open = true;
-      });
-    }
-  }, []);
 
   return (
     <div className="flex flex-col gap-1">
       {/* Section 1: Instructions */}
       <details
-        ref={(el) => { refs.current[0] = el; }}
-        open={defaultOpen}
         className="rounded-sm border border-border bg-background overflow-hidden"
         aria-label={sections[0].ariaLabel}
       >
@@ -72,8 +57,6 @@ const LCARSInfoAccordion = () => {
 
       {/* Section 2: Details */}
       <details
-        ref={(el) => { refs.current[1] = el; }}
-        open={defaultOpen}
         className="rounded-sm border border-border bg-background overflow-hidden"
         aria-label={sections[1].ariaLabel}
       >
@@ -96,13 +79,11 @@ const LCARSInfoAccordion = () => {
         </div>
       </details>
 
-      {/* Section 3: Credits & Licensing */}
-      <details
-        ref={(el) => { refs.current[2] = el; }}
-        open={defaultOpen}
-        className="rounded-sm border border-border bg-background overflow-hidden"
-        aria-label={sections[2].ariaLabel}
-      >
+    </div>
+  );
+};
+
+export default LCARSInfoAccordion;
         <summary
           className={`${sections[2].color} ${sections[2].textColor} ${sections[2].hoverColor} font-display text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 cursor-pointer list-none lcars-pill-right transition-colors select-none [&::-webkit-details-marker]:hidden flex items-center gap-2`}
         >
