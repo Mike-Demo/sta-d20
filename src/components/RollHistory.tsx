@@ -7,7 +7,7 @@ export interface RollHistoryEntry {
   targetNumber: number;
   totalSuccesses: number;
   complications: number;
-  dice: { value: number; isSuccess: boolean; isCritical: boolean; isComplication: boolean }[];
+  dice: { value: number; isSuccess: boolean; isCritical: boolean; isComplication: boolean; isAssist?: boolean }[];
   timestamp: Date;
   difficulty: number;
   focusOn: boolean;
