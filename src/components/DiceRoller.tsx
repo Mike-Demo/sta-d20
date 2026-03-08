@@ -568,8 +568,8 @@ const DiceRoller = () => {
                           : isLockedMiss
                           ? "bg-muted border-border opacity-60"
                           : "bg-muted border-border"
-                      } ${isSelectable && !isSelected ? "cursor-pointer hover:border-lcars-arctic-ice/50 lcars-glow-blue" : ""}`}
-                      aria-label={`Die ${i + 1}: rolled ${die.value}, ${die.isComplication ? "complication" : die.isCritical ? "critical success" : die.isSuccess ? "success" : "miss"}${isSelectable ? ", click to select for reroll" : ""}`}
+                      } ${die.isAssist ? "ring-1 ring-lcars-arctic-ice/50" : ""} ${isSelectable && !isSelected ? "cursor-pointer hover:border-lcars-arctic-ice/50 lcars-glow-blue" : ""}`}
+                      aria-label={`${die.isAssist ? "Assist " : ""}Die ${i + 1}: rolled ${die.value}, ${die.isComplication ? "complication" : die.isCritical ? "critical success" : die.isSuccess ? "success" : "miss"}${isSelectable ? ", click to select for reroll" : ""}`}
                     >
                       <span
                         className={`font-display text-2xl font-bold ${
@@ -587,7 +587,7 @@ const DiceRoller = () => {
                         {die.value}
                       </span>
                       <span className="text-[8px] font-bold tracking-wider text-muted-foreground uppercase">
-                        {die.isComplication
+                        {die.isAssist ? "ASSIST" : die.isComplication
                           ? "COMP"
                           : die.isCritical
                           ? "CRIT"
