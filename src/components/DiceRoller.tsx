@@ -526,7 +526,7 @@ const DiceRoller = () => {
         <div className="min-h-[200px] flex flex-col items-center justify-center gap-6">
           {isRolling && (
             <div className="flex gap-3">
-              {Array.from({ length: numDice }).map((_, i) => (
+              {Array.from({ length: numDice + (assistOn ? 1 : 0) }).map((_, i) => (
                 <div
                   key={i}
                   className="dice-rolling h-16 w-16 bg-muted rounded-lg flex items-center justify-center"
