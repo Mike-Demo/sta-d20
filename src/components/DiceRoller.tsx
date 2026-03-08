@@ -483,7 +483,7 @@ const DiceRoller = () => {
           onClick={rollDice}
           disabled={isRolling}
           aria-label={isRolling ? "Scanning, rolling dice" : "Engage, roll dice"}
-          className="flex-1 h-16 bg-lcars-alpha-blue text-primary-foreground font-display text-2xl font-bold tracking-[0.3em] uppercase lcars-pill hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-60"
+          className="flex-1 h-16 bg-lcars-alpha-blue text-primary-foreground font-display text-xl md:text-2xl font-bold tracking-[0.15em] md:tracking-[0.3em] uppercase lcars-pill hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-60 overflow-hidden text-ellipsis whitespace-nowrap"
         >
           {isRolling ? "SCANNING..." : "ENGAGE"}
         </button>
