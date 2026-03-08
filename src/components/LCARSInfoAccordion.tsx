@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 
 const sections = [
@@ -18,36 +17,13 @@ const sections = [
     textColor: "text-primary-foreground",
     ariaLabel: "Rules and features supported",
   },
-  {
-    id: "credits",
-    label: "Credits & Licensing",
-    color: "bg-lcars-alpha-blue",
-    hoverColor: "hover:bg-lcars-radioactive hover:text-accent-foreground",
-    textColor: "text-primary-foreground",
-    ariaLabel: "Credits, licensing, and attribution",
-  },
 ] as const;
 
 const LCARSInfoAccordion = () => {
-  const [defaultOpen, setDefaultOpen] = useState(false);
-  const refs = useRef<(HTMLDetailsElement | null)[]>([]);
-
-  useEffect(() => {
-    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-    setDefaultOpen(isDesktop);
-    if (isDesktop) {
-      refs.current.forEach((el) => {
-        if (el) el.open = true;
-      });
-    }
-  }, []);
-
   return (
     <div className="flex flex-col gap-1">
       {/* Section 1: Instructions */}
       <details
-        ref={(el) => { refs.current[0] = el; }}
-        open={defaultOpen}
         className="rounded-sm border border-border bg-background overflow-hidden"
         aria-label={sections[0].ariaLabel}
       >
@@ -72,8 +48,6 @@ const LCARSInfoAccordion = () => {
 
       {/* Section 2: Details */}
       <details
-        ref={(el) => { refs.current[1] = el; }}
-        open={defaultOpen}
         className="rounded-sm border border-border bg-background overflow-hidden"
         aria-label={sections[1].ariaLabel}
       >
@@ -93,26 +67,6 @@ const LCARSInfoAccordion = () => {
             <li>Complication detection (sorry in advance)</li>
           </ul>
           <p>Everything runs client‑side, which means your rolls stay private — even from suspicious admirals.</p>
-        </div>
-      </details>
-
-      {/* Section 3: Credits & Licensing */}
-      <details
-        ref={(el) => { refs.current[2] = el; }}
-        open={defaultOpen}
-        className="rounded-sm border border-border bg-background overflow-hidden"
-        aria-label={sections[2].ariaLabel}
-      >
-        <summary
-          className={`${sections[2].color} ${sections[2].textColor} ${sections[2].hoverColor} font-display text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 cursor-pointer list-none lcars-pill-right transition-colors select-none [&::-webkit-details-marker]:hidden flex items-center gap-2`}
-        >
-          <ChevronDown className="w-3 h-3 transition-transform duration-200 [[open]>&]:rotate-180" aria-hidden="true" />
-          {sections[2].label}
-        </summary>
-        <div className="px-4 py-3">
-          <p className="text-muted-foreground text-[8px] leading-relaxed">
-            TM &amp; © 2026 CBS Studios Inc. STAR TREK and related marks and logos are trademarks of CBS Studios Inc. All rights reserved. This site is a community-created tool for the Star Trek Adventures tabletop role-playing game and is not affiliated with or endorsed by Modiphius Entertainment. Some interface elements were created or refined with AI assistance. No trackers were detected on 2d20.space, and the site holds a 90/100 privacy score according to <a href="https://geckoadvisor.com/privacy-report/2d20.space" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">GeckoAdvisor</a>. Estimated emissions are 0.01g CO₂ per visit, cleaner than 98% of tested sites, as measured by <a href="https://www.websitecarbon.com/website/2d20-space/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Website Carbon</a>. The LCARS-inspired interface draws on design principles popularized by <a href="https://thelcars.com/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">thelcars.com</a> by Jim Robertus, and the <a href="https://icons8.com/icon/21039/star-trek" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Star Trek</a> icon is provided by <a href="https://icons8.com/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Icons8</a>. Open-source code: <a href="https://github.com/nastyox/Rando.js" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="underline hover:text-primary transition-colors">Web Crypto API</a> for cryptographically secure dice rolls. Technical files available: <a href="/robots.txt" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">robots.txt</a>, <a href="/llms.txt" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">llms.txt</a>, <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">sitemap.xml</a>.
-          </p>
         </div>
       </details>
     </div>
