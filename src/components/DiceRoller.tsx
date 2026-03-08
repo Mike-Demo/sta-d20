@@ -124,7 +124,7 @@ const DiceRoller = () => {
         ...prev,
       ].slice(0, 50));
     }, 700);
-  }, [numDice, targetNumber, rollId, focusOn, discipline, difficulty, complicationRange, momentumBuy, threatBuy, calcSuccesses, makeDie]);
+  }, [numDice, targetNumber, rollId, focusOn, discipline, difficulty, complicationRange, momentumBuy, threatBuy, calcSuccesses, makeDie, assistOn, shipTN]);
 
   const toggleDieSelection = useCallback((index: number) => {
     if (!result || hasRerolled) return;
