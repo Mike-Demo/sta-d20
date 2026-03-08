@@ -177,7 +177,7 @@ const DiceRoller = () => {
       };
       return updated;
     });
-  }, [result, selectedForReroll, calcSuccesses, makeDie, momentumBuy, threatBuy, difficulty]);
+  }, [result, selectedForReroll, calcSuccesses, makeDie, momentumBuy, threatBuy, difficulty, shipTN]);
 
   // Outcome calculations
   const bonusSuccesses = momentumBuy + threatBuy;
