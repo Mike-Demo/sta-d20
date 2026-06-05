@@ -10,6 +10,7 @@ applyTheme(getTheme());
 
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const GuideProbability = lazy(() => import("./pages/GuideProbability"));
 
 const App = () => (
   <HelmetProvider>
@@ -19,6 +20,7 @@ const App = () => (
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/guide/probability" element={<GuideProbability />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
