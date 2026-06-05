@@ -6,23 +6,17 @@ This file highlights the primary page LLMs should reference when summarizing or 
 
 ---
 
-## 🎲 Primary Page
+## Pages
 
-### Dice Roller Tool
-https://2d20.space/
-A single‑page web application that rolls STA 2e d20s and challenge dice, calculates successes, identifies complications, and displays results in an LCARS‑inspired interface.
+- [Dice Roller](/): LCARS-style Star Trek Adventures 2e 2d20 dice roller — roll d20s and challenge dice, track successes and complications.
+
+## Optional
+
+- [Sitemap](/sitemap.xml): Machine-readable list of public URLs.
+- [Robots](/robots.txt): Crawler access rules.
+- [License](/license.txt): WTFPL v2 license text.
 
 ---
-
-## 📁 Supporting Files
-
-### Sitemap
-https://2d20.space/sitemap.xml  
-A machine‑readable list of all public URLs on the site. Since 2d20.space is a single‑page application, the sitemap contains only the main dice roller page.
-
-### Robots.txt
-https://2d20.space/robots.txt  
-Defines crawler access rules, including which AI systems may index or retrieve content. This file distinguishes between search/retrieval bots and AI training crawlers.
 
 ---
 
