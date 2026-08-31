@@ -1,5 +1,4 @@
 import { Link } from "@/lib/router-compat";
-import SEOHead from "@/components/SEOHead";
 import LCARSFrame from "@/components/LCARSFrame";
 
 // Probability that a single d20 (1..20) succeeds against a target number.
@@ -60,30 +59,8 @@ const GuideProbability = () => {
   const difficulties = [1, 2, 3, 4, 5];
   const tns = [8, 10, 12, 14, 16];
 
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: "2d20 Probability and Momentum Generation Guide — Star Trek Adventures 2e",
-    description:
-      "How the Star Trek Adventures 2d20 system works mathematically: probabilities of success at every target number, the impact of Focus, and how often you generate Momentum at each difficulty.",
-    image: "https://2d20.space/social-card.png",
-    author: { "@type": "Person", name: "MikeDemo" },
-    publisher: { "@type": "Person", name: "Mike Demo", url: "https://2d20.space" },
-    datePublished: "2026-06-05",
-    dateModified: "2026-08-31",
-    mainEntityOfPage: "https://2d20.space/guide/probability",
-  };
-
   return (
-    <>
-      <SEOHead
-        title="2d20 Probability & Momentum Guide — Star Trek Adventures Dice Math"
-        description="A clear, math-backed guide to Star Trek Adventures 2e: success odds for star trek dice rolls at every target number, Focus impact, and 2d20 system probability for Momentum."
-        canonical="https://2d20.space/guide/probability"
-        ogType="article"
-      />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <LCARSFrame title="2D20 PROBABILITY GUIDE">
+    <LCARSFrame title="2D20 PROBABILITY GUIDE">
         <article className="max-w-3xl mx-auto px-4 py-6 space-y-6 text-foreground font-lcars">
           <header className="space-y-2">
             <h1 className="text-2xl md:text-3xl font-display font-bold tracking-wider uppercase text-primary">
@@ -265,8 +242,7 @@ const GuideProbability = () => {
             </p>
           </section>
         </article>
-      </LCARSFrame>
-    </>
+    </LCARSFrame>
   );
 };
 
