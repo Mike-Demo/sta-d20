@@ -368,6 +368,8 @@ export const themes: Record<ThemeId, ThemeDefinition> = {
 export const themeIds = Object.keys(themes) as ThemeId[];
 
 export function getTheme(): ThemeId {
+  // SSR-safe: server render has no localStorage; fall back to the default theme.
+  if (typeof localStorage === "undefined") return "lower-decks-padd";
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored && stored in themes) return stored as ThemeId;
   return "lower-decks-padd";

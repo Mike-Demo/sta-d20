@@ -5,9 +5,16 @@ const CRT_KEY = "lcars-crt";
 
 const ThemeSwitcher = () => {
   const [open, setOpen] = useState(false);
-  const [current, setCurrent] = useState<ThemeId>(getTheme);
-  const [crt, setCrt] = useState(() => localStorage.getItem(CRT_KEY) !== "off");
+  // Defaults render identically on server and client; stored values are read
+  // after mount to avoid SSR localStorage access and hydration mismatches.
+  const [current, setCurrent] = useState<ThemeId>("lower-decks-padd");
+  const [crt, setCrt] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setCurrent(getTheme());
+    setCrt(localStorage.getItem(CRT_KEY) !== "off");
+  }, []);
 
   const applyCrt = useCallback((on: boolean) => {
     const isRetro = current === "strategic-ops" || current === "25th-anniversary";
