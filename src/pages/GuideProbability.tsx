@@ -39,16 +39,17 @@ function probMeetDifficulty(n: number, tn: number, difficulty: number, disc: num
   // Distribution of total successes across N dice (convolution).
   let dist: number[] = [1];
   for (let i = 0; i < n; i++) {
-    const next = new Array(dist.length + 2).fill(0);
+    const next: number[] = new Array(dist.length + 2).fill(0);
     for (let k = 0; k < dist.length; k++) {
-      next[k] += dist[k] * p0;
-      next[k + 1] += dist[k] * p1;
-      next[k + 2] += dist[k] * p2;
+      const cur = dist[k] ?? 0;
+      next[k] = (next[k] ?? 0) + cur * p0;
+      next[k + 1] = (next[k + 1] ?? 0) + cur * p1;
+      next[k + 2] = (next[k + 2] ?? 0) + cur * p2;
     }
     dist = next;
   }
   let p = 0;
-  for (let k = difficulty; k < dist.length; k++) p += dist[k];
+  for (let k = difficulty; k < dist.length; k++) p += dist[k] ?? 0;
   return p;
 }
 

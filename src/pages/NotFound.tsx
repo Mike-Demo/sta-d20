@@ -5,7 +5,7 @@ import SEOHead from "@/components/SEOHead";
 const NotFound = () => {
   const location = useLocation();
   const sanitizedPath = (() => {
-    const raw = location.pathname.split("?")[0].split("#")[0];
+    const raw = location.pathname.split("?")[0]?.split("#")[0] ?? "";
     return raw.length > 40 ? raw.slice(0, 40) + "…" : raw;
   })();
   const [compensatorDots, setCompensatorDots] = useState("");

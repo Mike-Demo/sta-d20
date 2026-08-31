@@ -129,7 +129,7 @@ const DiceRoller = () => {
   const toggleDieSelection = useCallback((index: number) => {
     if (!result || hasRerolled) return;
     const die = result.dice[index];
-    if (die.isSuccess || die.isCritical || die.isComplication) return;
+    if (!die || die.isSuccess || die.isCritical || die.isComplication) return;
     setSelectedForReroll((prev) => {
       const next = new Set(prev);
       if (next.has(index)) next.delete(index);
@@ -166,16 +166,18 @@ const DiceRoller = () => {
 
     // Update history
     setHistory((prev) => {
-      if (prev.length === 0) return prev;
-      const updated = [...prev];
-      updated[0] = {
-        ...updated[0],
-        dice: newDice,
-        totalSuccesses,
-        complications,
-        momentum: effectiveSuccesses - difficulty,
-      };
-      return updated;
+      const [latest, ...rest] = prev;
+      if (!latest) return prev;
+      return [
+        {
+          ...latest,
+          dice: newDice,
+          totalSuccesses,
+          complications,
+          momentum: effectiveSuccesses - difficulty,
+        },
+        ...rest,
+      ];
     });
   }, [result, selectedForReroll, calcSuccesses, makeDie, momentumBuy, threatBuy, difficulty, shipTN]);
 
