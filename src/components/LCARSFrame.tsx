@@ -73,7 +73,7 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           <div className="flex flex-wrap gap-2">
             <Link
               to="/guide/probability"
-              className="bg-lcars-lavender hover:bg-lcars-radioactive transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-accent-foreground text-[11px] font-bold tracking-wider uppercase"
+              className="bg-lcars-gold hover:bg-lcars-radioactive transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-accent-foreground text-[11px] font-bold tracking-wider uppercase"
             >
               2d20 Probability &amp; Momentum Guide
             </Link>
