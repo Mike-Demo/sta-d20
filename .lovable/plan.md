@@ -1,60 +1,50 @@
+# Remove AI Crawler Blocks from robots.txt
 
-# Fix Focus Mechanic with Discipline Support
+## Summary
 
-## The Problem
+`public/robots.txt` currently carries ~130 lines of AI-crawler rules across four sections. These do nothing for SEO (Google ignores per-AI-bot rules for ranking) and bloat the file. This plan removes every AI-specific block and keeps the file lean: search engines, ad/tracker bot blocks, default allow, and sitemap.
 
-User feedback (Tony Pi, Kenton Campbell) correctly identifies that Focus is broken. Currently, when Focus is ON, **all** results at or below the Target Number count as 2 successes. This is wrong.
+## Changes — `public/robots.txt` only
 
-Per STA 2nd Edition rules:
-- **Target Number (TN)** = Attribute + Discipline
-- **Natural 1** = always 2 successes (critical)
-- **Focus ON** = results at or below the **Discipline score** count as 2 successes (instead of just natural 1s)
-- All other results at or below TN = 1 success as normal
+### Removed (all AI-related sections)
 
-The app is missing a **Discipline** input, so it has no threshold for the Focus double-success check.
+1. **"Allow AI assistants to cite your content"** section — ChatGPT-User, PerplexityBot, YouBot, NeevaAI, ClaudeBot, Bytespider (lines 17–34)
+2. **"Block AI data scrapers"** section — Ai2Bot-Dolma, Amazonbot, Applebot-Extended, CCBot, GPTBot, Google-Extended, Meta-ExternalAgent, anthropic-ai, cohere-ai, etc. (lines 36–131)
+3. **"Block undocumented AI agents"** section — Claude-Web, Crawl4AI, DeepSeekBot, iAskBot, etc. (lines 133–159)
 
-## The Fix
+### Kept
 
-When Focus is toggled ON, reveal a **Discipline stepper** (range 1--5) inline next to the Focus toggle. The success calculation changes from "all hits = 2" to "hits where value is at or below Discipline = 2."
+- Major search engine allows (Googlebot, Bingbot, PetalBot, Twitterbot, facebookexternalhit)
+- Ad/tracking bot blocks (adidxbot, AdsBot-Google, SemrushBot, AhrefsBot, DotBot, MJ12bot, etc.)
+- `User-agent: *` + `Allow: /`
+- `Sitemap: https://2d20.space/sitemap.xml`
 
-### UI Change (DiceRoller.tsx)
+### Resulting file (condensed)
 
-- Add `discipline` state (default 3, range 1--5)
-- When Focus is ON, show a small stepper for Discipline right next to or below the Focus toggle, keeping the 4-column grid clean
-- When Focus is OFF, the Discipline stepper hides (not needed)
-
-### Logic Changes (DiceRoller.tsx)
-
-Update `calcSuccesses`:
 ```text
-Current:  if focusOn && isSuccess -> +2
-Correct:  if focusOn && value <= discipline && isSuccess -> +2
-          else if isSuccess -> +1
+# --- Allow major search engines ---
+User-agent: Googlebot
+Allow: /
+... (Bingbot, PetalBot, Twitterbot, facebookexternalhit)
+
+# --- Block ad/tracking bots ---
+User-agent: adidxbot
+Disallow: /
+... (rest of ad/SEO-tool bots)
+
+# --- Default allow ---
+User-agent: *
+Allow: /
+
+Sitemap: https://2d20.space/sitemap.xml
 ```
 
-### Info Panel Update (bottom of DiceRoller.tsx)
+## Not Changed
 
-The "Success" info box currently reads: `<= TN = 2 successes` when Focus is on.
-Update to: `<= Disc. X = 2 successes` when Focus is on, showing the actual Discipline value.
+- `public/llms.txt` stays as-is (it is not a robots.txt block; removing it is a separate decision — say the word and I'll delete it too)
+- No effect on the meta/JSON-LD, sitemap, or page content
+- Since `User-agent: *` → `Allow: /` is the default, AI crawlers not explicitly listed will simply fall through to the default allow — no crawl errors
 
-### ExplainModal Update
+## Risk
 
-- Pass `discipline` as a new prop
-- Update the label for focus successes from `"Focus Success (value <= TN, +2)"` to `"Focus Success (value <= Disc. X, +2)"`
-- Non-focus successes that are still hits show as regular `"+1"` successes
-
-### WatchDiceRoller Update
-
-- Add the same Discipline stepper (compact) that appears when Focus would be relevant
-- Note: The watch layout currently has no Focus toggle, so this is optional / future work
-
-### RollHistory Update
-
-- Add `discipline` field to `RollHistoryEntry` so the log records what Discipline was used
-- Display it in the history entry detail line
-
-## Files Modified
-
-1. **src/components/DiceRoller.tsx** -- Add discipline state, conditional UI, fix calcSuccesses
-2. **src/components/ExplainModal.tsx** -- Add discipline prop, fix labels
-3. **src/components/RollHistory.tsx** -- Add discipline to interface and display
+None for SEO. Removing the explicit AI blocks does not change how Google/Bing crawl or index the site; those bots were never blocking search indexing.
