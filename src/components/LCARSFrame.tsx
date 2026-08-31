@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ExternalLink, ChevronDown } from "lucide-react";
 import wtfplLogo from "@/assets/wtfpl.svg";
 
