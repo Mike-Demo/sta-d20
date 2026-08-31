@@ -106,7 +106,7 @@ export function useSearchParams(): [URLSearchParams, (init: URLSearchParams | Re
             : new URLSearchParams(init);
       const searchObj: Record<string, string> = {};
       next.forEach((v, k) => { searchObj[k] = v; });
-      nav({ to: live.pathname, search: searchObj as never, replace: opts?.replace });
+      nav({ to: live.pathname, search: searchObj as never, replace: opts?.replace ?? false });
     },
     [nav, router],
   );
@@ -127,14 +127,17 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   ref,
 ) {
   const { pathname, search, hash } = parseTo(to);
+  // Optional props are added conditionally to satisfy exactOptionalPropertyTypes.
+  const optional: Record<string, unknown> = {};
+  if (search) optional["search"] = search;
+  if (hash !== undefined) optional["hash"] = hash;
+  if (replace !== undefined) optional["replace"] = replace;
+  if (state !== undefined) optional["state"] = state;
   return (
     <TSLink
       ref={ref as never}
       to={pathname as never}
-      search={search as never}
-      hash={hash}
-      replace={replace}
-      state={state as never}
+      {...(optional as never as Record<string, unknown>)}
       {...((rest ?? {}) as Record<string, unknown>)}
     >
       {children}
@@ -147,7 +150,12 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
 
 export function Navigate({ to, replace, state }: { to: string; replace?: boolean; state?: unknown }) {
   const { pathname, search, hash } = parseTo(to);
-  return <TSNavigate to={pathname as never} search={search as never} hash={hash} state={state as never} replace={replace} />;
+  const optional: Record<string, unknown> = {};
+  if (search) optional["search"] = search;
+  if (hash !== undefined) optional["hash"] = hash;
+  if (replace !== undefined) optional["replace"] = replace;
+  if (state !== undefined) optional["state"] = state;
+  return <TSNavigate to={pathname as never} {...(optional as never as Record<string, unknown>)} />;
 }
 
 // ---------- Outlet ----------

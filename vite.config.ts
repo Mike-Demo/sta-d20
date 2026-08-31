@@ -12,7 +12,7 @@ const getBuildMetadata = () => {
   const now = new Date();
 
   return {
-    buildDate: now.toISOString().split("T")[0],
+    buildDate: now.toISOString().slice(0, 10),
     buildDatetime: now.toISOString().replace(/\.\d{3}Z$/, "+00:00"),
   };
 };
