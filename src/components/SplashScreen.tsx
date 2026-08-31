@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 
-const SplashScreen = () => {
-  const isStandalone =
-    window.matchMedia("(display-mode: standalone)").matches ||
-    (navigator as any).standalone === true;
+const isStandaloneDisplay = (): boolean =>
+  typeof window !== "undefined" &&
+  (window.matchMedia("(display-mode: standalone)").matches ||
+    (navigator as Navigator & { standalone?: boolean }).standalone === true);
 
-  const [phase, setPhase] = useState<"visible" | "fading" | "gone">(
-    isStandalone ? "visible" : "gone"
-  );
+const SplashScreen = () => {
+  // SSR renders nothing; standalone detection needs window, so it runs on mount.
+  const [phase, setPhase] = useState<"visible" | "fading" | "gone">("gone");
 
   useEffect(() => {
-    if (!isStandalone) return;
+    if (!isStandaloneDisplay()) return;
+    setPhase("visible");
     const fadeTimer = setTimeout(() => setPhase("fading"), 2000);
     const removeTimer = setTimeout(() => setPhase("gone"), 2300);
     return () => {
