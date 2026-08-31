@@ -242,8 +242,7 @@ const GuideProbability = () => {
             </p>
           </section>
         </article>
-      </LCARSFrame>
-    </>
+    </LCARSFrame>
   );
 };
 

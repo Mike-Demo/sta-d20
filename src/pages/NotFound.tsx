@@ -1,6 +1,5 @@
 import { useLocation } from "@/lib/router-compat";
 import { useState, useEffect } from "react";
-import SEOHead from "@/components/SEOHead";
 
 const NotFound = () => {
   const location = useLocation();
@@ -17,17 +16,21 @@ const NotFound = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // SEOHead handles noindex via robots meta
-
-
+  // Unmatched routes return a strict 404 status, so crawlers won't index
+  // this page; set the title and noindex client-side as belt-and-braces.
+  useEffect(() => {
+    document.title = "Page Not Found — Star Trek Adventures Dice Roller";
+    const robots = document.createElement("meta");
+    robots.name = "robots";
+    robots.content = "noindex, nofollow";
+    document.head.appendChild(robots);
+    return () => {
+      robots.remove();
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col" role="main" aria-label="404 Error Page">
-      <SEOHead
-        title="Page Not Found — Star Trek Adventures Dice Roller"
-        description="This page doesn't exist in this timeline. Return to the 2d20.space LCARS dice roller for Star Trek Adventures 2e."
-        robots="noindex, nofollow"
-      />
       {/* Top bar */}
       <div className="flex items-stretch gap-2 mb-2">
         <div className="bg-lcars-arctic-ice lcars-pill-left h-12 w-32 md:w-48 flex-shrink-0" />

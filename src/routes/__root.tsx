@@ -8,7 +8,6 @@ import {
   Scripts,
   useRouter,
 } from "@tanstack/react-router";
-import { HelmetProvider } from "react-helmet-async";
 
 // ported from main.tsx — self-hosted fonts (no third-party requests)
 import "@fontsource/antonio/latin-400.css";
@@ -198,12 +197,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <TooltipProvider>
-          <SplashScreen />
-          <Outlet />
-        </TooltipProvider>
-      </HelmetProvider>
+      <TooltipProvider>
+        <SplashScreen />
+        <Outlet />
+      </TooltipProvider>
     </QueryClientProvider>
   );
 }
