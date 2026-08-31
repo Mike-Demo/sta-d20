@@ -1,80 +1,67 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
+// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
+// or the app will break with duplicate plugins:
+//   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,
+//     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
+//     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
+// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import fs from "node:fs";
-import path from "path";
-import { componentTagger } from "lovable-tagger";
+import path from "node:path";
 
 const getBuildMetadata = () => {
   const now = new Date();
 
   return {
-    buildDate: now.toISOString().split("T")[0],
+    buildDate: now.toISOString().slice(0, 10),
     buildDatetime: now.toISOString().replace(/\.\d{3}Z$/, "+00:00"),
   };
 };
 
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-    hmr: {
-      overlay: false,
-    },
-  },
-  plugins: [
-    react(),
-    mode === "development" && componentTagger(),
-    {
-      name: "inject-build-date",
-      transformIndexHtml(html: string) {
-        const { buildDate } = getBuildMetadata();
-        return html.replace(/__BUILD_DATE__/g, buildDate);
-      },
-      generateBundle(_options: unknown, bundle: unknown) {
-        const { buildDate, buildDatetime } = getBuildMetadata();
-        const b = bundle as Record<string, { type: string; source?: string | Uint8Array }>;
+// Ported from the pre-migration vite.config.ts: replaces __BUILD_DATE__ /
+// __BUILD_DATETIME__ placeholders in emitted assets and the deployed sitemap.
+const injectBuildDate = () => ({
+  name: "inject-build-date",
+  generateBundle(_options: unknown, bundle: unknown) {
+    const { buildDate, buildDatetime } = getBuildMetadata();
+    const b = bundle as Record<string, { type: string; source?: string | Uint8Array }>;
 
-        for (const file of Object.values(b)) {
-          if (file.type === "asset" && typeof file.source === "string") {
-            file.source = file.source
-              .replace(/__BUILD_DATETIME__/g, buildDatetime)
-              .replace(/__BUILD_DATE__/g, buildDate);
-          }
-        }
-      },
-      closeBundle() {
-        const sitemapPath = path.resolve(__dirname, "dist/sitemap.xml");
-
-        if (!fs.existsSync(sitemapPath)) return;
-
-        const { buildDate, buildDatetime } = getBuildMetadata();
-        const sitemap = fs.readFileSync(sitemapPath, "utf8");
-        const updatedSitemap = sitemap
+    for (const file of Object.values(b)) {
+      if (file.type === "asset" && typeof file.source === "string") {
+        file.source = file.source
           .replace(/__BUILD_DATETIME__/g, buildDatetime)
           .replace(/__BUILD_DATE__/g, buildDate);
+      }
+    }
+  },
+  closeBundle() {
+    const candidates = [
+      path.resolve(__dirname, "dist/sitemap.xml"),
+      path.resolve(__dirname, ".output/public/sitemap.xml"),
+    ];
+    const { buildDate, buildDatetime } = getBuildMetadata();
 
-        if (updatedSitemap !== sitemap) {
-          fs.writeFileSync(sitemapPath, updatedSitemap, "utf8");
-        }
-      },
-    },
-  ].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
+    for (const sitemapPath of candidates) {
+      if (!fs.existsSync(sitemapPath)) continue;
+
+      const sitemap = fs.readFileSync(sitemapPath, "utf8");
+      const updatedSitemap = sitemap
+        .replace(/__BUILD_DATETIME__/g, buildDatetime)
+        .replace(/__BUILD_DATE__/g, buildDate);
+
+      if (updatedSitemap !== sitemap) {
+        fs.writeFileSync(sitemapPath, updatedSitemap, "utf8");
+      }
+    }
   },
-  build: {
-    target: "esnext",
-    minify: "esbuild",
-    cssMinify: true,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom"],
-        },
-      },
-    },
+});
+
+export default defineConfig({
+  tanstackStart: {
+    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
+    // nitro/vite builds from this
+    server: { entry: "server" },
   },
-}));
+  vite: {
+    plugins: [injectBuildDate()],
+  },
+});

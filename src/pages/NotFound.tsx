@@ -1,11 +1,11 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from "@/lib/router-compat";
 import { useState, useEffect } from "react";
 import SEOHead from "@/components/SEOHead";
 
 const NotFound = () => {
   const location = useLocation();
   const sanitizedPath = (() => {
-    const raw = location.pathname.split("?")[0].split("#")[0];
+    const raw = location.pathname.split("?")[0]?.split("#")[0] ?? "";
     return raw.length > 40 ? raw.slice(0, 40) + "…" : raw;
   })();
   const [compensatorDots, setCompensatorDots] = useState("");
@@ -122,7 +122,7 @@ const NotFound = () => {
                 A junior officer attempted to access a file Starfleet has classified as{" "}
                 <span className="text-lcars-arctic-ice">"Oops, that's not real,"</span>{" "}
                 triggering a Level‑0.5 Diagnostic. The requested path{" "}
-                <code className="text-lcars-radioactive bg-muted px-1.5 py-0.5 rounded text-xs">
+                <code className="text-lcars-radioactive bg-muted px-1.5 py-0.5 rounded-sm text-xs">
                   {sanitizedPath}
                 </code>{" "}
                 could not be located in any known database.
