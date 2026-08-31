@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { ExternalLink, ChevronDown } from "lucide-react";
 import wtfplLogo from "@/assets/wtfpl.svg";
 
@@ -70,6 +71,12 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
 
           {/* External links */}
           <div className="flex flex-wrap gap-2">
+            <Link
+              to="/guide/probability"
+              className="bg-lcars-lavender hover:bg-lcars-radioactive transition-colors h-8 lcars-pill-right flex items-center gap-2 px-4 text-accent-foreground text-[11px] font-bold tracking-wider uppercase"
+            >
+              2d20 Probability &amp; Momentum Guide
+            </Link>
             <a
               href="https://www.startrek.com/category/games"
               target="_blank"
