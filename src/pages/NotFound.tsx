@@ -122,7 +122,7 @@ const NotFound = () => {
                 A junior officer attempted to access a file Starfleet has classified as{" "}
                 <span className="text-lcars-arctic-ice">"Oops, that's not real,"</span>{" "}
                 triggering a Level‑0.5 Diagnostic. The requested path{" "}
-                <code className="text-lcars-radioactive bg-muted px-1.5 py-0.5 rounded text-xs">
+                <code className="text-lcars-radioactive bg-muted px-1.5 py-0.5 rounded-sm text-xs">
                   {sanitizedPath}
                 </code>{" "}
                 could not be located in any known database.

@@ -1,0 +1,233 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition — LCARS "Lower Decks PADD" theme (ported from the
+ * pre-migration src/index.css + tailwind.config.ts).
+ *
+ * The runtime theme switcher (src/lib/themes.ts) swaps the raw HSL-triplet
+ * custom properties below via inline styles on <html>, so the @theme inline
+ * mappings intentionally keep the hsl(var(--token)) wrapper — do not convert
+ * these to direct oklch values or theme switching breaks.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-ring-offset-background: hsl(var(--background));
+  --color-lcars-alpha-blue: hsl(var(--lcars-alpha-blue));
+  --color-lcars-arctic-ice: hsl(var(--lcars-arctic-ice));
+  --color-lcars-arctic-snow: hsl(var(--lcars-arctic-snow));
+  --color-lcars-radioactive: hsl(var(--lcars-radioactive));
+  --color-lcars-beta-blue: hsl(var(--lcars-beta-blue));
+  --color-lcars-night-cloud: hsl(var(--lcars-night-cloud));
+  --color-lcars-night-rain: hsl(var(--lcars-night-rain));
+  --color-lcars-sunset-red: hsl(var(--lcars-sunset-red));
+  --color-lcars-gold: hsl(var(--lcars-gold));
+}
+
+/* Font stacks: themes.ts overrides --font-lcars / --font-display via inline
+   style on <html> for pixel themes, so utilities must reference the vars. */
+@theme {
+  --font-lcars: Antonio, Orbitron, sans-serif;
+  --font-display: Orbitron, Antonio, sans-serif;
+}
+
+:root {
+  /* Lower Decks PADD Theme v24.2 — Jim Robertus / thelcars.com */
+  --background: 224 38% 12%;
+  --foreground: 210 60% 90%;
+
+  --card: 224 30% 17%;
+  --card-foreground: 210 60% 90%;
+
+  --popover: 224 30% 17%;
+  --popover-foreground: 210 60% 90%;
+
+  --primary: 224 78% 72%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 218 56% 54%;
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 224 35% 22%;
+  --muted-foreground: 210 40% 85%;
+
+  --accent: 180 100% 73%;
+  --accent-foreground: 224 38% 12%;
+
+  --destructive: 16 100% 62%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 224 28% 26%;
+  --input: 224 28% 26%;
+  --ring: 224 78% 63%;
+
+  --radius: 0.5rem;
+
+  /* Lower Decks LCARS tokens (thelcars.com PADD theme) */
+  --lcars-alpha-blue: 224 78% 56%;
+  --lcars-arctic-ice: 200 100% 70%;
+  --lcars-arctic-snow: 210 100% 80%;
+  --lcars-radioactive: 180 100% 73%;
+  --lcars-beta-blue: 218 56% 46%;
+  --lcars-night-cloud: 224 38% 32%;
+  --lcars-night-rain: 224 30% 42%;
+  --lcars-sunset-red: 16 100% 50%;
+  --lcars-gold: 45 100% 50%;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-lcars);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* LCARS pill/bar shapes */
+.lcars-pill {
+  border-radius: 999px;
+}
+
+.lcars-pill-left {
+  border-radius: 999px 0 0 999px;
+}
+
+.lcars-pill-right {
+  border-radius: 0 999px 999px 0;
+}
+
+.lcars-elbow-tl {
+  border-radius: 2rem 0 0 0;
+}
+
+.lcars-elbow-bl {
+  border-radius: 0 0 0 2rem;
+}
+
+/* Dice roll animation */
+@keyframes dice-spin {
+  0% { transform: rotateX(0deg) rotateY(0deg) scale(1); }
+  25% { transform: rotateX(180deg) rotateY(90deg) scale(1.2); }
+  50% { transform: rotateX(360deg) rotateY(180deg) scale(1); }
+  75% { transform: rotateX(540deg) rotateY(270deg) scale(1.1); }
+  100% { transform: rotateX(720deg) rotateY(360deg) scale(1); }
+}
+
+@keyframes dice-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes lcars-scan {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+@keyframes result-appear {
+  0% { opacity: 0; transform: scale(0.5); }
+  60% { transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.dice-rolling {
+  animation: dice-spin 0.6s ease-out;
+}
+
+.dice-idle {
+  animation: dice-bounce 2s ease-in-out infinite;
+}
+
+.lcars-blink {
+  animation: lcars-scan 1.5s ease-in-out infinite;
+}
+
+.result-pop {
+  animation: result-appear 0.4s ease-out forwards;
+}
+
+.lcars-glow-blue {
+  box-shadow: 0 0 8px hsl(200 100% 70% / 0.6);
+}
+
+/* Splash screen */
+@keyframes splash-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.splash-fade-out {
+  animation: splash-fade-out 0.3s ease-out forwards;
+}
+
+@keyframes splash-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+.splash-pulse {
+  animation: splash-pulse 2s ease-in-out infinite;
+}
+
+@keyframes splash-scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+/* Strategic Ops Simulator theme — subtle vector glow on decorative bars only */
+.theme-strategic-ops .lcars-pill-left,
+.theme-strategic-ops .lcars-pill-right,
+.theme-strategic-ops .lcars-elbow-tl,
+.theme-strategic-ops .lcars-elbow-bl {
+  box-shadow: 0 0 6px currentColor;
+}
+
+/* CRT scanline overlay */
+.crt-scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+}
