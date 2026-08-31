@@ -53,7 +53,7 @@ const DiceRoller = () => {
   const calcSuccesses = useCallback((dice: DieResult[]) => {
     return dice.reduce((sum, d) => {
       if (d.isCritical) return sum + 2;
-      if (focusOn && d.isSuccess && d.value <= discipline) return sum + 2;
+      if (focusOn && !d.isAssist && d.isSuccess && d.value <= discipline) return sum + 2;
       if (d.isSuccess) return sum + 1;
       return sum;
     }, 0);
