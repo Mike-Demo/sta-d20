@@ -155,6 +155,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "license", content: "WTFPL v2 — /license.txt" },
     ],
     links: [
+      { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@awesome.me/webawesome@3.12.0/dist/styles/webawesome.css" },
+      { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css" },
       { rel: "stylesheet", href: appCss },
       { rel: "apple-touch-icon", href: "/pwa-icon-512.png" },
       { rel: "manifest", href: "/manifest.json" },
