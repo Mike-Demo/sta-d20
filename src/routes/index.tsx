@@ -3,7 +3,7 @@ import Index from "@/pages/Index";
 
 const TITLE = "Star Trek Adventures 2d20 Dice Roller — LCARS‑Style Tool";
 const DESCRIPTION =
-  "2d20 dice roller for STA 2e. Roll d20s and challenge dice, track successes, complications, and rerolls in a clean, rules‑accurate LCARS interface.";
+  "2d20 dice roller for STA 2e. Roll a d20 task pool, track successes, complications, and rerolls in a clean, rules‑accurate LCARS interface.";
 
 export const Route = createFileRoute("/")({
   component: Index,

@@ -31,7 +31,7 @@ if (typeof window !== "undefined") {
 
 const SITE_TITLE = "Star Trek Adventures 2d20 Dice Roller — LCARS‑Style Tool";
 const SITE_DESCRIPTION =
-  "2d20 dice roller for STA 2e. Roll d20s and challenge dice, track successes, complications, and rerolls in a clean, rules‑accurate LCARS interface.";
+  "2d20 dice roller for STA 2e. Roll a d20 task pool, track successes, complications, and rerolls in a clean, rules‑accurate LCARS interface.";
 
 const softwareApplicationJsonLd = {
   "@context": "https://schema.org",
@@ -41,7 +41,7 @@ const softwareApplicationJsonLd = {
   url: "https://2d20.space",
   image: "https://2d20.space/social-card.png",
   description:
-    "A fast, LCARS-inspired Star Trek Adventures 2d20 dice roller for STA 2e. Roll d20s and challenge dice, track successes, complications, and effects in a clean, rules-accurate interface.",
+    "A fast, LCARS-inspired Star Trek Adventures 2d20 dice roller for STA 2e. Roll a d20 task pool, track successes, complications, and effects in a clean, rules-accurate interface.",
   applicationCategory: "GameUtility",
   genre: "Tabletop RPG",
   operatingSystem: "Web",

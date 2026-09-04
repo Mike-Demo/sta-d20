@@ -8,7 +8,7 @@ This file highlights the primary page LLMs should reference when summarizing or 
 
 ## Pages
 
-- [Dice Roller](/): LCARS-style Star Trek Adventures 2e 2d20 dice roller — roll d20s and challenge dice, track successes and complications.
+- [Dice Roller](/): LCARS-style Star Trek Adventures 2e 2d20 dice roller — roll a d20 task pool, track successes and complications.
 - [2d20 Probability & Momentum Guide](/guide/probability): How the STA 2e dice math works — success odds, Focus, and Momentum generation at each Target Number and Difficulty.
 
 ## Optional
