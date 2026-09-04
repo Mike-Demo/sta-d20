@@ -16,6 +16,7 @@ import "@fontsource/orbitron/latin-400.css";
 import "@fontsource/orbitron/latin-700.css";
 // Press Start 2P loaded on-demand by themes.ts when pixel themes are activated
 
+import CaptchaGate from "@/components/CaptchaGate";
 import SplashScreen from "@/components/SplashScreen";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -132,7 +133,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         httpEquiv: "Content-Security-Policy",
         content:
-          "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';",
+          "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://*.hcaptcha.com; frame-src https://*.hcaptcha.com; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';",
       },
       { title: SITE_TITLE },
       { name: "description", content: SITE_DESCRIPTION },
@@ -199,7 +200,9 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <SplashScreen />
-        <Outlet />
+        <CaptchaGate>
+          <Outlet />
+        </CaptchaGate>
       </TooltipProvider>
     </QueryClientProvider>
   );
