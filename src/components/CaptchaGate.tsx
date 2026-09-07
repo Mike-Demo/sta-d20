@@ -62,6 +62,7 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
   const [attempt, setAttempt] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<number | null>(null);
+  const setupForAttemptRef = useRef<number | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -77,7 +78,11 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
   }, []);
 
   useEffect(() => {
-    if (!mounted || status === "passed") return;
+    if (!mounted) return;
+    // Run setup once per attempt. Re-running on every status change would
+    // double-render the widget and short-circuit a pending verification.
+    if (setupForAttemptRef.current === attempt) return;
+    setupForAttemptRef.current = attempt;
 
     let alreadyPassed = false;
     try {
