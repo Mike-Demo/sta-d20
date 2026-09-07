@@ -177,7 +177,7 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
               ? "That check didn't go through. Try again."
               : "Confirm you're human to access the dice roller."}
         </p>
-        <div className="flex justify-center min-h-[78px]">
+        <div className="flex justify-center min-h-20">
           {(status === "checking" || status === "ready") && (
             <div ref={containerRef} key={attempt} aria-label="hCaptcha challenge" />
           )}
