@@ -195,13 +195,6 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
               >
                 Try again
               </button>
-              <button
-                type="button"
-                onClick={pass}
-                className="text-muted-foreground text-xs underline"
-              >
-                Skip verification and continue
-              </button>
             </div>
           )}
         </div>
