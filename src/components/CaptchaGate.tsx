@@ -119,17 +119,25 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
       .then(() => {
         if (cancelled) return;
         if (!containerRef.current || !window.hcaptcha) {
-          pass();
+          // No place to draw the challenge — offer a retry rather than
+          // silently granting access.
+          setStatus("retry");
           return;
         }
-        widgetIdRef.current = window.hcaptcha.render(containerRef.current, {
-          sitekey: HCAPTCHA_SITE_KEY,
-          callback: onToken,
-          "expired-callback": () => setStatus("ready"),
-          "error-callback": () => setStatus("retry"),
-          theme: "dark",
-        });
-        setStatus("ready");
+        if (widgetIdRef.current !== null) return;
+        try {
+          widgetIdRef.current = window.hcaptcha.render(containerRef.current, {
+            sitekey: HCAPTCHA_SITE_KEY,
+            callback: onToken,
+            "expired-callback": () => setStatus("ready"),
+            "error-callback": () => setStatus("retry"),
+            theme: "dark",
+          });
+          setStatus("ready");
+        } catch {
+          // Widget failed to draw — let the visitor retry.
+          setStatus("retry");
+        }
       })
       .catch(() => {
         // Blocked script (ad blocker, privacy browser, offline) — let them in.
@@ -139,7 +147,7 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
     return () => {
       cancelled = true;
     };
-  }, [mounted, attempt, pass, status]);
+  }, [mounted, attempt, pass]);
 
   const retry = () => {
     widgetIdRef.current = null;
