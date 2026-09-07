@@ -62,6 +62,7 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
   const [attempt, setAttempt] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<number | null>(null);
+  const setupForAttemptRef = useRef<number | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -77,7 +78,11 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
   }, []);
 
   useEffect(() => {
-    if (!mounted || status === "passed") return;
+    if (!mounted) return;
+    // Run setup once per attempt. Re-running on every status change would
+    // double-render the widget and short-circuit a pending verification.
+    if (setupForAttemptRef.current === attempt) return;
+    setupForAttemptRef.current = attempt;
 
     let alreadyPassed = false;
     try {
@@ -114,17 +119,25 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
       .then(() => {
         if (cancelled) return;
         if (!containerRef.current || !window.hcaptcha) {
-          pass();
+          // No place to draw the challenge — offer a retry rather than
+          // silently granting access.
+          setStatus("retry");
           return;
         }
-        widgetIdRef.current = window.hcaptcha.render(containerRef.current, {
-          sitekey: HCAPTCHA_SITE_KEY,
-          callback: onToken,
-          "expired-callback": () => setStatus("ready"),
-          "error-callback": () => setStatus("retry"),
-          theme: "dark",
-        });
-        setStatus("ready");
+        if (widgetIdRef.current !== null) return;
+        try {
+          widgetIdRef.current = window.hcaptcha.render(containerRef.current, {
+            sitekey: HCAPTCHA_SITE_KEY,
+            callback: onToken,
+            "expired-callback": () => setStatus("ready"),
+            "error-callback": () => setStatus("retry"),
+            theme: "dark",
+          });
+          setStatus("ready");
+        } catch {
+          // Widget failed to draw — let the visitor retry.
+          setStatus("retry");
+        }
       })
       .catch(() => {
         // Blocked script (ad blocker, privacy browser, offline) — let them in.
@@ -134,7 +147,7 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
     return () => {
       cancelled = true;
     };
-  }, [mounted, attempt, pass, status]);
+  }, [mounted, attempt, pass]);
 
   const retry = () => {
     widgetIdRef.current = null;
@@ -164,7 +177,7 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
               ? "That check didn't go through. Try again."
               : "Confirm you're human to access the dice roller."}
         </p>
-        <div className="flex justify-center min-h-[78px]">
+        <div className="flex justify-center min-h-20">
           {(status === "checking" || status === "ready") && (
             <div ref={containerRef} key={attempt} aria-label="hCaptcha challenge" />
           )}
@@ -181,13 +194,6 @@ const CaptchaGate = ({ children }: CaptchaGateProps) => {
                 className="lcars-pill bg-primary text-primary-foreground px-5 py-2 font-lcars"
               >
                 Try again
-              </button>
-              <button
-                type="button"
-                onClick={pass}
-                className="text-muted-foreground text-xs underline"
-              >
-                Skip verification and continue
               </button>
             </div>
           )}
