@@ -2,8 +2,11 @@ import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { verifyCaptcha } from "@/lib/captcha.functions";
 
 const HCAPTCHA_SITE_KEY = "ES_a8b041a0ff53438d9875b45684348643";
-const HCAPTCHA_SCRIPT_SRC = "https://js.hcaptcha.com/1/api.js?render=explicit";
+const HCAPTCHA_ONLOAD_CALLBACK = "sta2eHCaptchaReady";
+const HCAPTCHA_SCRIPT_SRC = `https://js.hcaptcha.com/1/api.js?render=explicit&onload=${HCAPTCHA_ONLOAD_CALLBACK}`;
 const SESSION_FLAG = "sta2e-captcha-ok";
+
+let hCaptchaLoadPromise: Promise<void> | null = null;
 
 interface HCaptchaApi {
   render: (
@@ -22,33 +25,57 @@ interface HCaptchaApi {
 declare global {
   interface Window {
     hcaptcha?: HCaptchaApi;
+    sta2eHCaptchaReady?: () => void;
   }
 }
 
 type GateStatus = "checking" | "ready" | "verifying" | "retry" | "passed";
 
-const loadHCaptchaScript = (): Promise<void> =>
-  new Promise((resolve, reject) => {
+const loadHCaptchaScript = (): Promise<void> => {
+  if (window.hcaptcha) return Promise.resolve();
+  if (hCaptchaLoadPromise) return hCaptchaLoadPromise;
+
+  hCaptchaLoadPromise = new Promise((resolve, reject) => {
     if (window.hcaptcha) {
       resolve();
       return;
     }
+
+    window.sta2eHCaptchaReady = () => {
+      if (window.hcaptcha) {
+        resolve();
+      } else {
+        hCaptchaLoadPromise = null;
+        reject(new Error("hCaptcha API unavailable after load"));
+      }
+      delete window.sta2eHCaptchaReady;
+    };
+
     const existing = document.querySelector<HTMLScriptElement>(
       `script[src^="https://js.hcaptcha.com/1/api.js"]`,
     );
     if (existing) {
-      existing.addEventListener("load", () => resolve(), { once: true });
-      existing.addEventListener("error", () => reject(new Error("script error")), { once: true });
+      if (window.hcaptcha) resolve();
       return;
     }
     const script = document.createElement("script");
     script.src = HCAPTCHA_SCRIPT_SRC;
     script.async = true;
     script.defer = true;
-    script.addEventListener("load", () => resolve(), { once: true });
-    script.addEventListener("error", () => reject(new Error("script error")), { once: true });
+    script.addEventListener(
+      "error",
+      () => {
+        hCaptchaLoadPromise = null;
+        delete window.sta2eHCaptchaReady;
+        reject(new Error("script error"));
+      },
+      { once: true },
+    );
     document.head.appendChild(script);
   });
+
+  return hCaptchaLoadPromise;
+};
 
 interface CaptchaGateProps {
   children: ReactNode;
