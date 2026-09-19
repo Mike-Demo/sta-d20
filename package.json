@@ -87,7 +87,7 @@
   },
   "private": true,
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && node scripts/copy-static-output.mjs",
     "build:dev": "vite build --mode development",
     "dev": "vite dev",
     "format": "prettier --write .",

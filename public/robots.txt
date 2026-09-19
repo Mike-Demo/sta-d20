@@ -49,4 +49,4 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://2d20.space/sitemap.xml
+Sitemap: /sitemap.xml
