@@ -61,8 +61,17 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
-    pages: [{ path: "/" }, { path: "/guide/probability" }],
-    prerender: { enabled: true, autoStaticPathsDiscovery: false },
+    pages: [
+      { path: "/", prerender: { enabled: true, crawlLinks: false } },
+      { path: "/guide/probability", prerender: { enabled: true, crawlLinks: false } },
+    ],
+    prerender: {
+      enabled: true,
+      autoStaticPathsDiscovery: false,
+      crawlLinks: false,
+      filter: (page: { path: string }) =>
+        page.path === "/" || page.path === "/guide/probability",
+    },
   },
   vite: {
     plugins: [injectBuildDate()],
