@@ -36,6 +36,7 @@ const injectBuildDate = () => ({
   closeBundle() {
     const candidates = [
       path.resolve(__dirname, "dist/sitemap.xml"),
+      path.resolve(__dirname, "dist/client/sitemap.xml"),
       path.resolve(__dirname, ".output/public/sitemap.xml"),
     ];
     const { buildDate, buildDatetime } = getBuildMetadata();
