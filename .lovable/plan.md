@@ -1,50 +1,50 @@
-# Remove AI Crawler Blocks from robots.txt
+# Static hosting prep for Spacefast
 
-## Summary
+## Step 0 — Static check: PASSES
 
-`public/robots.txt` currently carries ~130 lines of AI-crawler rules across four sections. These do nothing for SEO (Google ignores per-AI-bot rules for ranking) and bloat the file. This plan removes every AI-specific block and keeps the file lean: search engines, ad/tracker bot blocks, default allow, and sitemap.
+The app is fully static. Checked and confirmed:
 
-## Changes — `public/robots.txt` only
+- No database, no login, no user accounts, no webhooks or scheduled jobs.
+- No server functions at all (`createServerFn` appears nowhere in app code).
+- Dice rolls, themes, sound, and roll history are all in-browser only.
+- Two public pages: the roller at `/` and the probability guide at `/guide/probability`, plus a 404 page.
 
-### Removed (all AI-related sections)
+Both pages render the same HTML for every visitor, so prerendering is safe.
 
-1. **"Allow AI assistants to cite your content"** section — ChatGPT-User, PerplexityBot, YouBot, NeevaAI, ClaudeBot, Bytespider (lines 17–34)
-2. **"Block AI data scrapers"** section — Ai2Bot-Dolma, Amazonbot, Applebot-Extended, CCBot, GPTBot, Google-Extended, Meta-ExternalAgent, anthropic-ai, cohere-ai, etc. (lines 36–131)
-3. **"Block undocumented AI agents"** section — Claude-Web, Crawl4AI, DeepSeekBot, iAskBot, etc. (lines 133–159)
+## Step 1 — Prerender both routes
 
-### Kept
+- Bump the build config package to 2.20.0 or newer (currently 2.19.5, which silently prerenders nothing).
+- In `vite.config.ts`, list `/` and `/guide/probability` under `tanstackStart.pages` and turn on `prerender: { enabled: true, autoStaticPathsDiscovery: false }`.
+- Keep the existing build-date injection plugin and the custom server entry.
+- Watch for the build hanging after pages are written. The likely culprit is TanStack Query's timers during prerender; if it hangs, add the `TSS_PRERENDERING` timeout-provider guard where the query client is created. The app's other timers all live inside effects, so they never run during prerender.
 
-- Major search engine allows (Googlebot, Bingbot, PetalBot, Twitterbot, facebookexternalhit)
-- Ad/tracking bot blocks (adidxbot, AdsBot-Google, SemrushBot, AhrefsBot, DotBot, MJ12bot, etc.)
-- `User-agent: *` + `Allow: /`
-- `Sitemap: https://2d20.space/sitemap.xml`
+## Step 2 — Build output into `dist/client`
 
-### Resulting file (condensed)
+- Keep the normal SSR/Nitro build (no `nitro: { preset: "static" }`); it prerenders into `.output/public`.
+- Add `scripts/copy-static-output.mjs`: idempotent copy of `.output/public` into `dist/client`, cleaning the target first, and exiting quietly if the output already lives there.
+- Change the build command to `vite build && node scripts/copy-static-output.mjs`.
 
-```text
-# --- Allow major search engines ---
-User-agent: Googlebot
-Allow: /
-... (Bingbot, PetalBot, Twitterbot, facebookexternalhit)
+## Step 3 — Static files
 
-# --- Block ad/tracking bots ---
-User-agent: adidxbot
-Disallow: /
-... (rest of ad/SEO-tool bots)
+- Rewrite `public/sitemap.xml` with both public URLs (the current one already lists both; refresh the dates and keep the build-date placeholder handling intact).
+- Point the `Sitemap:` line in `public/robots.txt` at `/sitemap.xml`.
+- Add `public/_redirects` with `/*  /index.html  200` for deep links.
+- No server-generated sitemap route exists, so nothing to delete.
+- Head metadata is already fully in each route's `head()` (titles, descriptions, og/twitter tags, canonical, JSON-LD), so it bakes into the prerendered HTML as-is. No changes needed.
 
-# --- Default allow ---
-User-agent: *
-Allow: /
+## Step 4 — `SPACEFAST.md`
 
-Sitemap: https://2d20.space/sitemap.xml
-```
+Documents: install command (`bun install` / `npm install`), build command (`vite build && node scripts/copy-static-output.mjs`), static output directory `dist/client`, and `.output/public` as the raw pre-copy output.
 
-## Not Changed
+## Step 5 — Verification
 
-- `public/llms.txt` stays as-is (it is not a robots.txt block; removing it is a separate decision — say the word and I'll delete it too)
-- No effect on the meta/JSON-LD, sitemap, or page content
-- Since `User-agent: *` → `Allow: /` is the default, AI crawlers not explicitly listed will simply fall through to the default allow — no crawl errors
+- Run typecheck and the full build.
+- Confirm `dist/client/index.html` and `dist/client/guide/probability/index.html` exist, along with `sitemap.xml`, `robots.txt`, and `_redirects`.
+- Open both prerendered pages in a browser and confirm they render, the roller works, and any query-param state restores after hydration.
+- Report anything that only works before the build.
 
-## Risk
+## Notes
 
-None for SEO. Removing the explicit AI blocks does not change how Google/Bing crawl or index the site; those bots were never blocking search indexing.
+- `public/vercel.json` stays as-is; it is ignored by a static host and harmless.
+- The service worker (`public/sw.js`) keeps working; nothing about it changes.
+- No GitHub, DNS, or publishing steps are touched.
