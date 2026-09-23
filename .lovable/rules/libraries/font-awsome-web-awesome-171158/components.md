@@ -7,6 +7,134 @@
 
 Component catalog for **Font Awsome & Web Awesome**. Import all components from `@/design-system/font-awsome-web-awesome-171158`.
 
+### HCaptcha
+
+```ts
+import { HCaptcha } from "@/design-system/font-awsome-web-awesome-171158"
+```
+
+Bot protection for sign-up, login, password reset, and public contact forms. Renders hCaptcha's widget themed to the design system and writes the token into a hidden field so a plain form submit carries it; verify that token server-side before trusting the submission.
+
+**Props:**
+
+| Prop | Type | Default |
+|---|---|---|
+| `siteKey` | string | `—` |
+| `size` | normal · compact · invisible | `normal` |
+| `theme` | light · dark · auto | `auto` |
+| `hl` | string | `—` |
+| `name` | string | `h-captcha-response` |
+| `onVerify` | function | `—` |
+| `onExpire` | function | `—` |
+| `onError` | function | `—` |
+| `onChallengeOpen` | function | `—` |
+| `onChallengeClose` | function | `—` |
+| `className` | string | `wa-hcaptcha-widget` |
+| `id` | string | `—` |
+
+**Examples:**
+
+_Contact form with a visible challenge_
+```tsx
+<form method="post" action="/api/public/contact">
+  <wa-input name="email" label="Email" type="email" required></wa-input>
+  <HCaptcha siteKey={import.meta.env.VITE_HCAPTCHA_SITE_KEY} />
+  <wa-button type="submit" variant="brand">Send</wa-button>
+</form>
+```
+
+_Invisible challenge run from your own button_
+```tsx
+const captcha = useRef<HCaptchaHandle>(null);
+
+<HCaptcha ref={captcha} size="invisible" siteKey={siteKey} onVerify={(token) => submit(token)} />
+<wa-button variant="brand" onClick={() => captcha.current?.execute()}>Create account</wa-button>
+```
+
+**Avoid:**
+
+- Trusting the token client-side, or gating a submit purely on onVerify without a server check.
+- Putting the hCaptcha secret key in client code or in the siteKey prop.
+- Adding hCaptcha's api.js with a <script> tag or hand-rolling the widget instead of using this component.
+- Using size="invisible" without calling execute() — no challenge ever runs.
+
+### LicensesPage
+
+```ts
+import { LicensesPage } from "@/design-system/font-awsome-web-awesome-171158"
+```
+
+**Props:**
+
+| Prop | Type | Default |
+|---|---|---|
+| `heading` | string | `Open source & credits` |
+| `lede` | string | `This app is built on open source software and freely licensed artwork. Everything it depends on is credited below.` |
+| `backHref` | string | `/` |
+| `backLabel` | string | `Back home` |
+| `groups` | any | `—` |
+| `className` | string | `wa-licenses-list` |
+
+### SiteFooter
+
+```ts
+import { SiteFooter } from "@/design-system/font-awsome-web-awesome-171158"
+```
+
+**Props:**
+
+| Prop | Type | Default |
+|---|---|---|
+| `madeBy` | string | `Made by MikeDemo` |
+| `licensesHref` | string | `/licenses` |
+| `socialLinks` | any | `—` |
+| `year` | number | `—` |
+| `className` | string | `wa-site-footer-meta` |
+| `slot` | string | `—` |
+
+### ThemeEditor
+
+```ts
+import { ThemeEditor } from "@/design-system/font-awsome-web-awesome-171158"
+```
+
+Drop in a panel that retunes the system's semantic colors, font stacks, type scale, spacing/density, corner radius, and shadow strength live. Overrides are applied as --wa-* custom properties on <html> and remembered in localStorage; serializeThemeCss() turns them into the CSS that belongs in src/webawesome/brand.css.
+
+**Props:**
+
+| Prop | Type | Default |
+|---|---|---|
+| `onSave` | function | `—` |
+| `className` | string | `wa-stack wa-gap-2xs` |
+| `onController` | function | `—` |
+
+**Examples:**
+
+_Copy-only editor_
+```tsx
+<ThemeEditor />
+```
+
+_Save into the brand file_
+```tsx
+import { ThemeEditor } from "@/webawesome/theme-editor";
+import { saveThemeDefaults } from "@/webawesome/theme-editor.functions";
+
+<ThemeEditor onSave={async (css) => { await saveThemeDefaults({ data: { css } }); }} />
+```
+
+_Read overrides elsewhere_
+```tsx
+const { overrides, patch } = useThemeOverrides();
+patch({ colors: { brand: "#7a2ff2" } });
+```
+
+**Avoid:**
+
+- Shipping theme changes only in localStorage — save them into brand.css so they reach every consumer.
+- Writing brand token overrides by hand in another stylesheet instead of brand.css.
+- Exposing the editor on a public production page: it is an authoring tool, and saving is refused outside development.
+
 ### WaAccordion
 
 ```ts
@@ -1556,6 +1684,13 @@ import { WaZoomableFrame } from "@/design-system/font-awsome-web-awesome-171158"
 ```ts
 import { WebAwesomeLoader } from "@/design-system/font-awsome-web-awesome-171158"
 ```
+
+**Props:**
+
+| Prop | Type | Default |
+|---|---|---|
+| `source` | bundle · cdn | `bundle` |
+| `hydrate` | boolean | `false` |
 
 
 

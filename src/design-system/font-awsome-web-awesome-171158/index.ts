@@ -2,6 +2,9 @@
 // Re-exports the components from this attached library so consumer
 // imports through `@/design-system/{slug}` resolve uniformly.
 
+export { HCaptcha } from "./webawesome/patterns/hcaptcha";
+export { LicensesPage } from "./webawesome/patterns/licenses";
+export { SiteFooter } from "./webawesome/patterns/site-footer";
 export { WaAccordion } from "./webawesome/react/accordion";
 export { WaAccordionItem } from "./webawesome/react/accordion-item";
 export { WaAnimatedImage } from "./webawesome/react/animated-image";
@@ -73,3 +76,4 @@ export { WaTree } from "./webawesome/react/tree";
 export { WaTreeItem } from "./webawesome/react/tree-item";
 export { WaZoomableFrame } from "./webawesome/react/zoomable-frame";
 export { WebAwesomeLoader } from "./webawesome/setup";
+export { ThemeEditor } from "./webawesome/theme-editor/theme-editor";

@@ -34,23 +34,57 @@ export const WEB_AWESOME_HTML_CLASSES = "wa-theme-default wa-palette-default wa-
  * Loading is browser-only and runs once per document. Server-rendered
  * <wa-*> markup is fine — the tags ship as plain HTML and upgrade in the
  * browser once the bundle arrives.
+ *
+ * Two optional modes:
+ *   source="cdn"   loads Web Awesome's own autoloader from the pinned CDN
+ *                  instead of the bundle shipped with this design system.
+ *   hydrate        loads the hydration-aware build, required only when
+ *                  <wa-*> markup is server-rendered with declarative
+ *                  shadow DOM (see ./ssr).
  */
-export function WebAwesomeLoader(): null {
+export interface WebAwesomeLoaderProps {
+  /** Where element definitions come from. Defaults to the shipped bundle. */
+  source?: "bundle" | "cdn";
+  /** Hydrate server-rendered declarative shadow roots instead of replacing them. */
+  hydrate?: boolean;
+}
+
+export function WebAwesomeLoader({
+  source = "bundle",
+  hydrate = false,
+}: WebAwesomeLoaderProps = {}): null {
   useEffect(() => {
     const flag = window as typeof window & { __waLoaderStarted?: boolean };
     if (flag.__waLoaderStarted) return;
     flag.__waLoaderStarted = true;
 
     void (async () => {
+      if (hydrate) {
+        // Lets the FOUC rule in theme.css apply only in SSR mode, where
+        // elements that were not server-rendered stay hidden until defined.
+        document.documentElement.dataset["waSsr"] = "";
+      }
+
+      if (source === "cdn") {
+        const { loadWebAwesomeFromCdn } = await import("./cdn");
+        await loadWebAwesomeFromCdn({ hydrate });
+        return;
+      }
+
       // Element definitions come from a self-contained vendor bundle that
       // ships with this design system (see scripts/build-vendor.ts), so
       // consumers need no npm install and no JavaScript CDN. Importing it
       // registers all 70 <wa-*> elements and pins the Font Awesome icon
       // path to FONT_AWESOME_VERSION.
+      if (hydrate) {
+        await import("./vendor/webawesome.ssr.bundle.js");
+        return;
+      }
       await import("./vendor/webawesome.bundle.js");
     })();
-  }, []);
+  }, [source, hydrate]);
 
   return null;
 }
+
 
