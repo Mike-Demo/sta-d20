@@ -107,4 +107,5 @@ Full details in [`docs/deployment.md`](docs/deployment.md).
 - [`docs/deployment.md`](docs/deployment.md) — hosting, static files, routes, domain notes.
 - [`docs/environment.md`](docs/environment.md) — environment variables (currently none).
 - [`SPACEFAST.md`](SPACEFAST.md) — condensed build spec for the Spacefast static host.
+- [`public/license.txt`](public/license.txt) — the WTFPL v2 license text.
 - [`roadmap.md`](roadmap.md) — completed milestones and open work.

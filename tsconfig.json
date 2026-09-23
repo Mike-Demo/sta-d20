@@ -1,5 +1,6 @@
 {
   "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "eslint.config.js"],
+  "exclude": ["src/design-system/font-awsome-web-awesome-171158/webawesome/ssr"],
   "compilerOptions": {
     "target": "ES2022",
     "jsx": "react-jsx",
