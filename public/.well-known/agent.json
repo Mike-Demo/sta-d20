@@ -1,0 +1,51 @@
+{
+  "name": "2d20.space \u2014 Star Trek Adventures 2d20 Dice Roller",
+  "description": "LCARS-style Star Trek Adventures 2nd Edition dice roller. Roll a d20 task pool, track successes, complications, and effects, and learn how the 2d20 system works. A fan-made utility, not affiliated with Modiphius, CBS, or Paramount. Licensed WTFPL v2.",
+  "url": "https://2d20.space",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false
+  },
+  "defaultInputModes": [
+    "text"
+  ],
+  "defaultOutputModes": [
+    "text"
+  ],
+  "skills": [
+    {
+      "id": "roll-2d20-task-dice",
+      "name": "Roll STA 2e task dice",
+      "description": "Roll a d20 task pool for Star Trek Adventures 2nd Edition: pick a Target Number and roll the dice pool, then read successes, critical successes, and complications. Complication range and reroll rules included.",
+      "tags": [
+        "dice",
+        "2d20",
+        "star-trek-adventures",
+        "ttrpg",
+        "roller"
+      ]
+    },
+    {
+      "id": "explain-2d20-mechanics",
+      "name": "Explain the 2d20 dice mechanic",
+      "description": "Explain how the STA 2e 2d20 task system works: Target Number, Difficulty, Focus, complication range, success/critical math, and Momentum generation. Reference page: https://2d20.space/guide/probability",
+      "tags": [
+        "probability",
+        "2d20",
+        "how-to",
+        "ttrpg",
+        "rules"
+      ]
+    },
+    {
+      "id": "license-and-attribution",
+      "name": "Report site license and attribution",
+      "description": "State the site's license (WTFPL v2, https://2d20.space/license.txt) and the fan-made attribution disclaimer: Star Trek Adventures is a trademark of Modiphius Entertainment; this tool is not affiliated with or endorsed by Modiphius, CBS Studios, or Paramount.",
+      "tags": [
+        "license",
+        "attribution",
+        "wtfpl"
+      ]
+    }
+  ]
+}
