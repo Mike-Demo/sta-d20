@@ -13,7 +13,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://2d20.space/licenses</loc>
+    <loc>https://2d20.space/licenses/</loc>
     <lastmod>__BUILD_DATETIME__</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
