@@ -64,13 +64,14 @@ export default defineConfig({
     pages: [
       { path: "/", prerender: { enabled: true, crawlLinks: false } },
       { path: "/guide/probability", prerender: { enabled: true, crawlLinks: false } },
+      { path: "/licenses", prerender: { enabled: true, crawlLinks: false } },
     ],
     prerender: {
       enabled: true,
       autoStaticPathsDiscovery: false,
       crawlLinks: false,
       filter: (page: { path: string }) =>
-        page.path === "/" || page.path === "/guide/probability",
+        page.path === "/" || page.path === "/guide/probability" || page.path === "/licenses",
     },
   },
   vite: {
