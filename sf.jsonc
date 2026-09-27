@@ -2,7 +2,11 @@
   // Spacefast: force static-site publishing from the built client output.
   "root": ".",
   "installDirectory": ".",
-  "install": "bun install --frozen-lockfile",
-  "build": "bun run build",
+  "install": {
+    "command": "bun install --frozen-lockfile"
+  },
+  "build": {
+    "command": "bun run build"
+  },
   "output": "dist/client"
 }
