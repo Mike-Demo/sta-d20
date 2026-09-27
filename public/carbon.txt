@@ -3,7 +3,7 @@ last_updated = 2026-09-27
 
 [org]
 disclosures = [
-    { doc_type = "web-page", url = "https://2d20.space/license", domain = "2d20.space", title = "Carbon disclosure for 2d20.space" },
+    { doc_type = "web-page", url = "https://2d20.space/licenses", domain = "2d20.space", title = "Carbon disclosure for 2d20.space" },
 ]
 
 [upstream]
