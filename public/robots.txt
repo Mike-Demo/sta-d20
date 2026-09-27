@@ -1,51 +1,6 @@
-# --- Allow major search engines ---
-User-agent: Googlebot
-Allow: /
+# STA 2D20 — robots.txt
+# Crawling and indexing are welcome, including AI crawlers.
 
-User-agent: Bingbot
-Allow: /
-
-User-agent: PetalBot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-# --- Block ad/tracking bots ---
-User-agent: adidxbot
-Disallow: /
-
-User-agent: AdsBot-Google
-Disallow: /
-
-User-agent: AdsBot-Google-Mobile
-Disallow: /
-
-User-agent: Mediapartners-Google
-Disallow: /
-
-User-agent: AdsTxtCrawler
-Disallow: /
-
-User-agent: Adsbot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: DotBot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-
-# --- Default allow ---
 User-agent: *
 Allow: /
 
