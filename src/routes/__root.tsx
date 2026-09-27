@@ -136,11 +136,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         // - styles: same-origin CSS + inline style props -> 'self' 'unsafe-inline'
         // - images: same-origin assets + the Aikido badge at app.aikido.dev (Licenses page)
         // - fonts: self-hosted @fontsource bundles -> 'self' data:
-        // - no external fetch, XHR, WebSocket, audio/video, iframes, or object embeds.
+        // - analytics: private umami-lite tracker at umami-lite.view.fast
+        //   (tracker.js + /api/send event beacons) -> allowlisted in script-src/connect-src
+        // - no other external fetch, XHR, WebSocket, audio/video, iframes, or object embeds.
         // - the vendored design-system/ dir is not imported by any route, so its
         //   CDN/hCaptcha references never execute and are intentionally not allowlisted.
         content:
-          "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://app.aikido.dev; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';",
+          "default-src 'self'; script-src 'self' 'unsafe-inline' https://umami-lite.view.fast; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://app.aikido.dev; font-src 'self' data:; connect-src 'self' https://umami-lite.view.fast; object-src 'none'; base-uri 'self'; form-action 'self';",
       },
       { title: SITE_TITLE },
       { name: "description", content: SITE_DESCRIPTION },
@@ -190,6 +192,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Private analytics (Umami-lite) — loads on every page via the root shell. */}
+        <script
+          defer
+          src="https://umami-lite.view.fast/tracker.js"
+          data-website-id="3f716637-9271-4d3c-967d-277404c59a11"
+        />
         <HeadContent />
       </head>
       <body>
