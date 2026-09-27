@@ -131,8 +131,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         httpEquiv: "Content-Security-Policy",
+        // Tightened 2026-09-26: inventoried every subresource loaded at runtime.
+        // - scripts: same-origin bundles + TanStack/SW inline snippets -> 'self' 'unsafe-inline'
+        // - styles: same-origin CSS + inline style props -> 'self' 'unsafe-inline'
+        // - images: same-origin assets + the Aikido badge at app.aikido.dev (Licenses page)
+        // - fonts: self-hosted @fontsource bundles -> 'self' data:
+        // - no external fetch, XHR, WebSocket, audio/video, iframes, or object embeds.
+        // - the vendored design-system/ dir is not imported by any route, so its
+        //   CDN/hCaptcha references never execute and are intentionally not allowlisted.
         content:
-          "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';",
+          "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://app.aikido.dev; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';",
       },
       { title: SITE_TITLE },
       { name: "description", content: SITE_DESCRIPTION },
