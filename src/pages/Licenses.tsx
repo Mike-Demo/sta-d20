@@ -141,6 +141,24 @@ const Licenses = () => {
           </a>
         </div>
 
+        <section className="mt-8">
+          <h2 className="font-display text-lg font-bold uppercase tracking-wider">
+            Open source
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            This site's source code is on{" "}
+            <a
+              href="https://github.com/Mike-Demo/sta-d20"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-primary hover:underline"
+            >
+              GitHub
+            </a>
+            .
+          </p>
+        </section>
+
         {GROUPS.map((group) => (
           <section key={group.title} className="mt-8">
             <h2 className="font-display text-lg font-bold uppercase tracking-wider">
