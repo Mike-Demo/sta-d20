@@ -18,7 +18,8 @@ The `build` script in `package.json` already runs both steps.
 - Raw Nitro/prerender output before the copy step: `.output/public`
 
 `scripts/copy-static-output.mjs` copies `.output/public` into `dist/client`. It is
-idempotent and safe to re-run.
+idempotent and safe to re-run. It also removes `.output/server` so static hosts
+don't attempt to bundle server functions for this static-only deploy.
 
 ## Prerendered routes
 

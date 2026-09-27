@@ -18,8 +18,8 @@ vite build && node scripts/copy-static-output.mjs
 ```
 
 **Serve `dist/client`.** `.output/public` is the raw Nitro/prerender output when the
-toolchain emits it; the copy script moves it into `dist/client` and exits quietly when the
-build already wrote there.
+toolchain emits it; the copy script moves it into `dist/client`, removes `.output/server`
+to keep deployment static-only, and exits quietly when the build already wrote there.
 
 Toolchain versions known good in CI: Node 22, Bun 1.3.
 
