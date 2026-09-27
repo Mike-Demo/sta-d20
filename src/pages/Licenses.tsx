@@ -187,6 +187,22 @@ const Licenses = () => {
             </ul>
           </section>
         ))}
+
+        <section className="mt-8">
+          <h2 className="font-display text-lg font-bold uppercase tracking-wider">
+            Digital carbon
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Homepage transfer is about 210.2 KB, roughly 0.032 g of CO2 per visit.
+            Estimated with CO2.js using the Sustainable Web Design Model v4, measured
+            2026-09-27. Hosting: Cloudflare, verified as green hosting by the Green
+            Web Foundation. Machine-readable disclosure:{" "}
+            <a href="/carbon.txt" className="font-medium text-primary hover:underline">
+              /carbon.txt
+            </a>
+            .
+          </p>
+        </section>
       </div>
     </LCARSFrame>
   );
