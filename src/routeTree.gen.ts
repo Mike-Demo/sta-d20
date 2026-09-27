@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LicensesRouteImport } from './routes/licenses'
 import { Route as GuideProbabilityRouteImport } from './routes/guide/probability'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LicensesRoute = LicensesRouteImport.update({
+  id: '/licenses',
+  path: '/licenses',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuideProbabilityRoute = GuideProbabilityRouteImport.update({
@@ -25,27 +31,31 @@ const GuideProbabilityRoute = GuideProbabilityRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/licenses': typeof LicensesRoute
   '/guide/probability': typeof GuideProbabilityRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/licenses': typeof LicensesRoute
   '/guide/probability': typeof GuideProbabilityRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/licenses': typeof LicensesRoute
   '/guide/probability': typeof GuideProbabilityRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/guide/probability'
+  fullPaths: '/' | '/licenses' | '/guide/probability'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/guide/probability'
-  id: '__root__' | '/' | '/guide/probability'
+  to: '/' | '/licenses' | '/guide/probability'
+  id: '__root__' | '/' | '/licenses' | '/guide/probability'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LicensesRoute: typeof LicensesRoute
   GuideProbabilityRoute: typeof GuideProbabilityRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/licenses': {
+      id: '/licenses'
+      path: '/licenses'
+      fullPath: '/licenses'
+      preLoaderRoute: typeof LicensesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guide/probability': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LicensesRoute: LicensesRoute,
   GuideProbabilityRoute: GuideProbabilityRoute,
 }
 export const routeTree = rootRouteImport
