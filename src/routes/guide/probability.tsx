@@ -4,7 +4,7 @@ import GuideProbability from "@/pages/GuideProbability";
 const TITLE = "2d20 Probability & Momentum Guide — Star Trek Adventures Dice Math";
 const DESCRIPTION =
   "A clear, math-backed guide to Star Trek Adventures 2e: success odds for star trek dice rolls at every target number, Focus impact, and 2d20 system probability for Momentum.";
-const URL = "https://2d20.space/guide/probability";
+const URL = "https://2d20.space/guide/probability/";
 
 const articleJsonLd = {
   "@context": "https://schema.org",
