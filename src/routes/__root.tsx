@@ -110,6 +110,18 @@ const softwareApplicationJsonLd = {
     "This LCARS‑style dice roller is designed to be accessible to as many users as possible. It supports keyboard navigation, screen readers, high‑contrast viewing, and responsive display scaling. The interface contains no flashing content, motion simulation, or audio hazards.",
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://2d20.space/#website",
+  url: "https://2d20.space/",
+  name: "2d20.space — Star Trek Adventures Dice Roller",
+  description:
+    "A fast, LCARS-inspired Star Trek Adventures 2d20 dice roller for STA 2e. Roll a d20 task pool, track successes, complications, and effects.",
+  inLanguage: "en",
+  publisher: { "@type": "Person", name: "Mike Demo", url: "https://2d20.space" },
+};
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -173,6 +185,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         type: "application/ld+json",
         children: JSON.stringify(softwareApplicationJsonLd),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(websiteJsonLd),
       },
       {
         // ported from index.html — registers the project's hand-rolled service
