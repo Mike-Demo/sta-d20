@@ -118,7 +118,7 @@ const GROUPS: readonly CreditGroup[] = [
 
 const Licenses = () => {
   return (
-    <LCARSFrame title="CREDITS">
+    <LCARSFrame title="CREDITS" titleAs="p">
       <div className="mx-auto w-full max-w-3xl px-4 py-8">
         <p className="font-display text-xs font-bold uppercase tracking-widest text-muted-foreground">
           LCARS // Credits database

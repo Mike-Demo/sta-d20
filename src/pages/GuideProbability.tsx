@@ -60,7 +60,7 @@ const GuideProbability = () => {
   const tns = [8, 10, 12, 14, 16];
 
   return (
-    <LCARSFrame title="2D20 PROBABILITY GUIDE">
+    <LCARSFrame title="2D20 PROBABILITY GUIDE" titleAs="p">
         <article className="max-w-3xl mx-auto px-4 py-6 space-y-6 text-foreground font-lcars">
           <header className="space-y-2">
             <h1 className="text-2xl md:text-3xl font-display font-bold tracking-wider uppercase text-primary">

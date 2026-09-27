@@ -9,9 +9,15 @@ import LCARSInfoAccordion from "@/components/LCARSInfoAccordion";
 interface LCARSFrameProps {
   title: string;
   children: ReactNode;
+  /**
+   * Element used for the title bar. Pages whose content renders its own <h1>
+   * should pass "p" so the document keeps exactly one h1.
+   */
+  titleAs?: "h1" | "p";
 }
 
-const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
+const LCARSFrame = ({ title, children, titleAs = "h1" }: LCARSFrameProps) => {
+  const TitleTag = titleAs;
   return (
     <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col" style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top))", paddingLeft: "max(0.75rem, env(safe-area-inset-left))", paddingRight: "max(0.75rem, env(safe-area-inset-right))", paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
       {/* Top bar */}
@@ -53,10 +59,10 @@ const LCARSFrame = ({ title, children }: LCARSFrameProps) => {
           <div className="flex items-center gap-2">
             <div className="bg-lcars-alpha-blue h-8 w-4 md:hidden rounded-l-full" />
             <div className="bg-muted h-8 flex-1 flex items-center px-4">
-              <h1 className="text-primary font-display text-lg md:text-2xl font-bold tracking-[0.2em] uppercase">
+              <TitleTag className="text-primary font-display text-lg md:text-2xl font-bold tracking-[0.2em] uppercase">
                 <span className="md:hidden">{title}</span>
                 <span className="hidden md:inline">Star Trek Adventures 2d20 Dice Roller</span>
-              </h1>
+              </TitleTag>
             </div>
             <div className="bg-lcars-arctic-ice h-8 w-16 lcars-pill-right" />
           </div>
