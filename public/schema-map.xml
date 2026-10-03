@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:sf="https://nlweb.ai/schemas/schema-feeds/1.0">
+  <url>
+    <loc>https://2d20.space/feeds/schema.jsonl</loc>
+    <sf:schemaType>SoftwareApplication</sf:schemaType>
+    <sf:format>application/x-ndjson</sf:format>
+  </url>
+</urlset>

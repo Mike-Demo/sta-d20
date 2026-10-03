@@ -65,13 +65,19 @@ export default defineConfig({
       { path: "/", prerender: { enabled: true, crawlLinks: false } },
       { path: "/guide/probability", prerender: { enabled: true, crawlLinks: false } },
       { path: "/licenses", prerender: { enabled: true, crawlLinks: false } },
+      { path: "/about", prerender: { enabled: true, crawlLinks: false } },
+      { path: "/contact", prerender: { enabled: true, crawlLinks: false } },
+      { path: "/privacy", prerender: { enabled: true, crawlLinks: false } },
+      { path: "/developers", prerender: { enabled: true, crawlLinks: false } },
     ],
     prerender: {
       enabled: true,
       autoStaticPathsDiscovery: false,
       crawlLinks: false,
       filter: (page: { path: string }) =>
-        page.path === "/" || page.path === "/guide/probability" || page.path === "/licenses",
+        ["/", "/guide/probability", "/licenses", "/about", "/contact", "/privacy", "/developers"].includes(
+          page.path,
+        ),
     },
   },
   vite: {

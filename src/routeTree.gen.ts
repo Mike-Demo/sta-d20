@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DevelopersRouteImport } from './routes/developers'
 import { Route as LicensesRouteImport } from './routes/licenses'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as GuideProbabilityRouteImport } from './routes/guide/probability'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +22,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevelopersRoute = DevelopersRouteImport.update({
+  id: '/developers',
+  path: '/developers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LicensesRoute = LicensesRouteImport.update({
   id: '/licenses',
   path: '/licenses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuideProbabilityRoute = GuideProbabilityRouteImport.update({
@@ -31,31 +55,69 @@ const GuideProbabilityRoute = GuideProbabilityRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/developers': typeof DevelopersRoute
   '/licenses': typeof LicensesRoute
+  '/privacy': typeof PrivacyRoute
   '/guide/probability': typeof GuideProbabilityRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/developers': typeof DevelopersRoute
   '/licenses': typeof LicensesRoute
+  '/privacy': typeof PrivacyRoute
   '/guide/probability': typeof GuideProbabilityRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/developers': typeof DevelopersRoute
   '/licenses': typeof LicensesRoute
+  '/privacy': typeof PrivacyRoute
   '/guide/probability': typeof GuideProbabilityRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/licenses' | '/guide/probability'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/developers'
+    | '/licenses'
+    | '/privacy'
+    | '/guide/probability'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/licenses' | '/guide/probability'
-  id: '__root__' | '/' | '/licenses' | '/guide/probability'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/developers'
+    | '/licenses'
+    | '/privacy'
+    | '/guide/probability'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/developers'
+    | '/licenses'
+    | '/privacy'
+    | '/guide/probability'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  DevelopersRoute: typeof DevelopersRoute
   LicensesRoute: typeof LicensesRoute
+  PrivacyRoute: typeof PrivacyRoute
   GuideProbabilityRoute: typeof GuideProbabilityRoute
 }
 
@@ -68,11 +130,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/developers': {
+      id: '/developers'
+      path: '/developers'
+      fullPath: '/developers'
+      preLoaderRoute: typeof DevelopersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/licenses': {
       id: '/licenses'
       path: '/licenses'
       fullPath: '/licenses'
       preLoaderRoute: typeof LicensesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guide/probability': {
@@ -87,7 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  DevelopersRoute: DevelopersRoute,
   LicensesRoute: LicensesRoute,
+  PrivacyRoute: PrivacyRoute,
   GuideProbabilityRoute: GuideProbabilityRoute,
 }
 export const routeTree = rootRouteImport

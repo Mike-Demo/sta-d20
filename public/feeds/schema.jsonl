@@ -1,0 +1,9 @@
+{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "2d20.space \u2014 Star Trek Adventures 2d20 Dice Roller", "url": "https://2d20.space/", "applicationCategory": "GameApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+{"@context": "https://schema.org", "@type": "WebApplication", "name": "STA 2e d20 task pool roller", "url": "https://2d20.space/", "description": "Roll a d20 task pool: Target Number, Difficulty, Focus, complication range, assists, Momentum/Threat bonus dice, rerolls."}
+{"@context": "https://schema.org", "@type": "Article", "headline": "2d20 Probability and Momentum Generation Guide", "url": "https://2d20.space/guide/probability/", "description": "Success odds at every target number, Focus impact, Momentum generation at each difficulty."}
+{"@context": "https://schema.org", "@type": "AboutPage", "name": "About 2d20.space", "url": "https://2d20.space/about/"}
+{"@context": "https://schema.org", "@type": "ContactPage", "name": "Contact 2d20.space", "url": "https://2d20.space/contact/"}
+{"@context": "https://schema.org", "@type": "WebPage", "name": "Privacy \u2014 2d20.space", "url": "https://2d20.space/privacy/"}
+{"@context": "https://schema.org", "@type": "WebPage", "name": "Developers \u2014 2d20.space", "url": "https://2d20.space/developers/"}
+{"@context": "https://schema.org", "@type": "CreativeWork", "name": "Open source credits \u2014 2d20.space", "url": "https://2d20.space/licenses/"}
+{"@context": "https://schema.org", "@type": "FAQPage", "url": "https://2d20.space/", "mainEntity": [{"@type": "Question", "name": "Is 2d20.space free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. No accounts, no paywalls."}}]}

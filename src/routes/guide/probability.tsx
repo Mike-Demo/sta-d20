@@ -33,7 +33,10 @@ export const Route = createFileRoute("/guide/probability")({
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
     ],
-    links: [{ rel: "canonical", href: URL }],
+    links: [
+      { rel: "canonical", href: URL },
+      { rel: "alternate", type: "text/markdown", href: "https://2d20.space/llms.md" },
+    ],
     scripts: [
       {
         type: "application/ld+json",

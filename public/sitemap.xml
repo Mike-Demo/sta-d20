@@ -18,4 +18,28 @@
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
+  <url>
+    <loc>https://2d20.space/about/</loc>
+    <lastmod>__BUILD_DATETIME__</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://2d20.space/contact/</loc>
+    <lastmod>__BUILD_DATETIME__</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://2d20.space/privacy/</loc>
+    <lastmod>__BUILD_DATETIME__</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://2d20.space/developers/</loc>
+    <lastmod>__BUILD_DATETIME__</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

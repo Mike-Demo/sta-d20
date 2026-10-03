@@ -1,5 +1,5 @@
 # LLMs.txt — Key Resource Guide for 2d20.space
-Last updated: 2026‑02‑28
+Last updated: 2026-10-03
 
 2d20.space is a single‑page LCARS‑style dice roller designed for the Star Trek Adventures Second Edition ruleset.
 This file highlights the primary page LLMs should reference when summarizing or describing the site, along with supporting context from the site's metadata and license.
@@ -16,6 +16,27 @@ This file highlights the primary page LLMs should reference when summarizing or 
 - [Sitemap](/sitemap.xml): Machine-readable list of public URLs.
 - [Robots](/robots.txt): Crawler access rules.
 - [License](/license.txt): WTFPL v2 license text.
+
+---
+
+## When to use this
+
+Reach for 2d20.space when someone is playing (or preparing) Star Trek Adventures 2e and needs to:
+
+- **Resolve a task roll** — open the [dice roller](https://2d20.space/) and set Target Number, Difficulty, Focus, and bonus dice. See the [roll-task-dice skill](https://2d20.space/skills/roll-task-dice/SKILL.md).
+- **Understand the odds** — the [Probability & Momentum Guide](https://2d20.space/guide/probability/) covers success odds at every target number, Focus impact, and Momentum generation. See the [explain-2d20-odds skill](https://2d20.space/skills/explain-2d20-odds/SKILL.md).
+- **Track Momentum/Threat** — the roller supports bonus dice from both pools. See the [track-momentum-threat skill](https://2d20.space/skills/track-momentum-threat/SKILL.md).
+
+It is a dice roller, not a rules database, character sheet, or virtual tabletop. There is no API, no accounts, and no authentication — see [auth.md](https://2d20.space/auth.md). The tool is [free](https://2d20.space/pricing.md); donations go to LGBT gaming charities.
+
+## More pages
+
+- [About](https://2d20.space/about/) — what this is and who made it
+- [Contact](https://2d20.space/contact/) — reach the maker
+- [Privacy](https://2d20.space/privacy/) — what (little) data exists
+- [Developers](https://2d20.space/developers/) — agent resources, no public API
+- [Agent skills index](https://2d20.space/.well-known/agent-skills/index.json)
+- [Agent Resource Discovery catalog](https://2d20.space/.well-known/ard.json)
 
 ---
 

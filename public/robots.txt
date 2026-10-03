@@ -5,3 +5,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://2d20.space/sitemap.xml
+schemamap: https://2d20.space/schema-map.xml
