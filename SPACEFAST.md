@@ -18,12 +18,12 @@ The `build` script in `package.json` already runs both steps.
 - Raw Nitro/prerender output before the copy step: `.output/public`
 
 `scripts/copy-static-output.mjs` copies `.output/public` into `dist/client`. It is
-idempotent and safe to re-run. After the copy it also deletes `.output/server`
-and strips `serverEntry` from `.output/nitro.json`: SpaceFast would otherwise
-try to bundle the Nitro SSR output as a serverless function and fail, because
-the TanStack Start SSR bundle imports node: builtins (`node:stream`,
-`node:process`, …) that SpaceFast's function bundler cannot resolve. This site
-is fully static, so no function is needed.
+idempotent and safe to re-run. After the copy it deletes the whole `.output`
+directory: SpaceFast treats Nitro build metadata as a signal that the project
+ships a serverless function and requires `.output/server/spacefast-worker.mjs`
+to exist, which fails the deploy. This site is fully static, so removing
+`.output` restores the pre-migration deployment shape (plain static files in
+`dist/client`) with no function involved.
 
 ## Prerendered routes
 
