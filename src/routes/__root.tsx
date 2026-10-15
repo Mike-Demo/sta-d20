@@ -219,6 +219,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <Scripts />
+        <script defer src="/co2.min.js" />
+        <script defer src="/co2-footer.js" />
       </body>
     </html>
   );
