@@ -1,0 +1,216 @@
+{
+  "boltSlidesVersion": 1,
+  "boltSlidesId": "11011050-f9d6-4d43-8a9e-3e43af51bbaf",
+  "deck": {
+    "title": "STA D20 — Dice tools for the final frontier",
+    "transition": "fade",
+    "font": "space",
+    "accent": "#4da6ff"
+  },
+  "slides": [
+    {
+      "id": "s1",
+      "position": 0,
+      "layout": "cover",
+      "props": {
+        "kicker": "A tabletop companion for Star Trek Adventures",
+        "title": "STA D20 — dice tools for the ==final frontier==.",
+        "subtitle": "Set the target, roll 2d20, and let the math stay in the computer core.",
+        "foot": "github.com/Mike-Demo/sta-d20 · Unofficial fan tool"
+      },
+      "background": { "type": "color", "color": "var(--bg)" },
+      "animation": "cascade",
+      "transition": null,
+      "nav": null,
+      "notes": "STA D20 is a companion tool I built for Star Trek Adventures sessions. Open with the hook: the dice math should never slow the story.",
+      "status": "none"
+    },
+    {
+      "id": "s2",
+      "position": 1,
+      "layout": "steps",
+      "props": {
+        "kicker": "The setting",
+        "title": "How Modiphius's ==2d20== system works.",
+        "items": [
+          {
+            "title": "Build the target",
+            "body": "Your officer's Attribute plus Discipline sets the number each die must meet or beat."
+          },
+          {
+            "title": "Roll 2d20",
+            "body": "Every die at or under the target scores a success."
+          },
+          {
+            "title": "Watch the twenties",
+            "body": "A natural 20 always brings a {c:#ffb85c}complication{/c}, however well the roll went."
+          },
+          {
+            "title": "Bank the extra",
+            "body": "Successes beyond the first become {c:#ffb85c}Momentum{/c} — a resource the whole crew can spend."
+          }
+        ]
+      },
+      "background": { "type": "color", "color": "var(--bg)" },
+      "animation": "cascade",
+      "transition": null,
+      "nav": null,
+      "notes": "Walk the table through one roll: target from Attribute + Discipline, two dice, successes under the target, twenties complicate, extras become Momentum.",
+      "status": "none"
+    },
+    {
+      "id": "s3",
+      "position": 2,
+      "layout": "statement",
+      "props": {
+        "kicker": "The problem",
+        "title": "Math at the table ==stops the story==.",
+        "body": "Targets, focus ranges, complication ranges — every roll is a small arithmetic problem, and the scene goes quiet mid-adventure while someone works it out."
+      },
+      "background": { "type": "color", "color": "var(--bg)" },
+      "animation": "cascade",
+      "transition": null,
+      "nav": null,
+      "notes": "The pain: the GM narrates a tense moment, then everyone waits while dice math happens. Momentum tracking makes it worse.",
+      "status": "none"
+    },
+    {
+      "id": "s4",
+      "position": 3,
+      "layout": "contrast",
+      "props": {
+        "kicker": "What it does",
+        "title": "Roll. Don't calculate.",
+        "left": {
+          "label": "By hand",
+          "title": "Pen, paper, pause",
+          "points": [
+            "Add Attribute + Discipline for every roll",
+            "Track focus and complication ranges in your head",
+            "Count successes, re-check twenties, re-count Momentum"
+          ]
+        },
+        "right": {
+          "label": "With STA D20",
+          "title": "One glance",
+          "points": [
+            "Set Attribute and Discipline once",
+            "Roll — successes counted instantly",
+            "Complications and Momentum flagged for you"
+          ]
+        }
+      },
+      "background": { "type": "color", "color": "var(--bg)" },
+      "animation": "cascade",
+      "transition": null,
+      "nav": null,
+      "notes": "Same roll, two experiences. STA D20 moves the arithmetic off the table so the scene keeps moving.",
+      "status": "none"
+    },
+    {
+      "id": "s5",
+      "position": 4,
+      "layout": "bigNumber",
+      "props": {
+        "kicker": "Built for live play",
+        "value": "2d20",
+        "caption": "Big, glanceable results the whole table can read at TV distance — not just the GM's chair",
+        "foot": "Designed for an ongoing campaign, game-mastered by a friend"
+      },
+      "background": { "type": "color", "color": "var(--bg)" },
+      "animation": "cascade",
+      "transition": null,
+      "nav": null,
+      "notes": "This was built for a real, continuing campaign. Results are sized for the couch, so players see the roll land as part of the story.",
+      "status": "none"
+    },
+    {
+      "id": "s6",
+      "position": 5,
+      "layout": "bento",
+      "props": {
+        "kicker": "Key features",
+        "title": "Everything the roll needs, ==nothing it doesn't==.",
+        "tiles": [
+          {
+            "fig": "01",
+            "title": "Instant counts",
+            "body": "Successes, complications, and Momentum the moment the dice land",
+            "c": 2,
+            "variant": "accent"
+          },
+          {
+            "fig": "02",
+            "title": "Target builder",
+            "body": "Attribute + Discipline becomes your target number in two taps"
+          },
+          {
+            "fig": "03",
+            "title": "Focus & complication ranges",
+            "body": "Wide focus ranges and natural-20 complications handled automatically"
+          },
+          {
+            "fig": "04",
+            "title": "Large-type results",
+            "body": "Clear, readable output from across the table"
+          },
+          {
+            "fig": "05",
+            "title": "2d20 rules reference",
+            "body": "The core rules, one glance away whenever the table needs them"
+          }
+        ]
+      },
+      "background": { "type": "color", "color": "var(--bg)" },
+      "animation": "cascade",
+      "transition": null,
+      "nav": null,
+      "notes": "Five features, one purpose: the fastest possible roll. The rules reference keeps new players from needing to flip a book mid-scene.",
+      "status": "none"
+    },
+    {
+      "id": "s7",
+      "position": 6,
+      "layout": "statGrid",
+      "props": {
+        "kicker": "Status",
+        "title": "At the table ==today==.",
+        "stats": [
+          {
+            "value": "Live",
+            "label": "In active use",
+            "caption": "Powering a real, ongoing Star Trek Adventures campaign"
+          },
+          {
+            "value": "OSS",
+            "label": "Open source",
+            "caption": "Free to run, fork, and fit to your own table"
+          }
+        ]
+      },
+      "background": { "type": "color", "color": "var(--bg)" },
+      "animation": "cascade",
+      "transition": null,
+      "nav": null,
+      "notes": "Not a prototype — it's in weekly use at a live table, and the code is public for anyone who wants to run or adapt it.",
+      "status": "none"
+    },
+    {
+      "id": "s8",
+      "position": 7,
+      "layout": "cover",
+      "props": {
+        "kicker": "The code is public",
+        "title": "==Engage.==",
+        "subtitle": "Run it at your own table — github.com/Mike-Demo/sta-d20",
+        "foot": "Unofficial fan tool · Not affiliated with Paramount, CBS, or Modiphius"
+      },
+      "background": { "type": "color", "color": "var(--bg)" },
+      "animation": "cascade",
+      "transition": "zoom",
+      "nav": null,
+      "notes": "Close on the repo link. Thank the campaign crew, and remind folks it's an unofficial fan project.",
+      "status": "none"
+    }
+  ]
+}
