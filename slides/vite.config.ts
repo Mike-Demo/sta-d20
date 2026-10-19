@@ -40,6 +40,16 @@ function deckFilePlugin(): Plugin {
           return;
         }
 
+        const origin = req.headers.origin;
+        if (
+          origin &&
+          origin !== `http://${req.headers.host}` &&
+          origin !== `https://${req.headers.host}`
+        ) {
+          sendJson(res, 403, { error: 'cross-origin' });
+          return;
+        }
+
         if (req.method === 'GET') {
           try {
             sendJson(res, 200, JSON.parse(await readFile(filePath, 'utf8')));
@@ -56,7 +66,15 @@ function deckFilePlugin(): Plugin {
 
         try {
           const raw = JSON.parse(await readBody(req as IncomingMessage));
-          if (!raw || typeof raw !== 'object') {
+          if (
+            !raw ||
+            typeof raw !== 'object' ||
+            Array.isArray(raw) ||
+            Array.isArray((raw as { deck?: unknown }).deck) ||
+            !raw.deck ||
+            typeof raw.deck !== 'object' ||
+            !Array.isArray((raw as { slides?: unknown }).slides)
+          ) {
             throw new Error('invalid-deck');
           }
           const file = raw as {
@@ -65,9 +83,6 @@ function deckFilePlugin(): Plugin {
             deck: unknown;
             slides: unknown;
           };
-          if (!file.deck || !Array.isArray(file.slides)) {
-            throw new Error('invalid-deck');
-          }
           if (!file.boltSlidesId) file.boltSlidesId = randomUUID();
           file.boltSlidesVersion = file.boltSlidesVersion ?? 1;
           ignoreHotUntil = Date.now() + 400;
