@@ -154,7 +154,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         // - the vendored design-system/ dir is not imported by any route, so its
         //   CDN/hCaptcha references never execute and are intentionally not allowlisted.
         content:
-          "default-src 'self'; script-src 'self' 'unsafe-inline' https://umami-lite.view.fast; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://app.aikido.dev; font-src 'self' data:; connect-src 'self' https://umami-lite.view.fast; object-src 'none'; base-uri 'self'; form-action 'self';",
+          "default-src 'self'; script-src 'self' 'unsafe-inline' https://umami-lite.view.fast; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://app.aikido.dev https://brandmylaptop.com; font-src 'self' data:; connect-src 'self' https://umami-lite.view.fast; object-src 'none'; base-uri 'self'; form-action 'self';",
       },
       { title: SITE_TITLE },
       { name: "description", content: SITE_DESCRIPTION },
