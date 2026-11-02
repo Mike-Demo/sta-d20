@@ -144,6 +144,9 @@ const LCARSFrame = ({ title, children, titleAs = "h1" }: LCARSFrameProps) => {
                 </p>
               </div>
             </details>
+            <div className="mt-2 flex justify-center">
+              <a href="https://brandmylaptop.com/demo?ref=demo"><img src="https://brandmylaptop.com/api/badge/demo?theme=dark" alt="Your logo on my laptop" height="60" /></a>
+            </div>
           </footer>
 
           {/* Bottom bar */}
